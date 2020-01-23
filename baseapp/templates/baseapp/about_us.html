@@ -1,0 +1,252 @@
+{% extends 'baseapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+			<section id="breadcrumbs" class="page_breadcrumbs ds parallax section_padding_65 table_section table_section_md">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 text-center text-md-left">
+							<h1 class="cornered-heading">О компании</h1>
+						</div>
+						<div class="col-md-6 text-center text-md-right">
+							<ol class="breadcrumb">
+								<li>
+									<a href="{% url 'show_index' %}">Главная</a>
+								</li>
+								<li class="active">О компании</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ls section_padding_top_110 section_padding_bottom_100">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-md-push-6 col-lg-5 col-lg-push-7">
+							<div class="with_corners image_corners topmargin_5 bottommargin_30">
+								<img src="{% static 'images/gallery/21.jpg' %}" alt="">
+							</div>
+						</div>
+						<div class="col-md-6 col-md-pull-6 col-lg-7 col-lg-pull-5">
+							<div class="text-uppercase">we offer green technologies</div>
+							<h2 class="text-uppercase topmargin_0 bottommargin_40">About our factory</h2>
+
+							<p class="bottommargin_10 entry-excerpt">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id nibh non lectus finibus tempor. Aliquam erat volutpat. Morbi egestas mi vitae dui pretium placerat. Aenean tristique sapien.
+							</p>
+							<p class="bottommargin_30">
+								Quisque maximus dolor non accumsan accumsan. Praesent mollis velit sed libero aliquam, sed aliquam sapien lacinia. Sed suscipit eros nec ultrices molestie. Vestibulum mollis purus in metus faucibus, in dapibus ante dignissim. Duis convallis nulla id nisi
+								imperdiet, nec vehicula augue semper. Donec sed pharetra est, vel congue magna. Curabitur ligula mauris, semper at eros id.
+							</p>
+							<a href="#" class="theme_button color1">Read More</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ds section_padding_50 counters_section">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12 text-center">
+							<div class="teaser info-teaser text-center">
+								<span class="info-icon info-project teaser_icon"></span>
+								<br>
+								<span class="counter highlight" data-from="0" data-to="2477" data-speed="1500">0</span>
+								<p class="bold text-uppercase">Finished Projects</p>
+							</div>
+							<div class="teaser info-teaser text-center">
+								<span class="info-icon info-project teaser_icon"></span>
+								<br>
+								<span class="counter highlight" data-from="0" data-to="832" data-speed="1500">0</span>
+								<p class="bold text-uppercase">Happy Clients</p>
+							</div>
+							<div class="teaser info-teaser text-center">
+								<span class="info-icon info-project teaser_icon"></span>
+								<br>
+								<span class="counter highlight" data-from="0" data-to="1858" data-speed="1500">0</span>
+								<p class="bold text-uppercase">Working Hours</p>
+							</div>
+							<div class="teaser info-teaser text-center">
+								<span class="info-icon info-project teaser_icon"></span>
+								<br>
+								<span class="counter highlight" data-from="0" data-to="10035" data-speed="1500">0</span>
+								<p class="bold text-uppercase">Satisfied Employees</p>
+							</div>
+							<div class="teaser info-teaser text-center">
+								<span class="info-icon info-project teaser_icon"></span>
+								<br>
+								<span class="counter highlight" data-from="0" data-to="1858" data-speed="1500">0</span>
+								<p class="bold text-uppercase">Offices Worldwide</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="cs section_padding_110 services">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-6">
+							<div class="cornered-heading bottommargin_60">
+								<span class="text-uppercase">From idea to realization</span>
+								<h2 class="text-uppercase">Services we provide</h2>
+							</div>
+							<p class="bottommargin_0">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae arcu nec metus ultrices scelerisque facilisis id leo. Praesent iaculis lorem ut dictum tempus. Pellentesque sit amet erat at orci bibendum consequat.
+							</p>
+							<div class="row columns_margin_0 service-teasers-row">
+								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
+									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
+										<div class="teaser_content">
+											<div class="teaser">
+												<div class="teaser_icon grey size_normal">
+													<i class="flaticon-light-bulb"></i>
+												</div>
+												<p class="text-uppercase raleway bold darklinks bottommargin_0">
+													<a href="#">Development ideas</a>
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
+									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
+										<div class="teaser_content">
+											<div class="teaser">
+												<div class="teaser_icon grey size_normal">
+													<i class="flaticon-wrench"></i>
+												</div>
+												<p class="text-uppercase raleway bold darklinks bottommargin_0">
+													<a href="#">Technical development</a>
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
+									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
+										<div class="teaser_content">
+											<div class="teaser">
+												<div class="teaser_icon grey size_normal">
+													<i class="flaticon-cogwheel"></i>
+												</div>
+												<p class="text-uppercase raleway bold darklinks bottommargin_0">
+													<a href="#">Realization of projects</a>
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
+									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
+										<div class="teaser_content">
+											<div class="teaser">
+												<div class="teaser_icon grey size_normal">
+													<i class="flaticon-megaphone"></i>
+												</div>
+												<p class="text-uppercase raleway bold darklinks bottommargin_0">
+													<a href="#">Projects advertising</a>
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
+									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
+										<div class="teaser_content">
+											<div class="teaser">
+												<div class="teaser_icon grey size_normal">
+													<i class="flaticon-wind-turbine-for-ecological-energy"></i>
+												</div>
+												<p class="text-uppercase raleway bold darklinks bottommargin_0">
+													<a href="#">Projects installation</a>
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
+									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
+										<div class="teaser_content">
+											<div class="teaser">
+												<div class="teaser_icon grey size_normal">
+													<i class="flaticon-glasses"></i>
+												</div>
+												<p class="text-uppercase raleway bold darklinks bottommargin_0">
+													<a href="#">Technical support</a>
+												</p>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="ls section_padding_top_110 section_padding_bottom_90">
+				<div class="container">
+					<div class="row columns_margin_0">
+						<div class="col-md-6 col-lg-7">
+							<div class="row topmargin_15">
+								<div class="col-sm-6">
+									<div class="client-item bottommargin_30">
+										<img src="{% static 'images/clients/1.png' %}" alt="">
+										<div class="media-links">
+											<a href="#" class="abs-link"></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="client-item bottommargin_30">
+										<img src="{% static 'images/clients/2.png' %}" alt="">
+										<div class="media-links">
+											<a href="#" class="abs-link"></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="client-item bottommargin_30">
+										<img src="{% static 'images/clients/3.png' %}" alt="">
+										<div class="media-links">
+											<a href="#" class="abs-link"></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="client-item bottommargin_30">
+										<img src="{% static 'images/clients/4.png' %}" alt="">
+										<div class="media-links">
+											<a href="#" class="abs-link"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-5">
+							<div class="text-uppercase">major and best</div>
+							<h2 class="text-uppercase topmargin_0 bottommargin_40">our clients</h2>
+
+							<p>
+								Cras feugiat nibh vel imperdiet porta. Nam ut libero scelerisque, porta ligula in, mattis neque. Duis consequat, eros eu mollis venenatis, lectus nisi sagittis lorem, a lacinia arcu lectus vitae ante. Sed tempus aliquam erat, ac euismod erat commodo vel.
+								Etiam semper massa at lectus congue tristiq. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							</p>
+							<blockquote class="bold blockquote-small">
+								Sed ut maximus neque. Quisque lectus tortor, pellente vitae fringilla et, commodo eu orci. Praesent aliquet, dui eu varius pellentesque, magna quam feugiat ex.
+							</blockquote>
+						</div>
+					</div>
+				</div>
+			</section>
+
+{% endblock %}			
