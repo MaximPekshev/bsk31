@@ -1,17 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js">
-<!--<![endif]-->
 
 <head>
 	<title>Energy</title>
 	<meta charset="utf-8">
-	<!--[if IE]>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<![endif]-->
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,45 +18,21 @@
 	<link rel="stylesheet" href="{% static 'css/fonts.css' %}">
 	<script src="{% static 'js/vendor/modernizr-2.6.2.min.js' %}"></script>
 
-	<!--[if lt IE 9]>
-		<script src="js/vendor/html5shiv.min.js"></script>
-		<script src="js/vendor/respond.min.js"></script>
-		<script src="js/vendor/jquery-1.12.4.min.js"></script>
-	<![endif]-->
-
 </head>
 
 <body>
-	<!--[if lt IE 9]>
-		<div class="bg-danger text-center">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" class="highlight">upgrade your browser</a> to improve your experience.</div>
-	<![endif]-->
 
 	<div class="preloader">
 		<div class="preloader_image"></div>
 	</div>
-
-	<!-- wrappers for visual page editor and boxed version of template -->
 	<div id="canvas">
 		<div id="box_wrapper">
-
-			<!-- template sections -->
-
 			<section class="page_topline ds ms columns_margin_0">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6 text-center text-sm-left">
 							<p class="fontsize_12 grey">
-								<i class="flaticon-clock"></i> Opening Times: Mon - Sat 8.00 - 18.00</p>
-						</div>
-						<div class="col-sm-6 text-center text-sm-right">
-							<div class="grey fontsize_12">Follow us:
-								<div class="page_social_icons inline-block darklinks">
-									<a class="social-icon soc-facebook" href="#" title="Facebook"></a>
-									<a class="social-icon soc-twitter" href="#" title="Twitter"></a>
-									<a class="social-icon soc-google" href="#" title="Google"></a>
-									<a class="social-icon soc-linkedin" href="#" title="LinkedIn"></a>
-								</div>
-							</div>
+								<i class="flaticon-clock"></i> Время работы: Пн - Пт 8.00 - 18.00</p>
 						</div>
 					</div>
 				</div>
@@ -74,7 +42,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-4 text-center text-sm-left">
-							<a href="./" class="logo">
+							<a href="{% url 'show_under_construct' %}" class="logo">
 								<img src="{% static 'images/logo.png' %}" alt="">
 							</a>
 						</div>
@@ -87,8 +55,8 @@
 									</div>
 								</div>
 								<div class="media-body media-middle text-left">
-									<p class="bold fontsize_26 grey bottommargin_5"><a href="tel:0800 123 4567">0800 123 4567</a></p>
-									<p><a href="mailto:energy@support.com">energy@support.com</a></p>
+									<p class="bold fontsize_26 grey bottommargin_5"><a href="tel:+74722231970">+7 (4722) 23-19-70</a></p>
+									<p><a href="mailto:stroi31@bk.ru">stroi31@bk.ru</a></p>
 								</div>
 							</div>
 							<a class="teaser location-teaser media inline-block hidden-sm hidden-xs" href="#">
@@ -98,8 +66,8 @@
 									</div>
 								</div>
 								<div class="media-body media-middle text-left">
-									<p class="bold fontsize_26 bottommargin_5">1116 15th St,</p>
-									<p class="fontcolor">Sacramento, California</p>
+									<p class="bold fontsize_26 bottommargin_5">Родниковая 2-Б</p>
+									<p class="fontcolor">г. Белгород</p>
 								</div>
 							</a>
 						</div>
@@ -119,11 +87,11 @@
 									</li>
 
 									<li>
-										<a href="№">Строительство</a>
+										<a href="#">Строительство</a>
 									</li>
 
 									<li>
-										<a href="№">Продукция</a>
+										<a href="#">Продукция</a>
 										<ul>
 											<li><a href="#">Аренда инструмента</a></li>
 											<li><a href="#">Металлоконструкции</a></li>
@@ -133,11 +101,11 @@
 									</li>
 
 									<li>
-										<a href="№">Наши объекты</a>
+										<a href="#">Наши объекты</a>
 									</li>
 
 									<li>
-										<a href="№">Сертификаты</a>
+										<a href="#">Сертификаты</a>
 									</li>
 
 									<li>
@@ -168,23 +136,17 @@
 								<p class="bottommargin_25">
 									Sed cursus tortor neque, sit amet dignissim purus pretium vel. Nullam et sodales sem. Fusce elit urna, accumsan id mollis eu, egestas a nunc.
 								</p>
-								<div class="page_social_icons inline-block darklinks">
-									<a class="social-icon soc-facebook" href="#" title="Facebook"></a>
-									<a class="social-icon soc-twitter" href="#" title="Twitter"></a>
-									<a class="social-icon soc-google" href="#" title="Google"></a>
-									<a class="social-icon soc-linkedin" href="#" title="LinkedIn"></a>
-								</div>
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-6 to_animate" data-animation="scaleAppear">
 							<div class="widget widget_text topmargin_25">
-								<h4 class="text-uppercase bottommargin_20">contact us</h4>
+								<h4 class="text-uppercase bottommargin_20">Контакты</h4>
 								<div class="media">
 									<div class="media-left">
 										<i class="fa fa-map-marker highlight fontsize_18"></i>
 									</div>
 									<div class="media-body">
-										1116 15th St, Sacramento, USA
+										ул. Родниковая 2-Б, г. Белгород
 									</div>
 								</div>
 								<div class="media">
@@ -192,8 +154,7 @@
 										<i class="fa fa-phone highlight fontsize_18"></i>
 									</div>
 									<div class="media-body">
-										0800 123 4567
-										<br> 0800 123 4566
+										+7 (4722) 23-19-70
 									</div>
 								</div>
 								<div class="media">
@@ -201,68 +162,14 @@
 										<i class="fa fa-envelope highlight fontsize_18"></i>
 									</div>
 									<div class="media-body greylinks">
-										<a href="#">energy@support.com</a>
+										<a href="#">stroi31@bk.ru</a>
 										<br>
-										<a href="#">energy@info.com</a>
 									</div>
 								</div>
 							</div>
 
 						</div>
 						<div class="col-md-3 col-sm-6 to_animate" data-animation="scaleAppear">
-							<div class="widget widget_twitter topmargin_25">
-								<h4 class="text-uppercase bottommargin_20">Twitter widget</h4>
-								<!-- <div class="twitter"></div> -->
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6 to_animate" data-animation="scaleAppear">
-							<div class="widget widget_slider topmargin_25">
-
-								<h4 class="widget-title text-uppercase">Gallery</h4>
-								<div class="owl-carousel topmargin_30" data-nav="false" data-dots="true" data-loop="true" data-autoplay="true" data-items="1" data-responsive-lg="1" data-responsive-md="1" data-responsive-sm="1" data-responsive-xs="1">
-									<div class="vertical-item">
-										<div class="item-media">
-											<img src="{% static 'images/gallery/07.jpg' %}" alt="">
-											<div class="media-links middle-links type2">
-												<div class="links-wrap">
-													<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="{% static 'images/gallery/07.jpg' %}"></a>
-													<a href="#" class="p-like"></a>
-													<a class="p-link" href="gallery-single.html"></a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="vertical-item">
-										<div class="item-media">
-											<img src="{% static 'images/gallery/08.jpg' %}" alt="">
-											<div class="media-links middle-links type2">
-												<div class="links-wrap">
-													<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="{% static 'images/gallery/08.jpg' %}"></a>
-													<a href="#" class="p-like"></a>
-													<a class="p-link" href="gallery-single.html"></a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="vertical-item">
-										<div class="item-media">
-											<img src="{% static 'images/gallery/09.jpg' %}" alt="">
-											<div class="media-links middle-links type2">
-												<div class="links-wrap">
-													<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="{% static 'images/gallery/09.jpg' %}"></a>
-													<a href="#" class="p-like"></a>
-													<a class="p-link" href="gallery-single.html"></a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-
-								</div>
-
-							</div>
 						</div>
 					</div>
 				</div>
@@ -272,11 +179,6 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-12 text-center">
-							<p class="darklinks fontsize_12">&copy;
-								<span class="text-uppercase">Energy</span>2016 | Created with
-								<i class="fa fa-heart-o highlight"></i> by
-								<a href="http://wprollers.com">WPRollers</a>
-							</p>
 						</div>
 					</div>
 				</div>

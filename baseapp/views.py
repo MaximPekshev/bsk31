@@ -7,3 +7,6 @@ def show_index(request):
 
 def show_about_us(request):
 	return render(request, 'baseapp/about_us.html')
+
+def show_under_construct(request):
+	return render(request, 'baseapp/under_construct.html')
