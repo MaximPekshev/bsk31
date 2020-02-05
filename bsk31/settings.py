@@ -25,7 +25,7 @@ SECRET_KEY = '5zd)c0gpr(_b@tef0_#8xn4-w@-1epptc&2-t@8^5ces!x1727'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bsk31.com', 'www.bsk31.com']
+ALLOWED_HOSTS = ['bsk31.com', 'www.bsk31.com', 'localhost', ]
 
 
 # Application definition
