@@ -7001,52 +7001,61 @@ widget_pages
 }
 
 .partner-image.partner1 {
-	background-image: url("../images/partners/1_dark.png");
+	background-image: url("../images/partners/letologo.png");
 }
 
 .partner-image.partner1:hover {
-	background-image: url("../images/partners/1.png");
+	background-image: url("../images/partners/letologo.png");
 }
 
 .partner-image.partner2 {
-	background-image: url("../images/partners/2_dark.png");
+	background-image: url("../images/partners/prlogo.png");
 }
 
 .partner-image.partner2:hover {
-	background-image: url("../images/partners/2.png");
+	background-image: url("../images/partners/prlogo.png");
 }
 
 .partner-image.partner3 {
-	background-image: url("../images/partners/3_dark.png");
+	background-image: url("../images/partners/gazpromlogo.png");
 }
 
 .partner-image.partner3:hover {
-	background-image: url("../images/partners/3.png");
+	background-image: url("../images/partners/gazpromlogo.png");
 }
 
 .partner-image.partner4 {
-	background-image: url("../images/partners/4_dark.png");
+	background-image: url("../images/partners/miratorglogo.png");
 }
 
 .partner-image.partner4:hover {
-	background-image: url("../images/partners/4.png");
+	background-image: url("../images/partners/miratorglogo.png");
 }
 
 .partner-image.partner5 {
-	background-image: url("../images/partners/5_dark.png");
+	background-image: url("../images/partners/gragr.png");
 }
 
 .partner-image.partner5:hover {
-	background-image: url("../images/partners/5.png");
+	background-image: url("../images/partners/gragr.png");
 }
 
 .partner-image.partner6 {
-	background-image: url("../images/partners/6_dark.png");
+	background-image: url("../images/partners/rusagro.png");
 }
 
 .partner-image.partner6:hover {
-	background-image: url("../images/partners/6.png");
+	background-image: url("../images/partners/rusagro.png");
 }
+
+.partner-image.partner7 {
+	background-image: url("../images/partners/zory.png");
+}
+
+.partner-image.partner7:hover {
+	background-image: url("../images/partners/zory.png");
+}
+
 
 /* Client item */
 .client-item {

@@ -16,7 +16,7 @@ from .views import show_under_construct
 urlpatterns = [
 
 	path('', 					show_under_construct, name='show_under_construct'),
-	path(u'главная', 			show_index, name='show_index'),
+	path('home/', 			show_index, name='show_index'),
 	path('about-us/', 			show_about_us, name='show_about_us'),
 
 			]
