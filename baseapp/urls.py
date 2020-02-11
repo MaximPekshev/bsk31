@@ -2,9 +2,6 @@
 from django.urls import path
 from django.contrib import admin
 
-from django.utils.encoding import uri_to_iri
-from django.utils.encoding import iri_to_uri
-
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings

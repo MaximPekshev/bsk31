@@ -127,6 +127,7 @@
 				</div>
 			</section>
 
+
 			<section class="ds section_padding_110">
 				<div class="container">
 					<div class="row">
@@ -144,69 +145,22 @@
 								4,5 млн. голов в год.» Блок обвалки и упаковки.
 
 							</p>
-							<a href="#" class="theme_button color1 border_button topmargin_25 bottommargin_0">Все объекты</a>
+							<a href="{% url 'show_objects' %}" class="theme_button color1 border_button topmargin_25 bottommargin_0">Все объекты</a>
 
 							<div class="owl-carousel projects-carousel topmargin_40" data-margin="10" data-nav="false" data-items="6" data-themeclass="owl-theme" data-responsive-lg="3">
-
+								{% for object in build_objects %}
 								<div class="vertical-item content-absolute">
 									<div class="item-media">
-										<img src="{% static 'images/gallery/project_01.png' %}" alt="">
+										<img src="{{ object.image.object_image.url }}" alt="">
 										<div class="media-links p-link">
 											<div class="links-wrap">
 												<i class="flaticon-arrows-2"></i>
 											</div>
-											<a class="abs-link" title="" href="#project1" data-toggle="tab"></a>
+											<a class="abs-link" title="" href="#project{{ object.build_object.object_slug }}" data-toggle="tab"></a>
 										</div>
 									</div>
 								</div>
-
-								<div class="vertical-item content-absolute">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_02.png' %}" alt="">
-										<div class="media-links p-link">
-											<div class="links-wrap">
-												<i class="flaticon-arrows-2"></i>
-											</div>
-											<a class="abs-link" title="" href="#project2" data-toggle="tab"></a>
-										</div>
-									</div>
-								</div>
-
-								<div class="vertical-item content-absolute">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_03.png' %}" alt="">
-										<div class="media-links p-link">
-											<div class="links-wrap">
-												<i class="flaticon-arrows-2"></i>
-											</div>
-											<a class="abs-link" title="" href="#project3" data-toggle="tab"></a>
-										</div>
-									</div>
-								</div>
-
-								<div class="vertical-item content-absolute">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_04.png' %}" alt="">
-										<div class="media-links p-link">
-											<div class="links-wrap">
-												<i class="flaticon-arrows-2"></i>
-											</div>
-											<a class="abs-link" title="" href="#project4" data-toggle="tab"></a>
-										</div>
-									</div>
-								</div>
-
-								<div class="vertical-item content-absolute">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_05.png' %}" alt="">
-										<div class="media-links p-link">
-											<div class="links-wrap">
-												<i class="flaticon-arrows-2"></i>
-											</div>
-											<a class="abs-link" title="" href="#project5" data-toggle="tab"></a>
-										</div>
-									</div>
-								</div>
+								{% endfor %}
 
 							</div>
 							<!-- .owl-carousel -->
@@ -214,9 +168,10 @@
 						<div class="col-md-6">
 							<div class="tab-content projects-content">
 
-								<div class="vertical-item gallery-item content-absolute ds tab-pane active" id="project1" role="tabpanel">
+								{% for object in build_objects %}
+								<div class="vertical-item gallery-item content-absolute ds tab-pane {% if forloop.first %} active {% endif %}" id="project{{ object.build_object.object_slug }}" role="tabpanel">
 									<div class="item-media">
-										<img src="{% static 'images/gallery/project_01.png' %}" alt="">
+										<img src="{{ object.image.object_image.url }}" alt="">
 										<div class="media-links">
 											<!-- <div class="links-wrap">
 												<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="images/gallery/project_01.png"></a>
@@ -226,93 +181,14 @@
 									</div>
 									<div class="item-content">
 										<div class="item-meta">
-											<h4 class="text-uppercase">Praesent ultrices dui sed ornare</h4>
+											<h4 class="text-uppercase">{{ object.build_object.object_title }}</h4>
 											<p class="margin_0 grey">
-												<em>Solar System, Wind Turbines</em>
+												<em>{{ object.build_object.object_desc }}</em>
 											</p>
 										</div>
 									</div>
 								</div>
-
-								<div class="vertical-item gallery-item content-absolute ds tab-pane" id="project2" role="tabpanel">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_02.png' %}" alt="">
-										<div class="media-links">
-											<!-- <div class="links-wrap">
-												<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="images/gallery/project_02.png"></a>
-											</div> -->
-											<!-- <a href="#" class="abs-link"></a> -->
-										</div>
-									</div>
-									<div class="item-content">
-										<div class="item-meta">
-											<h4 class="text-uppercase">Praesent ultrices dui sed ornare</h4>
-											<p class="margin_0 grey">
-												<em>Solar System, Wind Turbines</em>
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="vertical-item gallery-item content-absolute ds tab-pane" id="project3" role="tabpanel">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_03.png' %}" alt="">
-										<div class="media-links">
-											<!-- <div class="links-wrap">
-												<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="images/gallery/project_03.png"></a>
-											</div> -->
-											<!-- <a href="#" class="abs-link"></a> -->
-										</div>
-									</div>
-									<div class="item-content">
-										<div class="item-meta">
-											<h4 class="text-uppercase">Praesent ultrices dui sed ornare</h4>
-											<p class="margin_0 grey">
-												<em>Solar System, Wind Turbines</em>
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="vertical-item gallery-item content-absolute ds tab-pane" id="project4" role="tabpanel">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_04.png' %}" alt="">
-										<div class="media-links">
-											<!-- <div class="links-wrap">
-												<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="images/gallery/project_04.png"></a>
-											</div> -->
-											<!-- <a href="#" class="abs-link"></a> -->
-										</div>
-									</div>
-									<div class="item-content">
-										<div class="item-meta">
-											<h4 class="text-uppercase">Praesent ultrices dui sed ornare</h4>
-											<p class="margin_0 grey">
-												<em>Solar System, Wind Turbines</em>
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="vertical-item gallery-item content-absolute ds tab-pane" id="project5" role="tabpanel">
-									<div class="item-media">
-										<img src="{% static 'images/gallery/project_05.png' %}" alt="">
-										<div class="media-links">
-											<!-- <div class="links-wrap">
-												<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="images/gallery/project_05.png"></a>
-											</div> -->
-											<!-- <a href="#" class="abs-link"></a> -->
-										</div>
-									</div>
-									<div class="item-content">
-										<div class="item-meta">
-											<h4 class="text-uppercase">Praesent ultrices dui sed ornare</h4>
-											<p class="margin_0 grey">
-												<em>Solar System, Wind Turbines</em>
-											</p>
-										</div>
-									</div>
-								</div>
+								{% endfor %}
 
 							</div>
 						</div>
