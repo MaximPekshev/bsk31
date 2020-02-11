@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
 
 	path('', include('baseapp.urls')),
+	path('objects/', include('objectapp.urls')),
 
 
 
