@@ -1,5 +1,7 @@
 {% extends 'baseapp/base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 			<section id="breadcrumbs" class="page_breadcrumbs ds parallax section_padding_65 table_section table_section_md">
@@ -21,9 +23,7 @@
 					</div>
 				</div>
 			</section>
-
-	
-
+		
 			<section class="ls  section_padding_bottom_30 section_padding_top_100">
 				<div class="container">
 					<div class="row">
@@ -39,21 +39,34 @@
 							</p>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-10 col-md-push-1">
-							<div id="gallery-owl-carousel" class="owl-carousel" data-dots="true" data-margin="0" data-items="1" data-responsive-lg="1" data-responsive-md="1" data-responsive-sm="1" data-responsive-xs="1">
-								{% for picture in pictures %}
-								<div class="vertical-item content-padding with_shadow gallery-extended-item text-center">
-									<div class="item-media">
-										<img src="{{ picture.object_image.url }}" alt="">
-									</div>				
+
+					<div class="row bottommargin_50">
+						<div class="col-xs-12 col-md-10 col-md-push-1">
+							<article id="blog-gallery-slider" class="carousel slide">
+
+								<ol class="carousel-indicators">
+									{% for picture in pictures %}
+									<li data-target="#blog-gallery-slider" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %} active {% endif %}"></li>
+									{% endfor %}
+								</ol>
+
+								<div class="carousel-inner">
+									{% for picture in pictures %}
+									<div class="item {% if forloop.first %} active {% endif %}">
+										<div class="vertical-item content-absolute vertical-center">
+											<div class="item-media">
+												<img class="" src="{{ picture.object_image.url }}" alt="">
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+
 								</div>
-								{% endfor %}								
-							</div>
+
+							</article>
 						</div>
 					</div>
 				</div>
 			</section>
-
 
 {% endblock %}
