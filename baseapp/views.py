@@ -22,9 +22,11 @@ def show_index(request):
 		
 		item.build_object = obj
 		
-		images = Picture.objects.get(build_object=obj, main_image=True)
-		
-		item.image = images 
+		try:
+			images = Picture.objects.get(build_object=obj, main_image=True)
+			item.image = images
+		except Picture.DoesNotExist:
+			item.image = None	 
 		 	
 		table.append(item)
 
