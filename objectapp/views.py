@@ -20,10 +20,12 @@ def show_objects(request):
 		item = Item()
 		
 		item.build_object = obj
-		
-		images = Picture.objects.get(build_object=obj, main_image=True)
-		
-		item.image = images 
+
+		try:
+			images = Picture.objects.get(build_object=obj, main_image=True)
+			item.image = images 
+		except Picture.DoesNotExist:
+			item.image = None
 		 	
 		table.append(item)	
 
@@ -58,7 +60,11 @@ def show_build_object(request, slug):
 
 	build_object = Build_object.objects.get(object_slug=slug)
 
-	main_picture = Picture.objects.filter(build_object=build_object).order_by('-main_image')[0]
+	try:
+		main_picture = Picture.objects.filter(build_object=build_object).order_by('-main_image')[0]
+	except IndexError:
+		main_picture = None
+
 	pictures = Picture.objects.filter(build_object=build_object, main_image=False)
 
 
