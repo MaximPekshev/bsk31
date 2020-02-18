@@ -23,7 +23,5 @@ urlpatterns = [
 	path('', include('baseapp.urls')),
 	path('objects/', include('objectapp.urls')),
 
-
-
     path('admin/', admin.site.urls),
 ]

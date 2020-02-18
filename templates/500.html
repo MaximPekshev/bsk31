@@ -1,0 +1,16 @@
+{% extends 'baseapp/base.html' %}
+
+{% block content %}
+<section class="ls section_padding_110">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8 text-center">
+				<div class="cornered-heading center-heading bottommargin_40">
+					<h2 class="text-uppercase"> Извините, но такой страницы не существует </h2>
+					<span class="text-uppercase"><a href="{% url 'show_index' %}"> На главную </a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	
+{% endblock %}
