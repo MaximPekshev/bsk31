@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<html>
+	<head>
+    <title>БСК Такси</title>
+    
+		{% load static %}
+
+  		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  		<meta name="description" content="">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'css/main.css' %}" id="color-switcher-link">
+      <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+      <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+      <script src="{% static 'js/vendor/modernizr-2.6.2.min.js' %}"></script>
+  		<script src="{% static 'js/bootstrap.js' %}"></script>
+  		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+ 	</head>
+ 	<body>
+  <section class="page_topline ds ms columns_margin_0">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 text-center text-sm-left">
+          <p class="fontsize_12 grey">
+          </div>
+        </div>
+      </div>
+    </section>
+
+ 	{% block content %}
+  <section class="ls ms">
+   <div class="container-fluid flex-row">
+    <div class="row">
+      <div class="col-lg-12 d-flex flex-row-reverse">
+        <div class="pl-2">
+          <a class="theme_button color1" href="{% url 'logout' %}">Выйти</a>
+        </div>
+        <div class="pl-2">
+          <a class="theme_button" href="" data-toggle="modal" data-target="#addnewdriver">Новый водитель <i class="rt-icon2-add"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container col-lg-12">
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="table_template darklinks table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>Водитель</th>
+              <th>Номер В/У</th>
+              <th>Гос номер А/М</th>
+              <th>Марка А/М</th>
+              <th>Ставка</th>
+              <th></th>
+              <th>Долг</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for driver in drivers %}
+            <tr>
+              <td><a href="{% url 'show_driver' slug=driver.slug %}">{{ driver.second_name}} {{ driver.first_name}}</a></td>
+              <td>{{ driver.driver_license}}</td>
+              <td>{{ driver.car_number}}</td>
+              <td>{{ driver.car_model}}</td>
+              <td>{{ driver.rate}}</td>
+              <td></td>
+              <td>{{ driver.debt}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section> 
+
+<div class="modal" id="addnewdriver" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="text-uppercase pt-3">Создание нового водителя</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-sm-12 text-center">
+          <form id="edit-driver"  class="shop-register" method="POST" action="{% url 'driver_add_new' %}">
+            {% csrf_token %}
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+
+                  <div class="form-group validate-required" id="last_name">
+                    <label for="last_name" class="control-label">
+                      <span class="grey">Фамилия </span>
+                      <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="last_name" id="last_name" placeholder="" value="" required>
+                  </div>
+                  <div class="form-group validate-required" id="first_name">
+                    <label for="first_name" class="control-label">
+                      <span class="grey">Имя </span>
+                      <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="first_name" id="first_name" placeholder="" value="" required>
+                  </div>
+
+                  <div class="form-group" id="third_name">
+                    <label for="third_name" class="control-label">
+                      <span class="grey">Отчество</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="third_name" id="third_name" placeholder="" value="">
+                  </div>
+                </div>
+                <div class="col-lg-6 pt-4">                    
+                    <img src="{% static 'images/no-avatar-png.png' %}" alt="">                 
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group validate-required" id="driver_license">
+                    <label for="driver_license" class="control-label">
+                      <span class="grey">Номер В/У</span>
+                      <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="driver_license" id="driver_license" placeholder="" value="" required>
+                  </div>
+
+                  <div class="form-group" id="car_model">
+                    <label for="car_model" class="control-label">
+                      <span class="grey">Марка А/М</span>
+                      <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="car_model" id="car_model" placeholder="" value="" required>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group validate-required" id="car_number">
+                    <label for="car_number" class="control-label">
+                      <span class="grey">Гос номер А/М</span>
+                      <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="car_number" id="car_number" placeholder="" value="" required>
+                  </div>
+                  <div class="form-group validate-required" id="rate">
+                    <label for="rate" class="control-label">
+                      <span class="grey">Ставка</span>
+                      <span class="required">*</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="rate" id="rate" placeholder="" value="" required>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      <div class="modal-footer">
+        <a class="theme_button" href="#" data-dismiss="modal">ОТМЕНА</a>
+        <button class="theme_button color1" type="submit" form="edit-driver">СОХРАНИТЬ </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+ 	{% endblock %}
+
+
+
+
+ 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+ 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+ 	</body>	
+</html>
