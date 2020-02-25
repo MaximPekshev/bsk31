@@ -7,7 +7,7 @@ from taxiapp.models import Working_day
 
 
 
-def working_day_add_new(request, driver_slug):
+def working_day_add(request, driver_slug):
 
 	driver = Driver.objects.get(slug=driver_slug)
 

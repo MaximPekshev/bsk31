@@ -10,5 +10,6 @@ urlpatterns = [
 	path('driver/<str:slug>/', 		show_driver, name='show_driver'),
 	path('new-driver/', 			driver_add_new, name='driver_add_new'),
 	path('profile/', 				include('authapp.urls')),
+	path('working-days/', 			include('workingdayapp.urls')),
 
 			]

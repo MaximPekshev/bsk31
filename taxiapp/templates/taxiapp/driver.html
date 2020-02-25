@@ -15,7 +15,7 @@
 				<a href="" class="theme_button color1" data-toggle="modal" data-target="#new-day"><i class="rt-icon2-add"></i></i></a>
 			</div>
 			<div class="py-2 pl-2">
-				<a href="{% url 'show_index' %}" class="theme_button color1"><i class="rt-icon2-home"></i></a>
+				<a href="{% url 'taxi_show_index' %}" class="theme_button color1"><i class="rt-icon2-home"></i></a>
 			</div>
 			
 		</div>
@@ -81,7 +81,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form id="idnewday" class="form" action="{% url 'working_day_add_new' driver_slug=driver.slug %}" method="POST">
+				<form id="idnewday" class="form" action="{% url 'working_day_add' driver_slug=driver.slug %}" method="POST">
 					{% csrf_token %}
 					<div class="form-group row">
 						<label for="inputDate" class="col-sm-2 col-form-label pb-2">Дата</label>
