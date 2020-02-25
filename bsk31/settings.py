@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'objectapp',
     'taxiapp',
     'authapp',
+    'workingdayapp',
 ]
 
 MIDDLEWARE = [
