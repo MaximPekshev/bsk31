@@ -11,7 +11,7 @@ class Build_object(models.Model):
 
 	object_title 	= models.CharField(max_length = 150, verbose_name='Наименование')
 	object_desc 	= models.TextField(max_length=1024, verbose_name='Описание', blank=True)
-	object_top 		=  models.BooleanField(verbose_name='Поднять в топ', default=False)
+	object_top 		= models.BooleanField(verbose_name='Поднять в топ', default=False)
 
 	object_slug 	= models.SlugField(max_length=10, verbose_name='Url', blank=True, db_index=True)
 
