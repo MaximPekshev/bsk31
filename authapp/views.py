@@ -4,6 +4,7 @@ from django.contrib		 			import auth
 from django.contrib.auth.models		import User
 from django.contrib.auth.forms 		import AuthenticationForm
 from django.contrib					import messages
+from django.contrib.auth.models 	import Group
 
 
 def login(request):
@@ -16,11 +17,23 @@ def login(request):
 
 		user 			= auth.authenticate(username=username, password=password)
 
+		users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+
 		if user is not None:
 
 			auth.login(request, user)
 
-			return redirect('taxi_show_index')
+			if request.user in users_in_group:
+				
+				return redirect('taxi_show_index')
+
+			else:
+				
+				auth.logout(request)
+
+				messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
+
+				return redirect('taxi_show_index')
 
 		else:
 
