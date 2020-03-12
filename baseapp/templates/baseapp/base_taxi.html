@@ -56,6 +56,7 @@
               <th>Водитель</th>
               <th>Номер В/У</th>
               <th>Гос номер А/М</th>
+              <th>Топливная карта</th>
               <th>Марка А/М</th>
               <th>Ставка</th>
               <th></th>
@@ -68,6 +69,7 @@
               <td><a href="{% url 'show_driver' slug=driver.slug %}">{{ driver.second_name}} {{ driver.first_name}}</a></td>
               <td>{{ driver.driver_license}}</td>
               <td>{{ driver.car_number}}</td>
+              <td>{{ driver.fuel_card}}</td>
               <td>{{ driver.car_model}}</td>
               <td>{{ driver.rate}}</td>
               <td></td>
@@ -99,19 +101,19 @@
 
                   <div class="form-group validate-required" id="last_name">
                     <label for="last_name" class="control-label">
-                      <span class="grey">Фамилия </span>
+                      <span class="grey">Фамилия</span>
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="last_name" id="last_name" placeholder="" value="" required>
+                    <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Фамилия" value="" required>
                   </div>
                   <div class="form-group validate-required" id="first_name">
                     <label for="first_name" class="control-label">
-                      <span class="grey">Имя </span>
+                      <span class="grey">Имя</span>
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="first_name" id="first_name" placeholder="" value="" required>
+                    <input type="text" class="form-control " name="first_name" id="first_name" placeholder="Имя" value="" required>
                   </div>
 
                   <div class="form-group" id="third_name">
@@ -119,7 +121,7 @@
                       <span class="grey">Отчество</span>
                     </label>
 
-                    <input type="text" class="form-control " name="third_name" id="third_name" placeholder="" value="">
+                    <input type="text" class="form-control " name="third_name" id="third_name" placeholder="Отчество" value="">
                   </div>
                 </div>
                 <div class="col-lg-6 pt-4">                    
@@ -133,10 +135,17 @@
                   <div class="form-group validate-required" id="driver_license">
                     <label for="driver_license" class="control-label">
                       <span class="grey">Номер В/У</span>
-                      <!-- <span class="required">*</span> -->
                     </label>
 
-                    <input type="text" class="form-control " name="driver_license" id="driver_license" placeholder="" value="">
+                    <input type="text" class="form-control " name="driver_license" id="driver_license" placeholder="Номер В/У" value="">
+                  </div>
+
+                  <div class="form-group validate-required" id="fuel_card">
+                    <label for="fuel_card" class="control-label">
+                      <span class="grey">Топливная карта</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="fuel_card" id="fuel_card" placeholder="Топливная карта" value="">
                   </div>
 
                   <div class="form-group" id="car_model">
@@ -145,7 +154,7 @@
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="car_model" id="car_model" placeholder="" value="" required>
+                    <input type="text" class="form-control " name="car_model" id="car_model" placeholder="Марка А/М" value="" required>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -155,7 +164,7 @@
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="car_number" id="car_number" placeholder="" value="" required>
+                    <input type="text" class="form-control " name="car_number" id="car_number" placeholder="Гос номер А/М" value="" required>
                   </div>
                   <div class="form-group validate-required" id="rate">
                     <label for="rate" class="control-label">
@@ -163,7 +172,7 @@
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="rate" id="rate" placeholder="" value="" required>
+                    <input type="text" class="form-control " name="rate" id="rate" placeholder="Ставка" value="" required>
                   </div>
                 </div>
 

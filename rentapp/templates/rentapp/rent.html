@@ -1,0 +1,97 @@
+{% extends 'baseapp/base.html' %}
+
+{% block content %}
+
+<section id="breadcrumbs" class="page_breadcrumbs ds parallax section_padding_65 table_section table_section_md">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-center text-md-left">
+				<h1 class="cornered-heading">{% if rent_category == "EQ" %} Аренда техники {% elif rent_category == "TL" %} Аренда инструмента {% endif %}</h1>
+			</div>
+			<div class="col-md-6 text-center text-md-right">
+				<ol class="breadcrumb">
+					<li>
+						<a href="{% url 'show_index' %}">Главная</a>
+					</li>
+					<li class="active">{% if rent_category == "EQ" %} Аренда техники {% elif rent_category == "TL" %} Аренда инструмента {% endif %}</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ls section_padding_top_110 section_padding_bottom_100">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-sm-12">
+
+				{% for item in page_object.object_list %}
+
+				<div class="side-item event-item content-padding with_background bottommargin_30">
+
+					<div class="row">
+
+						<div class="col-lg-3 col-md-4">
+							<div class="item-media">
+								<img src="{{ item.rent_picture.object_image.url }}" alt="">
+							</div>
+						</div>
+
+						<div class="col-lg-9 col-md-8">
+							<div class="item-content">
+								<h5 class="text-uppercase">
+									<a >{{ item.rent_object.object_title }} </a>
+								</h5>
+								<p>
+									{{ item.rent_object.object_desc|linebreaksbr }}
+								</p>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				{% endfor %}
+
+				{% if is_paginated %}
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<div class="with_shadow inline-block topmargin_20">
+							<ul class="pagination">
+								<li>
+									<a href="{{ prev_url }}">
+										<i class="rt-icon2-chevron-thin-left"></i>
+										<span class="sr-only">Prev</span>
+									</a>
+								</li>
+								{% for n in page_object.paginator.page_range %}
+								{% if page_object.number == n %}
+								<li class="active">
+									<a href="?page={{ n }}">{{ n }}</a>
+								</li>
+								{% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
+								<li>
+									<a href="?page={{ n }}">{{ n }}</a>
+								</li>
+								{% endif %}
+								{% endfor %}
+								<li>
+									<a href="{{ next_url }}">
+										<i class="rt-icon2-chevron-thin-right"></i>
+										<span class="sr-only">Next</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+
+			</div>
+
+		</div>
+	</div>
+</section>
+{% endblock %}
