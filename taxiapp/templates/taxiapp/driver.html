@@ -31,6 +31,7 @@
 			<th>ГСМ</th>
 			<th>Штрафы</th>
 			<th>Наличные</th>
+      <th>Карта</th>
 			<th>Безналичные</th>
 			<th></th>
 			<th>Долг</th>
@@ -48,6 +49,7 @@
           			<td>{{ day.fuel }}</td>
           			<td>{{ day.penalties }}</td>
           			<td>{{ day.cash }}</td>
+                <td>{{ day.cash_card }}</td>
           			<td>{{ day.cashless }}</td>
           			<td></td>
           			<td style="text-align: right" >{{ day.debt_of_day }}</td>
@@ -104,6 +106,10 @@
 						<div class="col-sm-10 pb-2">
 							<input type="text" name="input_cash" class="form-control" id="inputCash" placeholder="Наличные" value="">
 						</div>
+            <label for="inputCashCard" class="col-sm-2 col-form-label pb-2">Карта</label>
+            <div class="col-sm-10 pb-2">
+              <input type="text" name="input_cash_card" class="form-control" id="inputCashCard" placeholder="Карта" value="">
+            </div>
 						<label for="inputCashless" class="col-sm-2 col-form-label pb-2">Безнал</label>
 						<div class="col-sm-10 pb-2">
 							<input type="text" name="input_cashless" class="form-control" id="inputCashless" placeholder="Безнал" value="">
@@ -130,28 +136,28 @@
           </button>
         </div>
         <div class="modal-body col-sm-12 text-center">
-          <form id="new-driver"  class="shop-register" method="POST" action="#">
+          <form id="new-driver"  class="shop-register" method="POST" action="{% url 'driver_edit' slug=driver.slug %}">
             {% csrf_token %}
             <div class="container">
               <div class="row">
                 <div class="col-lg-6">
                 	<div class="form-group validate-required" id="last_name">
                     <label for="last_name" class="control-label">
-                      <span class="grey">Фамилия </span>
+                      <span class="grey">Фамилия</span>
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="last_name" id="last_name" placeholder="" value="{{ driver.second_name }}" required>
+                    <input type="text" class="form-control " name="last_name" id="last_name" placeholder="Фамилия" value="{{ driver.second_name }}" required>
                   </div>
 
                   <div class="form-group validate-required" id="first_name">
 
                     <label for="first_name" class="control-label">
-                      <span class="grey">Имя </span>
+                      <span class="grey">Имя</span>
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="first_name" id="first_name" placeholder="" value="{{ driver.first_name }}" required>
+                    <input type="text" class="form-control " name="first_name" id="first_name" placeholder="Имя" value="{{ driver.first_name }}" required>
                   </div>
 
                   <div class="form-group" id="third_name">
@@ -159,7 +165,7 @@
                       <span class="grey">Отчество</span>
                     </label>
 
-                    <input type="text" class="form-control " name="third_name" id="third_name" placeholder="" value="{{ driver.third_name }}">
+                    <input type="text" class="form-control " name="third_name" id="third_name" placeholder="Отчество" value="{{ driver.third_name }}">
                   </div>
                 </div>
                 <div class="col-lg-6 pt-4">
@@ -173,10 +179,17 @@
                   <div class="form-group validate-required" id="driver_license">
                     <label for="driver_license" class="control-label">
                       <span class="grey">Номер В/У</span>
-                      <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="driver_license" id="driver_license" placeholder="" value="{{ driver.driver_license }}" required>
+                    <input type="text" class="form-control " name="driver_license" id="driver_license" placeholder="Номер В/У" value="{{ driver.driver_license }}">
+                  </div>
+
+                  <div class="form-group validate-required" id="fuel_card">
+                    <label for="fuel_card" class="control-label">
+                      <span class="grey">Топливная карта</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="fuel_card" id="fuel_card" placeholder="Топливная карта" value="{{ driver.fuel_card }}">
                   </div>
 
                   <div class="form-group" id="car_model">
@@ -185,7 +198,7 @@
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="car_model" id="car_model" placeholder="" value="{{ driver.car_model }}" required>
+                    <input type="text" class="form-control " name="car_model" id="car_model" placeholder="Марка А/М" value="{{ driver.car_model }}" required>
                   </div>
                 </div>
                 <div class="col-lg-6">
@@ -195,7 +208,7 @@
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="car_number" id="car_number" placeholder="" value="{{ driver.car_number }}" required>
+                    <input type="text" class="form-control " name="car_number" id="car_number" placeholder="Гос номер А/М" value="{{ driver.car_number }}" required>
                   </div>
                   <div class="form-group validate-required" id="rate">
                     <label for="rate" class="control-label">
@@ -203,7 +216,7 @@
                       <span class="required">*</span>
                     </label>
 
-                    <input type="text" class="form-control " name="rate" id="rate" placeholder="" value="{{ driver.rate }}" required>
+                    <input type="text" class="form-control " name="rate" id="rate" placeholder="Ставка" value="{{ driver.rate }}" required>
                   </div>
                 </div>
 
@@ -252,6 +265,10 @@
 						<div class="col-sm-10 pb-2">
 							<input type="text" name="input_cash" class="form-control" id="inputCash" placeholder="Наличные" value="{{ day.cash }}">
 						</div>
+            <label for="inputCashCard" class="col-sm-2 col-form-label pb-2">Карта</label>
+            <div class="col-sm-10 pb-2">
+              <input type="text" name="input_cash_card" class="form-control" id="inputCashCard" placeholder="Карта" value="{{ day.cash_card }}">
+            </div>
 						<label for="inputCashless" class="col-sm-2 col-form-label pb-2">Безнал</label>
 						<div class="col-sm-10 pb-2">
 							<input type="text" name="input_cashless" class="form-control" id="inputCashless" placeholder="Безнал" value="{{ day.cashless }}">

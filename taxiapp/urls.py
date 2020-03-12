@@ -1,7 +1,7 @@
 from django.urls import path
 from django.urls import include
 from .views import taxi_show_index
-from .views import show_driver, driver_add_new
+from .views import show_driver, driver_add_new, driver_edit
 
 
 urlpatterns = [
@@ -9,6 +9,7 @@ urlpatterns = [
 	path('', 						taxi_show_index, name='taxi_show_index'),
 	path('driver/<str:slug>/', 		show_driver, name='show_driver'),
 	path('new-driver/', 			driver_add_new, name='driver_add_new'),
+	path('edit-driver/<str:slug>/', driver_edit, name='driver_edit'),
 	path('profile/', 				include('authapp.urls')),
 	path('working-days/', 			include('workingdayapp.urls')),
 

@@ -23,6 +23,7 @@ class Driver(models.Model):
 	driver_license	= models.CharField(max_length = 15, verbose_name = 'Номер В/У', blank=True, null=True, default='')
 	car_number		= models.CharField(max_length = 15, verbose_name = 'Номер А/М', blank=True, null=True, default='')
 	car_model		= models.CharField(max_length = 30, verbose_name = 'Марка А/М', blank=True, null=True, default='')
+	fuel_card		= models.CharField(max_length = 15, verbose_name = 'Топливная карта', blank=True, null=True, default='')
 
 	rate			= models.DecimalField(verbose_name = 'Ставка', max_digits=15, decimal_places=2, blank=True, null=True, default=0)
 
@@ -65,6 +66,8 @@ class  Working_day(models.Model):
 	penalties	= models.DecimalField(verbose_name = 'Штрафы', max_digits=15, decimal_places=2)
 
 	cash		= models.DecimalField(verbose_name = 'Наличные', max_digits=15, decimal_places=2)
+	cash_card	= models.DecimalField(verbose_name = 'Карта', max_digits=15, decimal_places=2, default=0)
+
 	cashless	= models.DecimalField(verbose_name = 'Безналичные', max_digits=15, decimal_places=2)
 
 	debt_of_day	= models.DecimalField(verbose_name = 'Долг дня', max_digits=15, decimal_places=2)
@@ -78,7 +81,7 @@ class  Working_day(models.Model):
 		if self.slug == "":
 			self.slug = get_uuid()
 
-		self.debt_of_day = self.cash + self.cashless - self.rate - self.fuel - self.penalties
+		self.debt_of_day = self.cash + self.cash_card + self.cashless - self.rate - self.fuel - self.penalties
 		
 		super(Working_day, self).save(*args, **kwargs)
 		calculate_debt(self.driver.slug)
