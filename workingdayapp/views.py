@@ -49,6 +49,11 @@ def working_day_add(request, driver_slug):
 				else:
 					cash = 0
 
+				if day_form.cleaned_data['input_cash_card']:
+					cash_card = float(day_form.cleaned_data['input_cash_card'].replace(',','.'))
+				else:
+					cash = 0	
+
 				if day_form.cleaned_data['input_cashless']:
 					cashless = float(day_form.cleaned_data['input_cashless'].replace(',','.'))
 				else:
@@ -61,6 +66,7 @@ def working_day_add(request, driver_slug):
 					fuel=fuel,
 					penalties=penalties,
 					cash=cash,
+					cash_card=cash_card,
 					cashless=cashless,
 					)
 

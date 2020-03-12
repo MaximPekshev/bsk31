@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'taxiapp',
     'authapp',
     'workingdayapp',
+    'rentapp',
 ]
 
 MIDDLEWARE = [
