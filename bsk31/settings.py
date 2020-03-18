@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
     'baseapp',
     'objectapp',
     'taxiapp',
@@ -131,3 +132,10 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# CRON_CLASSES = [
+#     "taxiapp.cron.CreatingWorkingDays",
+# ]
+
+CRONJOBS = [
+    ('*/2 * * * *', 'taxiapp.cron.creating_working_days'),
+]

@@ -168,8 +168,8 @@
                     <input type="text" class="form-control " name="third_name" id="third_name" placeholder="Отчество" value="{{ driver.third_name }}">
                   </div>
                 </div>
-                <div class="col-lg-6 pt-4">
-                  	<img src="{% static 'images/no-avatar-png.png' %}" alt="">
+                <div class="col-lg-6 pt-3">
+                  <img src="{% static 'images/no-avatar-png.png' %}" alt="">
                 </div>
               </div>
             </div>
@@ -202,6 +202,7 @@
                   </div>
                 </div>
                 <div class="col-lg-6">
+
                   <div class="form-group validate-required" id="car_number">
                     <label for="car_number" class="control-label">
                       <span class="grey">Гос номер А/М</span>
@@ -210,6 +211,7 @@
 
                     <input type="text" class="form-control " name="car_number" id="car_number" placeholder="Гос номер А/М" value="{{ driver.car_number }}" required>
                   </div>
+
                   <div class="form-group validate-required" id="rate">
                     <label for="rate" class="control-label">
                       <span class="grey">Ставка</span>
@@ -218,12 +220,68 @@
 
                     <input type="text" class="form-control " name="rate" id="rate" placeholder="Ставка" value="{{ driver.rate }}" required>
                   </div>
+
+                  <div class="form-group validate-required pt-4" id="active">
+                    <div class="container-fluid py-2 flex-row">
+                      <div class="d-flex flex-row-reverse">  
+                        <ul class="ks-cboxtags pt-2">
+                          <li class="">
+                            <input type="checkbox" id="checkboxActive" value="AC" {% if driver.active == True %}checked {% endif %} name="active">
+                            <label for="checkboxActive">{% if driver.active == True %} Работает {% else %} Уволен {% endif %}</label>
+                          </li>
+                        </ul> 
+                      </div> 
+                    </div> 
+                  </div>
+
                 </div>
+                
+                <div class="col-lg-12">
+                  <div class="form-group validate-required" id="shedule">
+                    <label for="shedule" class="control-label">
+                      <span class="grey">График работы</span>
+                    </label>
+                    <div class="container">
+                      <ul class="ks-cboxtags mt-3">
+                        <li class="">
+                          <input type="checkbox" id="checkboxMN" value="ПН" {% if driver.monday == True %}checked {% endif %} name="monday">
+                          <label for="checkboxMN">ПН</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxTUE" value="ВТ" {% if driver.tuesday == True %}checked {% endif %} name="tuesday">
+                          <label for="checkboxTUE">ВТ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxWD" value="СР" {% if driver.wednesday == True %}checked {% endif %} name="wednesday">
+                          <label for="checkboxWD">СР</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxTHR" value="ЧТ" {% if driver.thursday == True %}checked {% endif %} name="thursday">
+                          <label for="checkboxTHR">ЧТ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxFR" value="ПТ" {% if driver.friday == True %}checked {% endif %} name="friday">
+                          <label for="checkboxFR">ПТ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxST" value="СБ" {% if driver.saturday == True %}checked {% endif %} name="saturday">
+                          <label for="checkboxST">СБ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxSN" value="ВС" {% if driver.sunday == True %}checked {% endif %} name="sunday">
+                          <label for="checkboxSN">ВС</label>
+                        </li>
+                      </ul>
+                    </div>    
+                  </div>
+                </div>
+
 
               </div>
             </div>
           </form>
         </div>
+
       <div class="modal-footer">
         <a class="theme_button" href="#" data-dismiss="modal">ОТМЕНА</a>
         <button class="theme_button color1" type="submit" form="new-driver">СОХРАНИТЬ </button>

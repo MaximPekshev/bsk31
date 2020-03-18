@@ -27,12 +27,19 @@ class Driver(models.Model):
 
 	rate			= models.DecimalField(verbose_name = 'Ставка', max_digits=15, decimal_places=2, blank=True, null=True, default=0)
 
+	active			= models.BooleanField(verbose_name='Активный', default=True)
 
 	slug 			= models.SlugField(max_length=10, verbose_name='Url', blank=True, db_index=True)
 	
 	debt			= models.DecimalField(verbose_name = 'Долг', max_digits=15, decimal_places=2)
 
-
+	monday			= models.BooleanField(verbose_name='Понедельник', default=True)
+	tuesday			= models.BooleanField(verbose_name='Вторник', default=True)
+	wednesday		= models.BooleanField(verbose_name='Среда', default=True)
+	thursday		= models.BooleanField(verbose_name='Четверг', default=True)
+	friday			= models.BooleanField(verbose_name='Пятница', default=True)
+	saturday		= models.BooleanField(verbose_name='Суббота', default=True)
+	sunday			= models.BooleanField(verbose_name='Воскресенье', default=True)
 
 	def __str__(self):
 

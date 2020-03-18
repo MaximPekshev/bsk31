@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from decimal import Decimal
 from django.shortcuts import render, redirect
 from .forms import WorkingDayForm
@@ -27,7 +27,7 @@ def working_day_add(request, driver_slug):
 				if day_form.cleaned_data['input_date']:
 					date = day_form.cleaned_data['input_date']
 				else:
-					date = datetime.datetime.today()
+					date = datetime.today()
 
 				if day_form.cleaned_data['input_rate']:
 					rate = float(day_form.cleaned_data['input_rate'].replace(',','.'))
