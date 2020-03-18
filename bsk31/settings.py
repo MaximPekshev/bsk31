@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'authapp',
     'workingdayapp',
     'rentapp',
+    'servicesapp',
 ]
 
 MIDDLEWARE = [
@@ -132,10 +133,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-# CRON_CLASSES = [
-#     "taxiapp.cron.CreatingWorkingDays",
-# ]
-
 CRONJOBS = [
-    ('*/2 * * * *', 'taxiapp.cron.creating_working_days'),
+    ('30 0 * * *', 'taxiapp.cron.creating_working_days'),
 ]

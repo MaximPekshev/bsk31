@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from .models import Rent_object
 from .models import Rent_picture
 
+from servicesapp.models import Service_object
 
 class Item(object):
 	
@@ -12,8 +13,10 @@ class Item(object):
 
 def show_rent_objects(request, category):
 
-	rent_object_count=12
-	rent_objects = Rent_object.objects.filter(rent_category=category)
+	service_objects = Service_object.objects.all()
+
+	rent_object_count=20
+	rent_objects = Rent_object.objects.filter(rent_category=category).order_by('object_top')
 	
 	table = []
 	for obj in rent_objects:
@@ -48,7 +51,7 @@ def show_rent_objects(request, category):
 	template_name = 'rentapp/rent.html'
 	context = {
 		'page_object': page, 'prev_url': prev_url, 'next_url': next_url, 'is_paginated': is_paginated,
-		'rent_category':category,
+		'rent_category':category, 'service_objects': service_objects,
 	}
 
 	return render(request, template_name, context)

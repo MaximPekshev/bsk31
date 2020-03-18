@@ -2,6 +2,12 @@
 
 {% load static %}
 
+{% block header %}
+
+{{ block.super }}
+
+{% endblock %}
+
 {% block content %}
 
 			<section id="breadcrumbs" class="page_breadcrumbs ds parallax section_padding_65 table_section table_section_md">
@@ -15,7 +21,9 @@
 								<li>
 									<a href="{% url 'show_index' %}">Главная</a>
 								</li>
-								<li class="active">Наши объекты</li>
+								<li class="active">
+									<a href="{% url 'show_objects' %}">Наши объекты</a>
+								</li>
 							</ol>
 						</div>
 					</div>

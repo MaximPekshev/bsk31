@@ -23,6 +23,7 @@ urlpatterns = [
 	path('',                include('baseapp.urls')),
 	path('objects/',        include('objectapp.urls')),
     path('rent/',           include('rentapp.urls')),
+    path('services/',       include('servicesapp.urls')),
     path('taxi/',           include('taxiapp.urls')),
 
     path('admin/', admin.site.urls),
