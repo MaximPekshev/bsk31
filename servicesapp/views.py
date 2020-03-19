@@ -6,12 +6,13 @@ from .models import Service_picture
 
 def show_service_objects(request):
 
-	service_objects = Service_object.objects.all()	
+	service_objects = Service_object.objects.all()
+	s_objects 		= Service_object.objects.all().order_by('-object_top')
 		
 	template_name = 'servicesapp/services.html'
 
 	context = {
-		'service_objects': service_objects,
+		'service_objects': service_objects, 's_objects': s_objects,
 	}
 
 	return render(request, template_name, context)

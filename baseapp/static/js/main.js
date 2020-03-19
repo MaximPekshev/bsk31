@@ -590,7 +590,7 @@ function windowLoadInit() {
 				prevText: "",
 				nextText: "",
 				smoothHeight: false,
-				slideshowSpeed:2000,
+				slideshowSpeed:5000,
 				animationSpeed:600,
 				start: function( slider ) {
 					slider.find('.slide_description').children().css({'visibility': 'hidden'});

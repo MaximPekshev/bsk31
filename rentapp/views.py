@@ -16,7 +16,7 @@ def show_rent_objects(request, category):
 	service_objects = Service_object.objects.all()
 
 	rent_object_count=20
-	rent_objects = Rent_object.objects.filter(rent_category=category).order_by('object_top')
+	rent_objects = Rent_object.objects.filter(rent_category=category).order_by('-object_top')
 	
 	table = []
 	for obj in rent_objects:

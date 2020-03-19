@@ -15,8 +15,8 @@ def show_objects(request):
 
 	service_objects = Service_object.objects.all()
 
-	build_object_count=6
-	build_objects = Build_object.objects.all()
+	build_object_count=10
+	build_objects = Build_object.objects.all().order_by('-object_top')
 	
 	table = []
 	for obj in build_objects:

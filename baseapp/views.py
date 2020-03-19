@@ -15,7 +15,7 @@ def show_index(request):
 
 	service_objects = Service_object.objects.all()
 
-	build_objects = Build_object.objects.all().order_by('object_top')[:5]
+	build_objects = Build_object.objects.all().order_by('-object_top')[:5]
 
 	table = []
 
