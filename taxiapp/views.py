@@ -68,7 +68,7 @@ def driver_add_new(request):
 				last_name 			= dr_form.cleaned_data['last_name']
 				car_model 			= dr_form.cleaned_data['car_model']
 				car_number 			= dr_form.cleaned_data['car_number']
-				rate 				= dr_form.cleaned_data['rate']
+				rate 				= float(dr_form.cleaned_data['rate'].replace(',','.'))
 
 				if dr_form.cleaned_data['third_name']:
 					third_name = dr_form.cleaned_data['third_name']
@@ -86,13 +86,25 @@ def driver_add_new(request):
 				else:
 					fuel_card = ''	
 
+				active 				= dr_form.cleaned_data['active']	
+
+				monday 				= dr_form.cleaned_data['monday']
+				tuesday 			= dr_form.cleaned_data['tuesday']
+				wednesday 			= dr_form.cleaned_data['wednesday']
+				thursday 			= dr_form.cleaned_data['thursday']
+				friday 				= dr_form.cleaned_data['friday']
+				saturday 			= dr_form.cleaned_data['saturday']
+				sunday 				= dr_form.cleaned_data['sunday']
+
 				new_driver = Driver(
 					first_name=first_name, second_name=last_name, 
 					third_name=third_name,
 					driver_license=driver_license,
 					car_number=car_number, car_model=car_model,
 					fuel_card=fuel_card,
-					rate=rate, debt=0,
+					rate=rate, debt=0, active=active,
+					monday=monday, tuesday=tuesday, wednesday=wednesday,
+					thursday=thursday, friday=friday, saturday=saturday, sunday=sunday,
 					)
 				new_driver.save()
 
@@ -139,6 +151,16 @@ def driver_edit(request, slug):
 				car_number 			= dr_form.cleaned_data['car_number']
 				rate 				= float(dr_form.cleaned_data['rate'].replace(',','.'))
 
+				active 				= dr_form.cleaned_data['active']
+
+				monday 				= dr_form.cleaned_data['monday']
+				tuesday 			= dr_form.cleaned_data['tuesday']
+				wednesday 			= dr_form.cleaned_data['wednesday']
+				thursday 			= dr_form.cleaned_data['thursday']
+				friday 				= dr_form.cleaned_data['friday']
+				saturday 			= dr_form.cleaned_data['saturday']
+				sunday 				= dr_form.cleaned_data['sunday']
+
 				driver = Driver.objects.get(slug=slug)
 
 				if driver.first_name != first_name:
@@ -165,12 +187,36 @@ def driver_edit(request, slug):
 				if driver.rate != rate:
 					driver.rate = rate	
 
+				if driver.active != active:
+					driver.active = active
+
+				if driver.monday != monday:
+					driver.monday = monday
+
+				if driver.tuesday != tuesday:
+					driver.tuesday = tuesday
+
+				if driver.wednesday != wednesday:
+					driver.wednesday = wednesday
+
+				if driver.thursday != thursday:
+					driver.thursday = thursday
+
+				if driver.friday != friday:
+					driver.friday = friday
+
+				if driver.saturday != saturday:
+					driver.saturday = saturday
+
+				if driver.sunday != sunday:
+					driver.sunday = sunday
+
+
 				driver.save()
 
 				current_path = request.META['HTTP_REFERER']
 				return redirect(current_path)
-			else:
-				return HttpResponse('hello')		
+
 		else:
 
 			return redirect('taxi_show_index')

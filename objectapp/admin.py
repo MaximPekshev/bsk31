@@ -22,16 +22,3 @@ class Build_objectAdmin(admin.ModelAdmin):
 admin.site.register(Build_object, Build_objectAdmin)
 
 
-class PictureAdmin(admin.ModelAdmin):
-	list_display = (
-					'title', 
-					'build_object',
-					)
-	list_filter = (
-					'build_object', 
-					)
-	exclude = ('slug',)
-
-admin.site.register(Picture, PictureAdmin)
-
-

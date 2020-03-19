@@ -1,4 +1,4 @@
-{% extends 'baseapp/base.html' %}
+{% extends 'baseapp/index.html' %}
 
 {% load static %}
 
@@ -17,7 +17,7 @@
 								<li>
 									<a href="{% url 'show_objects' %}">Наши объекты</a>
 								</li>
-								<li class="active">{{ build_object.object_slug }}</li>
+								<li class="active">{{ build_object.object_title }}</li>
 							</ol>
 						</div>
 					</div>

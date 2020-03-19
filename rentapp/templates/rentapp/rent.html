@@ -1,4 +1,4 @@
-{% extends 'baseapp/base.html' %}
+{% extends 'baseapp/index.html' %}
 
 {% block content %}
 
@@ -6,14 +6,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 text-center text-md-left">
-				<h1 class="cornered-heading">{% if rent_category == "EQ" %} Аренда техники {% elif rent_category == "TL" %} Аренда инструмента {% endif %}</h1>
+				<h1 class="cornered-heading">{% if rent_category == "equipment" %} Аренда техники {% elif rent_category == "tool" %} Аренда инструмента {% endif %}</h1>
 			</div>
 			<div class="col-md-6 text-center text-md-right">
 				<ol class="breadcrumb">
 					<li>
 						<a href="{% url 'show_index' %}">Главная</a>
 					</li>
-					<li class="active">{% if rent_category == "EQ" %} Аренда техники {% elif rent_category == "TL" %} Аренда инструмента {% endif %}</li>
+					<li class="active">{% if rent_category == "equipment" %} Аренда техники {% elif rent_category == "tool" %} Аренда инструмента {% endif %}</li>
 				</ol>
 			</div>
 		</div>

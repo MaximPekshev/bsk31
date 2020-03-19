@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from objectapp.models import Build_object
 from objectapp.models import Picture
 
+from servicesapp.models import Service_object
 
 class Item(object):
 	
@@ -12,7 +13,9 @@ class Item(object):
 
 def show_index(request):
 
-	build_objects = Build_object.objects.all().order_by('object_top')[:5]
+	service_objects = Service_object.objects.all()
+
+	build_objects = Build_object.objects.all().order_by('-object_top')[:5]
 
 	table = []
 
@@ -34,14 +37,29 @@ def show_index(request):
 
 	context = {
 
-		'build_objects': table,
+		'build_objects': table, 'service_objects': service_objects,
 	}
 
 	return render(request, template_name, context)	
 
 
 def show_about_us(request):
-	return render(request, 'baseapp/about_us.html')
+
+	service_objects = Service_object.objects.all()
+
+	context = {
+
+		'service_objects': service_objects,
+	}
+
+	return render(request, 'baseapp/about_us.html', context)
 
 def show_under_construct(request):
-	return render(request, 'baseapp/under_construct.html')
+
+	service_objects = Service_object.objects.all()
+
+	context = {
+
+		'service_objects': service_objects,
+	}
+	return render(request, 'baseapp/under_construct.html', context)

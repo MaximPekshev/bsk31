@@ -174,7 +174,62 @@
 
                     <input type="text" class="form-control " name="rate" id="rate" placeholder="Ставка" value="" required>
                   </div>
+
+                  <div class="form-group validate-required pt-4" id="active">
+                    <div class="container-fluid py-2 flex-row">
+                      <div class="d-flex flex-row-reverse">  
+                        <ul class="ks-cboxtags pt-2">
+                          <li class="">
+                            <input type="checkbox" id="checkboxActive" value="AC" name="active" checked>
+                            <label for="checkboxActive">Работает</label>
+                          </li>
+                        </ul> 
+                      </div> 
+                    </div> 
+                  </div>
                 </div>
+
+                <div class="col-lg-12">
+                  <div class="form-group validate-required" id="shedule">
+                    <label for="shedule" class="control-label">
+                      <span class="grey">График работы</span>
+                    </label>
+                    <div class="container">
+                      <ul class="ks-cboxtags mt-3">
+                        <li class="">
+                          <input type="checkbox" id="checkboxMN" value="ПН" name="monday">
+                          <label for="checkboxMN">ПН</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxTUE" value="ВТ" name="tuesday">
+                          <label for="checkboxTUE">ВТ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxWD" value="СР" name="wednesday">
+                          <label for="checkboxWD">СР</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxTHR" value="ЧТ" name="thursday">
+                          <label for="checkboxTHR">ЧТ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxFR" value="ПТ" name="friday">
+                          <label for="checkboxFR">ПТ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxST" value="СБ" name="saturday">
+                          <label for="checkboxST">СБ</label>
+                        </li>
+                        <li class="pl-5">
+                          <input type="checkbox" id="checkboxSN" value="ВС" name="sunday">
+                          <label for="checkboxSN">ВС</label>
+                        </li>
+
+                      </ul>
+                    </div>    
+                  </div>
+                </div>
+
 
               </div>
             </div>

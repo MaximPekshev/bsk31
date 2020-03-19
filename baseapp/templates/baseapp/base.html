@@ -78,12 +78,11 @@
 					</div>
 				</div>
 			</section>
-
+			{% block header %}
 			<header class="page_header theme_header cs">
 				<div class="container">
 					<div class="row mainrow">
 						<div class="col-md-11">
-							<!-- main nav start -->
 							<nav class="mainmenu_wrapper">
 								<ul class="mainmenu nav sf-menu">
 									<li class="active">
@@ -91,22 +90,24 @@
 									</li>
 
 									<li>
-										<a href="#">Услуги</a>
+										<a>Услуги</a>
 										<ul>
-											<li><a href="#">Фасадные работы</a></li>
-											<li><a href="#">Кровельные работы</a></li>
-											<li><a href="#">Электромонтаж</a></li>
-											<li><a href="#">Металлоконструкции</a></li>
-											<li><a href="#">Реконструкции зданий</a></li>
-											<li><a href="#">Строительство</a></li>
+											{% for obj in service_objects %}
+											<li>
+												<a href="{% url 'show_service_object' slug=obj.object_slug %}">{{ obj.object_title }}</a>
+											</li>
+											{% endfor %}
 										</ul>
-
 									</li>
 									<li>
 										<a>Аренда</a>
 										<ul>
-											<li><a href="{% url 'show_rent_objects' category='EQ' %}">Техника</a></li>
-											<li><a href="{% url 'show_rent_objects' category='TL' %}">Инструмент</a></li>
+											<li>
+												<a href="{% url 'show_rent_objects' category='equipment' %}">Техника</a>
+											</li>
+											<li>
+												<a href="{% url 'show_rent_objects' category='tool' %}">Инструмент</a>
+											</li>
 										</ul>
 
 									</li>
@@ -125,7 +126,6 @@
 									
 								</ul>
 							</nav>
-							<!-- eof main nav -->
 							<span class="toggle_menu">
 								<span></span>
 							</span>
@@ -133,8 +133,9 @@
 					</div>
 				</div>
 			</header>
+			{% endblock %}
 
-			{% block content %} {% endblock %}
+			{% block content %}{% endblock %}
 
 			<footer class="page_footer theme_footer ds ms parallax section_padding_top_90 section_padding_bottom_50">
 				<div class="container">

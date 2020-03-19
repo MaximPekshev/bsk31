@@ -1,0 +1,57 @@
+{% extends 'baseapp/index.html' %}
+
+
+{% block content %}
+
+<section id="breadcrumbs" class="page_breadcrumbs ds parallax section_padding_65 table_section table_section_md">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-center text-md-left">
+				<h1 class="cornered-heading">Наши услуги</h1>
+			</div>
+			<div class="col-md-6 text-center text-md-right">
+				<ol class="breadcrumb">
+					<li>
+						<a href="{% url 'show_index' %}">Главная</a>
+					</li>
+					<li class="active">
+						<a>Услуги</a>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ls section_padding_top_90 section_padding_bottom_120 columns_margin_0">
+	<div class="container">
+		<div class="row">
+
+			{% for s_object in s_objects %}
+
+			<div class="col-md-6">
+				<div class="bg_teaser light_teaser with_shadow with_corners text-center topmargin_30">
+					<div class="bg_overlay"></div>
+					<div class="teaser_content">
+						<div class="teaser text-center">
+							<!-- <div class="teaser_icon grey size_big">
+								<i class="flaticon-signal"></i>
+							</div> -->
+							<h4 class="text-uppercase topmargin_25">{{ s_object.object_title }}</h4>
+							<hr class="divider_2_40 bottommargin_25">
+							<p class="darken-font-color">
+								{{ s_object.object_desc|slice:":255"|linebreaksbr }}
+							</p>
+							<a href="{% url 'show_service_object' slug=s_object.object_slug %}" class="theme_button color1">Подробнее</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+{% endblock %}

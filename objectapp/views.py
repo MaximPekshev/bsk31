@@ -4,6 +4,8 @@ from django.core.paginator import Paginator
 from .models import Build_object
 from .models import Picture
 
+from servicesapp.models import Service_object
+
 class Item(object):
 	
 	build_object 	= Build_object
@@ -11,8 +13,10 @@ class Item(object):
 
 def show_objects(request):
 
-	build_object_count=6
-	build_objects = Build_object.objects.all()
+	service_objects = Service_object.objects.all()
+
+	build_object_count=10
+	build_objects = Build_object.objects.all().order_by('-object_top')
 	
 	table = []
 	for obj in build_objects:
@@ -51,12 +55,15 @@ def show_objects(request):
 	template_name = 'objectapp/objects.html'
 	context = {
 		'page_object': page, 'prev_url': prev_url, 'next_url': next_url, 'is_paginated': is_paginated,
+		'service_objects': service_objects,
 	}
 
 	return render(request, template_name, context)
 
 
 def show_build_object(request, slug):
+
+	service_objects = Service_object.objects.all()
 
 	build_object = Build_object.objects.get(object_slug=slug)
 
@@ -71,5 +78,6 @@ def show_build_object(request, slug):
 	template_name = 'objectapp/build_object.html'
 	context = {
 		'build_object': build_object, 'pictures': pictures, 'main_picture': main_picture, 
+		'service_objects': service_objects,
 			}
 	return render(request, template_name, context)

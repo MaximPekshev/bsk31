@@ -11,3 +11,12 @@ class NewDriverForm(forms.Form):
 	car_number		= forms.CharField(max_length = 15)
 	rate			= forms.CharField(max_length = 15)
 
+	active 			= forms.BooleanField(required=False)
+
+	monday 			= forms.BooleanField(required=False)
+	tuesday 		= forms.BooleanField(required=False)
+	wednesday 		= forms.BooleanField(required=False)
+	thursday 		= forms.BooleanField(required=False)
+	friday 			= forms.BooleanField(required=False)
+	saturday 		= forms.BooleanField(required=False)
+	sunday 			= forms.BooleanField(required=False)

@@ -22,15 +22,3 @@ class Rent_objectAdmin(admin.ModelAdmin):
 
 admin.site.register(Rent_object, Rent_objectAdmin)
 
-
-class Rent_pictureAdmin(admin.ModelAdmin):
-	list_display = (
-					'title', 
-					'rent_object',
-					)
-	list_filter = (
-					'rent_object', 
-					)
-	exclude = ('slug',)
-
-admin.site.register(Rent_picture, Rent_pictureAdmin)
