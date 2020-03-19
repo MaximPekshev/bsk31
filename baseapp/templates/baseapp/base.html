@@ -90,18 +90,24 @@
 									</li>
 
 									<li>
-										<a href="{% url 'show_service_objects' %}">Услуги</a>
+										<a>Услуги</a>
 										<ul>
-											{% for object in service_objects %}
-											<li><a href="{% url 'show_service_object' slug=object.object_slug %}">{{ object.object_title }}</a></li>
+											{% for obj in service_objects %}
+											<li>
+												<a href="{% url 'show_service_object' slug=obj.object_slug %}">{{ obj.object_title }}</a>
+											</li>
 											{% endfor %}
 										</ul>
 									</li>
 									<li>
 										<a>Аренда</a>
 										<ul>
-											<li><a href="{% url 'show_rent_objects' category='equipment' %}">Техника</a></li>
-											<li><a href="{% url 'show_rent_objects' category='tool' %}">Инструмент</a></li>
+											<li>
+												<a href="{% url 'show_rent_objects' category='equipment' %}">Техника</a>
+											</li>
+											<li>
+												<a href="{% url 'show_rent_objects' category='tool' %}">Инструмент</a>
+											</li>
 										</ul>
 
 									</li>
@@ -128,6 +134,7 @@
 				</div>
 			</header>
 			{% endblock %}
+
 			{% block content %}{% endblock %}
 
 			<footer class="page_footer theme_footer ds ms parallax section_padding_top_90 section_padding_bottom_50">

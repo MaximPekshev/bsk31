@@ -1,11 +1,4 @@
-{% extends 'baseapp/base.html' %}
-
-
-{% block header %}
-
-{{ block.super }}
-
-{% endblock %}
+{% extends 'baseapp/index.html' %}
 
 
 {% block content %}
@@ -22,7 +15,7 @@
 						<a href="{% url 'show_index' %}">Главная</a>
 					</li>
 					<li>
-						<a href="{% url 'show_service_objects' %}">Услуги</a>
+						<a>Услуги</a>
 					</li>
 					<li class="active">
 						<a href="{% url 'show_service_object' slug=s_object.object_slug %}">{{ s_object.object_title }}</a>
