@@ -30,32 +30,32 @@ def working_day_add(request, driver_slug):
 					date = datetime.today()
 
 				if day_form.cleaned_data['input_rate']:
-					rate = float(day_form.cleaned_data['input_rate'].replace(',','.'))
+					rate = Decimal(day_form.cleaned_data['input_rate'].replace(',','.'))
 				else:
 					rate = 0
 
 				if day_form.cleaned_data['input_fuel']:
-					fuel = float(day_form.cleaned_data['input_fuel'].replace(',','.'))
+					fuel = Decimal(day_form.cleaned_data['input_fuel'].replace(',','.'))
 				else:
 					fuel = 0
 
 				if day_form.cleaned_data['input_penalties']:
-					penalties = float(day_form.cleaned_data['input_penalties'].replace(',','.'))
+					penalties = Decimal(day_form.cleaned_data['input_penalties'].replace(',','.'))
 				else:
 					penalties = 0	
 							
 				if day_form.cleaned_data['input_cash']:
-					cash = float(day_form.cleaned_data['input_cash'].replace(',','.'))
+					cash = Decimal(day_form.cleaned_data['input_cash'].replace(',','.'))
 				else:
 					cash = 0
 
 				if day_form.cleaned_data['input_cash_card']:
-					cash_card = float(day_form.cleaned_data['input_cash_card'].replace(',','.'))
+					cash_card = Decimal(day_form.cleaned_data['input_cash_card'].replace(',','.'))
 				else:
-					cash = 0	
+					cash_card = 0	
 
 				if day_form.cleaned_data['input_cashless']:
-					cashless = float(day_form.cleaned_data['input_cashless'].replace(',','.'))
+					cashless = Decimal(day_form.cleaned_data['input_cashless'].replace(',','.'))
 				else:
 					cashless = 0	
 				
@@ -99,27 +99,32 @@ def working_day_edit(request, day_slug):
 			if day_form.is_valid():
 
 				if day_form.cleaned_data['input_rate']:
-					working_day.rate = float(day_form.cleaned_data['input_rate'].replace(',','.'))
+					working_day.rate = Decimal(day_form.cleaned_data['input_rate'].replace(',','.'))
 				else:
 					working_day.rate = 0
 
 				if day_form.cleaned_data['input_fuel']:
-					working_day.fuel = float(day_form.cleaned_data['input_fuel'].replace(',','.'))
+					working_day.fuel = Decimal(day_form.cleaned_data['input_fuel'].replace(',','.'))
 				else:
 					working_day.fuel = 0
 
 				if day_form.cleaned_data['input_penalties']:
-					working_day.penalties = float(day_form.cleaned_data['input_penalties'].replace(',','.'))
+					working_day.penalties = Decimal(day_form.cleaned_data['input_penalties'].replace(',','.'))
 				else:
 					working_day.penalties = 0	
 							
 				if day_form.cleaned_data['input_cash']:
-					working_day.cash = float(day_form.cleaned_data['input_cash'].replace(',','.'))
+					working_day.cash = Decimal(day_form.cleaned_data['input_cash'].replace(',','.'))
 				else:
 					working_day.cash = 0
 
+				if day_form.cleaned_data['input_cash_card']:
+					working_day.cash_card = Decimal(day_form.cleaned_data['input_cash_card'].replace(',','.'))
+				else:
+					working_day.cash_card = 0	
+
 				if day_form.cleaned_data['input_cashless']:
-					working_day.cashless = float(day_form.cleaned_data['input_cashless'].replace(',','.'))
+					working_day.cashless = Decimal(day_form.cleaned_data['input_cashless'].replace(',','.'))
 				else:
 					working_day.cashless = 0	
 
