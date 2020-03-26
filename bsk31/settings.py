@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'workingdayapp',
     'rentapp',
     'servicesapp',
+    'certapp',
 ]
 
 MIDDLEWARE = [
