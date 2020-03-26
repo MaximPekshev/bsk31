@@ -8,6 +8,7 @@ from django.conf import settings
 from .views import show_index
 from .views import show_about_us
 from .views import show_under_construct
+from .views import show_certificates
 
 
 urlpatterns = [
@@ -15,6 +16,7 @@ urlpatterns = [
 	path('', 					show_under_construct, name='show_under_construct'),
 	path('home/', 				show_index, name='show_index'),
 	path('about-us/', 			show_about_us, name='show_about_us'),
+	path('certificates/', 		show_certificates, name='show_certificates'),
 
 			]
 

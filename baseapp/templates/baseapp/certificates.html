@@ -1,0 +1,64 @@
+{% extends 'baseapp/index.html' %}
+
+
+
+{% block content %}
+
+<section id="breadcrumbs" class="page_breadcrumbs ds parallax section_padding_65 table_section table_section_md">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-center text-md-left">
+				<h1 class="cornered-heading">Наши сертификаты</h1>
+			</div>
+			<div class="col-md-6 text-center text-md-right">
+				<ol class="breadcrumb">
+					<li>
+						<a href="{% url 'show_index' %}">Главная</a>
+					</li>
+					<li class="active">
+						<a href="{% url 'show_certificates' %}">Сертификаты</a>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="ls section_padding_top_100 columns_padding_0 columns_margin_0">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+
+				<div class="isotope_container isotope row columns_padding_0 masonry-layout" >
+
+					{% for item in cert_objects %}
+					{% if item.cert_picture %}
+					<div class="isotope-item col-lg-4 col-md-6 col-sm-6">
+						<div class="vertical-item gallery-title-item content-absolute">
+							<div class="item-media">
+								<img src="{{ item.cert_picture.object_image.url }}" alt="">
+								<div class="media-links middle-links type2">
+									<div class="links-wrap">
+										<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="{{ item.cert_picture.object_image.url }}"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item-title text-center">
+							<h3>
+								{{ item.cert_object.object_title }}
+							</h3>
+						</div>
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}
