@@ -20,3 +20,4 @@ class NewDriverForm(forms.Form):
 	friday 			= forms.BooleanField(required=False)
 	saturday 		= forms.BooleanField(required=False)
 	sunday 			= forms.BooleanField(required=False)
+ 

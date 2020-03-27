@@ -3,13 +3,42 @@ from django.db import models
 import uuid
 
 def calculate_debt(driver_slug):
-	driver = Driver.objects.get(slug=driver_slug)
-	working_days = Working_day.objects.filter(driver = driver)
-	debt = 0
-	for day in working_days:
-		debt += day.debt_of_day
-	driver.debt = debt	
-	driver.save()
+
+	try:
+		driver = Driver.objects.get(slug=driver_slug)
+	except Driver.DoesNotExist:
+		driver = None	
+
+	if driver:	
+		working_days = Working_day.objects.filter(driver = driver)
+		debt = 0
+		for day in working_days:
+			debt += day.debt_of_day
+		driver.debt = debt	
+		driver.save()
+
+def update_cashbox(working_day):
+
+	try:
+		cashbox = Cashbox.objects.get(working_day=working_day)
+		cashbox.cash = working_day.cash
+		cashbox.cash_card = working_day.cash_card
+		
+		cashbox.save()
+
+	except Cashbox.DoesNotExist:
+
+		if working_day.cash != 0 or working_day.cash_card != 0:
+			
+			cashbox = Cashbox(
+				date=working_day.date,
+				working_day=working_day,
+				cash=working_day.cash,
+				cash_card=working_day.cash_card,
+				)
+
+			cashbox.save()
+	
 
 def get_uuid():
 	return str(uuid.uuid4().fields[0])
@@ -83,6 +112,7 @@ class  Working_day(models.Model):
 
 
 
+
 	def save(self, *args, **kwargs):
 
 		if self.slug == "":
@@ -92,6 +122,7 @@ class  Working_day(models.Model):
 		
 		super(Working_day, self).save(*args, **kwargs)
 		calculate_debt(self.driver.slug)
+		update_cashbox(self)
 
 
 	class Meta:
@@ -99,4 +130,31 @@ class  Working_day(models.Model):
 		verbose_name = 'Рабочий день'
 		verbose_name_plural = 'Рабочие дни'
 
+
+class Cashbox(models.Model):
+	
+	date 			= models.DateField('Дата операции', auto_now_add = False)
+
+	slug 			= models.SlugField(max_length=15, verbose_name='Url', blank=True, db_index=True)
+	working_day 	= models.ForeignKey(Working_day, on_delete=models.PROTECT, blank=True, null=True, default=None)
+
+	cash 			= models.DecimalField(verbose_name = 'Наличные', max_digits=15, decimal_places=2, default=0)
+	cash_card 		= models.DecimalField(verbose_name = 'Карта', max_digits=15, decimal_places=2, default=0)
+
+
+	def __str__(self):
+
+		return self.slug
+
+	def save(self, *args, **kwargs):
+
+		if self.slug == "":
+			self.slug = get_uuid()
+
+		super(Cashbox, self).save(*args, **kwargs)
+			
+	class Meta:
+
+		verbose_name = 'Движение по кассе'
+		verbose_name_plural = 'Движения по кассе'
 
