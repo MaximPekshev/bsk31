@@ -5,6 +5,11 @@ from .models import Working_day
 from .forms import NewDriverForm
 from django.contrib.auth.models import Group
 from django.contrib				import messages
+from .models import Cashbox
+from django.db.models import Sum
+from datetime import datetime
+from decimal import Decimal
+from workingdayapp.forms import WorkingDayForm
 
 
 from django.contrib.auth.models import Group
@@ -224,3 +229,81 @@ def driver_edit(request, slug):
 
 		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
 		return render(request, 'authapp/login.html')			
+
+
+def taxi_show_cashbox(request):
+
+	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+
+	if request.user.is_authenticated and request.user in users_in_group:
+
+		cashbox = Cashbox.objects.all().order_by('date')
+
+		ca_cash 	 = Cashbox.objects.all().aggregate(Sum('cash'))['cash__sum']
+		ca_cash_card = Cashbox.objects.all().aggregate(Sum('cash_card'))['cash_card__sum']
+
+		context = {
+
+			'cashbox': cashbox, 'ca_cash': ca_cash, 'ca_cash_card': ca_cash_card,
+
+		}
+
+		return	render(request, 'taxiapp/cashbox.html', context)
+
+	else:
+
+		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
+		return render(request, 'authapp/login.html')
+
+def taxi_incass(request):
+
+	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+
+	if request.user.is_authenticated and request.user in users_in_group:
+
+
+		if request.method == 'POST':
+
+			incass_form = WorkingDayForm(request.POST)
+
+			if incass_form.is_valid():
+
+				if incass_form.cleaned_data['input_cash']:
+					cash = Decimal(incass_form.cleaned_data['input_cash'].replace(',','.'))
+				else:
+					cash = 0
+
+				if incass_form.cleaned_data['input_cash_card']:
+					cash_card = Decimal(incass_form.cleaned_data['input_cash_card'].replace(',','.'))
+				else:
+					cash_card = 0
+
+				if cash != 0 or cash_card != 0:
+			
+					cashbox = Cashbox(
+						date=datetime.today(),
+						cash=-cash,
+						cash_card=-cash_card,
+						)
+
+					cashbox.save()
+
+					current_path = request.META['HTTP_REFERER']
+					return redirect(current_path)
+
+				else:		
+					current_path = request.META['HTTP_REFERER']
+					return redirect(current_path)
+
+			else:		
+				current_path = request.META['HTTP_REFERER']
+				return redirect(current_path)		
+
+		else:		
+			current_path = request.META['HTTP_REFERER']
+			return redirect(current_path)			
+
+	else:
+
+		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
+		return render(request, 'authapp/login.html')		

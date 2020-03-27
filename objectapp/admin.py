@@ -22,3 +22,5 @@ class Build_objectAdmin(admin.ModelAdmin):
 admin.site.register(Build_object, Build_objectAdmin)
 
 
+
+

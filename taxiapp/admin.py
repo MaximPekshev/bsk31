@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import Driver
 from .models import Working_day
+from .models import Cashbox
 
 
 class Working_dayInline(admin.TabularInline):
@@ -38,3 +39,16 @@ class Working_dayAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Working_day, Working_dayAdmin)
+
+
+class CashboxAdmin(admin.ModelAdmin):
+
+	list_display = (
+					'date', 
+					'cash',
+					'cash_card',
+					)
+
+	exclude = ('slug',)
+
+admin.site.register(Cashbox, CashboxAdmin)
