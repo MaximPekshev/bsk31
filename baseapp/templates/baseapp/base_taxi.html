@@ -53,34 +53,88 @@
   <div class="container col-lg-12">
     <div class="row">
       <div class="col-lg-12">
-        <table class="table_template darklinks table-hover">
-          <thead class="thead-dark">
-            <tr>
-              <th>Водитель</th>
-              <th>Номер В/У</th>
-              <th>Гос номер А/М</th>
-              <th>Топливная карта</th>
-              <th>Марка А/М</th>
-              <th>Ставка</th>
-              <th></th>
-              <th>Долг</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for driver in drivers %}
-            <tr>
-              <td><a href="{% url 'show_driver' slug=driver.slug %}">{{ driver.second_name }} {{ driver.first_name }}</a></td>
-              <td>{{ driver.driver_license }}</td>
-              <td>{{ driver.car_number }}</td>
-              <td>{{ driver.fuel_card }}</td>
-              <td>{{ driver.car_model }}</td>
-              <td>{{ driver.rate }}</td>
-              <td></td>
-              <td>{{ driver.debt }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active">
+            <a href="#tab1" role="tab" data-toggle="tab">Работают</a>
+          </li>
+          <li>
+            <a href="#tab2" role="tab" data-toggle="tab">Уволены</a>
+          </li>
+        </ul>
+
+        <div class="tab-content top-color-border">
+
+          <div class="tab-pane fade in active" id="tab1">
+            <table class="table_template darklinks table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Водитель</th>
+                  <th>Номер В/У</th>
+                  <th>Гос номер А/М</th>
+                  <th>Топливная карта</th>
+                  <th>Марка А/М</th>
+                  <th>Ставка</th>
+                  <th></th>
+                  <th>Долг</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for driver in drivers %}
+                {% if driver.active is True %}
+                <tr>
+                  <td><a href="{% url 'show_driver' slug=driver.slug %}">{{ driver.second_name }} {{ driver.first_name }}</a></td>
+                  <td>{{ driver.driver_license }}</td>
+                  <td>{{ driver.car_number }}</td>
+                  <td>{{ driver.fuel_card }}</td>
+                  <td>{{ driver.car_model }}</td>
+                  <td>{{ driver.rate }}</td>
+                  <td></td>
+                  <td>{{ driver.debt }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="tab2">
+
+            <table class="table_template darklinks table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Водитель</th>
+                  <th>Номер В/У</th>
+                  <th>Гос номер А/М</th>
+                  <th>Топливная карта</th>
+                  <th>Марка А/М</th>
+                  <th>Ставка</th>
+                  <th></th>
+                  <th>Долг</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for driver in drivers %}
+                {% if driver.active is False %}
+                <tr>
+                  <td><a href="{% url 'show_driver' slug=driver.slug %}">{{ driver.second_name }} {{ driver.first_name }}</a></td>
+                  <td>{{ driver.driver_license }}</td>
+                  <td>{{ driver.car_number }}</td>
+                  <td>{{ driver.fuel_card }}</td>
+                  <td>{{ driver.car_model }}</td>
+                  <td>{{ driver.rate }}</td>
+                  <td></td>
+                  <td>{{ driver.debt }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div> 
+
+        </div>
+        
       </div>
     </div>
   </div>
@@ -257,5 +311,10 @@
  	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  <script src="{% static 'js/compressed.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
  	</body>	
 </html>
