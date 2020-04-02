@@ -47,7 +47,7 @@
 														<p class="big grey raleway text-uppercase bold">
 															Фасадные работы
 														</p>
-														<a href="#" class="theme_button color1 topmargin_30">Подробнее</a>
+														<a href="{% url 'show_service_object' slug='1866535695' %}" class="theme_button color1 topmargin_30">Подробнее</a>
 														<div class="bottom-corners"></div>
 													</div>
 												</div>
@@ -69,7 +69,7 @@
 														<p class="big grey raleway text-uppercase bold">
 															Металлоконструкции
 														</p>
-														<a href="#" class="theme_button color1 topmargin_30">Подробнее</a>
+														<a href="{% url 'show_service_object' slug='415312430' %}" class="theme_button color1 topmargin_30">Подробнее</a>
 														<div class="bottom-corners"></div>
 													</div>
 												</div>
@@ -91,7 +91,7 @@
 														<p class="big grey raleway text-uppercase bold">
 															Строительство
 														</p>
-														<a href="#" class="theme_button color1 topmargin_30">Подробнее</a>
+														<a href="{% url 'show_service_object' slug='253364982' %}" class="theme_button color1 topmargin_30">Подробнее</a>
 														<div class="bottom-corners"></div>
 													</div>
 												</div>
@@ -105,85 +105,6 @@
 				</div>
 			</section>
 
-			<!-- <section class="ls section_padding_110">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-offset-2 col-md-8 text-center">
-							<div class="cornered-heading center-heading bottommargin_40">
-								<h2 class="text-uppercase">What we offer</h2>
-								<span class="text-uppercase">We oofer diferent services</span>
-							</div>
-							<p>
-								<em>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus erat in tincidunt consequat. Phasellus sit amet convallis turpis, molestie nunc. Nulla facilisi. Vestibulum aliquam convallis ligula.
-								</em>
-							</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-sm-8 col-sm-offset-2 col-md-offset-0">
-							<div class="bg_teaser light_teaser with_shadow with_corners text-center topmargin_25">
-								<div class="bg_overlay"></div>
-								<img src="{% static 'images/teaser01.jpg' %}" alt="">
-								<div class="teaser_content">
-									<div class="teaser text-center">
-										<div class="teaser_icon grey size_big">
-											<i class="flaticon-solar-panel"></i>
-										</div>
-										<h4 class="text-uppercase topmargin_25">Solar System</h4>
-										<hr class="divider_2_40 bottommargin_25">
-										<p class="darken-font-color">
-											Mauris interdum mauris eget magna scelerisque pretium. Praesent sit amet ultricies tellus, vel tempor ante.
-										</p>
-										<a href="#" class="theme_button color1">Read More</a>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-8 col-sm-offset-2 col-md-offset-0">
-							<div class="bg_teaser light_teaser with_shadow with_corners text-center topmargin_25 hovered hover ">
-								<div class="bg_overlay"></div>
-								<img src="{% static 'images/teaser02.jpg' %}" alt="">
-								<div class="teaser_content">
-									<div class="teaser text-center">
-										<div class="teaser_icon grey size_big">
-											<i class="flaticon-wind-turbine-for-ecological-energy"></i>
-										</div>
-										<h4 class="text-uppercase topmargin_25">Wind Turbines</h4>
-										<hr class="divider_2_40 bottommargin_25">
-										<p class="darken-font-color">
-											Cras eget turpis fermentum, pulvinar justo in, sollicitudin risus. Suspendisse vehicula preti semper. Aenean convallis eu neque.
-										</p>
-										<a href="#" class="theme_button color1">Read More</a>
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-8 col-sm-offset-2 col-md-offset-0">
-							<div class="bg_teaser light_teaser with_shadow with_corners text-center topmargin_25">
-								<div class="bg_overlay"></div>
-								<img src="{% static 'images/teaser03.jpg' %}" alt="">
-								<div class="teaser_content">
-									<div class="teaser text-center">
-										<div class="teaser_icon grey size_big">
-											<i class="flaticon-hydro-power"></i>
-										</div>
-										<h4 class="text-uppercase topmargin_25">Heat Pumps</h4>
-										<hr class="divider_2_40 bottommargin_25">
-										<p class="darken-font-color">
-											Morbi sit amet est vitae urna mollis posuere. Proin tincidunt, libero nec porta aliquet, lacus quam pulvinar ex.
-										</p>
-										<a href="#" class="theme_button color1">Read More</a>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section> -->
 
 
 			<section class="ds section_padding_110">
@@ -191,7 +112,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="cornered-heading bottommargin_55 media-topmargin">
-								<h2 class="text-uppercase bottommargin_0">Фото с наших объектов</h2>
+								<h2 class="text-uppercase bottommargin_0">Фото с объектов</h2>
 							</div>
 							<p>
 								«Сельскохозяйственный комплекс по выращиванию,
@@ -221,7 +142,6 @@
 								{% endfor %}
 
 							</div>
-							<!-- .owl-carousel -->
 						</div>
 						<div class="col-md-6">
 							<div class="tab-content projects-content">
@@ -231,10 +151,6 @@
 									<div class="item-media">
 										<img src="{{ object.image.object_image.url }}" alt="">
 										<div class="media-links">
-											<!-- <div class="links-wrap">
-												<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="images/gallery/project_01.png"></a>
-											</div> -->
-											<!-- <a href="#" class="abs-link"></a> -->
 										</div>
 									</div>
 									<div class="item-content">
@@ -260,521 +176,90 @@
 						<div class="col-md-4 text-center text-md-left to_animate" data-animation="fadeInLeft">
 							<div class="cornered-heading bottommargin_60">
 								<h2 class="text-uppercase">Наши преимущества</h2>
-								<span class="text-uppercase">We oofer diferent services</span>
-							</div>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus erat in tincidunt consequat. Phasellus sit amet convallis turpis, id molestie nunc.
-							</p>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
-								<div class="media-left media-middle">
-									<div class="teaser_icon fontsize_36 grey with_background">
-										<i class="flaticon-signal"></i>
-									</div>
-								</div>
-								<div class="media-body media-middle text-left">
-									<h5 class="text-uppercase">
-										<a href="#">Newest Technologies</a>
-									</h5>
-									<p>Fusce efficitur, tortor ac commodo preti, tellus dui gravida ante memori.</p>
-								</div>
-							</div>
-							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
-								<div class="media-left media-middle">
-									<div class="teaser_icon fontsize_36 grey with_background">
-										<i class="flaticon-renewable-energy"></i>
-									</div>
-								</div>
-								<div class="media-body media-middle text-left">
-									<h5 class="text-uppercase">
-										<a href="#">Take Care of Nature</a>
-									</h5>
-									<p>Aenean malesuada mauris sed odio posu eleifend. Sed vehicula quam.</p>
-								</div>
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-6">
 							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
 								<div class="media-left media-middle">
 									<div class="teaser_icon fontsize_36 grey with_background">
-										<i class="flaticon-plug"></i>
+										<i class="rt-icon2-key2"></i>
 									</div>
 								</div>
 								<div class="media-body media-middle text-left">
 									<h5 class="text-uppercase">
-										<a href="#">Power and Energy</a>
+										<a>Гарантия</a>
 									</h5>
-									<p>Mauris eu egestas nunc. Nam pellen, libe sit amet imperdiet sodales.</p>
+									<p>Гарантийное сопровождение<br> сроком 3 года</p>
 								</div>
 							</div>
 							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
 								<div class="media-left media-middle">
 									<div class="teaser_icon fontsize_36 grey with_background">
-										<i class="flaticon-hydro-power"></i>
+										<i class="rt-icon2-wallet2"></i>
 									</div>
 								</div>
 								<div class="media-body media-middle text-left">
 									<h5 class="text-uppercase">
-										<a href="#">Green Energy</a>
+										<a>Экономия</a>
 									</h5>
-									<p>Duis at suscipit massa. Etiam quis mollis arcu. Integer sit amet ex eros.</p>
+									<p>Оплата только за реально<br> проделанную работу</p>
 								</div>
 							</div>
+							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
+								<div class="media-left media-middle">
+									<div class="teaser_icon fontsize_36 grey with_background">
+										<i class="rt-icon2-medal"></i>
+									</div>
+								</div>
+								<div class="media-body media-middle text-left">
+									<h5 class="text-uppercase">
+										<a>Опыт</a>
+									</h5>
+									<p>15 лет опыта<br>Более 1500 благодарных клиентов</p>
+								</div>
+							</div>
+
 						</div>
-					</div>
-				</div>
-			</section>
-
-			
-
-			<section class="cs section_padding_110 services">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-6">
-							<div class="cornered-heading bottommargin_60">
-								<span class="text-uppercase">From idea to realization</span>
-								<h2 class="text-uppercase">Наши услуги</h2>
-							</div>
-							<p class="bottommargin_0">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae arcu nec metus ultrices scelerisque facilisis id leo. Praesent iaculis lorem ut dictum tempus. Pellentesque sit amet erat at orci bibendum consequat.
-							</p>
-							<div class="row columns_margin_0 service-teasers-row">
-								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
-									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
-										<div class="teaser_content">
-											<div class="teaser">
-												<div class="teaser_icon grey size_normal">
-													<i class="flaticon-light-bulb"></i>
-												</div>
-												<p class="text-uppercase raleway bold darklinks bottommargin_0">
-													<a href="#">Development ideas</a>
-												</p>
-											</div>
-
-										</div>
+						<div class="col-md-4 col-sm-6">
+							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
+								<div class="media-left media-middle">
+									<div class="teaser_icon fontsize_36 grey with_background">
+										<i class="rt-icon2-like"></i>
 									</div>
 								</div>
-								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
-									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
-										<div class="teaser_content">
-											<div class="teaser">
-												<div class="teaser_icon grey size_normal">
-													<i class="flaticon-wrench"></i>
-												</div>
-												<p class="text-uppercase raleway bold darklinks bottommargin_0">
-													<a href="#">Technical development</a>
-												</p>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
-									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
-										<div class="teaser_content">
-											<div class="teaser">
-												<div class="teaser_icon grey size_normal">
-													<i class="flaticon-cogwheel"></i>
-												</div>
-												<p class="text-uppercase raleway bold darklinks bottommargin_0">
-													<a href="#">Realization of projects</a>
-												</p>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
-									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
-										<div class="teaser_content">
-											<div class="teaser">
-												<div class="teaser_icon grey size_normal">
-													<i class="flaticon-megaphone"></i>
-												</div>
-												<p class="text-uppercase raleway bold darklinks bottommargin_0">
-													<a href="#">Projects advertising</a>
-												</p>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
-									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
-										<div class="teaser_content">
-											<div class="teaser">
-												<div class="teaser_icon grey size_normal">
-													<i class="flaticon-wind-turbine-for-ecological-energy"></i>
-												</div>
-												<p class="text-uppercase raleway bold darklinks bottommargin_0">
-													<a href="#">Projects installation</a>
-												</p>
-											</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-4 col-xs-6 to_animate" data-animation="pullUp">
-									<div class="service-teaser with_corners hover_corners small_corners topmargin_30">
-										<div class="teaser_content">
-											<div class="teaser">
-												<div class="teaser_icon grey size_normal">
-													<i class="flaticon-glasses"></i>
-												</div>
-												<p class="text-uppercase raleway bold darklinks bottommargin_0">
-													<a href="#">Technical support</a>
-												</p>
-											</div>
-
-										</div>
-									</div>
+								<div class="media-body media-middle text-left">
+									<h5 class="text-uppercase">
+										<a>Специалисты</a>
+									</h5>
+									<p>Вежливые и квалифицированные специалисты</p>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class="ls section_padding_110">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-offset-2 col-md-8 text-center">
-							<div class="cornered-heading center-heading bottommargin_40">
-								<h2 class="text-uppercase">New from blog</h2>
-								<span class="text-uppercase">Recent News</span>
+							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
+								<div class="media-left media-middle">
+									<div class="teaser_icon fontsize_36 grey with_background">
+										<i class="rt-icon2-calendar4"></i>
+									</div>
+								</div>
+								<div class="media-body media-middle text-left">
+									<h5 class="text-uppercase">
+										<a>Сроки</a>
+									</h5>
+									<p>Строительство производится в назначенные сроки</p>
+								</div>
 							</div>
-							<p>
-								Curabitur dolor metus, accumsan vel iaculis eu, venenatis a turpis. Vestibulum mollis, nulla at tristique varius, ipsum diam tempus erat, nec dignissim ex lacus at velit. Etiam odio tortor, ultrices ultrices enim quis.
-							</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<article class="vertical-item content-absolute bottom-content blog-item ds topmargin_25">
-
-								<div class="item-media entry-thumbnail">
-									<div class="entry-meta-corner">
-										<span class="date">
-											<time datetime="2016-08-01T15:05:23+00:00" class="entry-date">
-												<strong>08</strong>
-												Jan
-											</time>
-										</span>
-									</div>
-									<img src="{% static 'images/gallery/14.jpg' %}" alt="">
-									<div class="media-links">
-										<div class="links-wrap darklinks">
-											<a class="p-view prettyPhoto" title="" data-gal="prettyPhoto[gal]" href="images/gallery/14.jpg"></a>
-											<a class="p-link" href="blog-single-right.html"></a>
-										</div>
+							<div class="teaser media inline-block topmargin_50 features-teaser to_animate" data-animation="pullDown">
+								<div class="media-left media-middle">
+									<div class="teaser_icon fontsize_36 grey with_background">
+										<i class="rt-icon2-heart"></i>
 									</div>
 								</div>
-
-								<div class="item-content entry-content">
-									<header class="entry-header">
-										<h4 class="text-uppercase">
-											<a href="blog-single-right.html" rel="bookmark">Lorem ipsum dolor sit amet, consecter adipiscing elit Donec</a>
-										</h4>
-										<p class="item-meta greylinks text-uppercase">
-											<a href="#">
-												<i class="flaticon-social"></i>By Anna Fry</a>
-											<a href="#" class="pull-right">
-												<i class="flaticon-communication"></i>
-												<span class="comments-amount">4</span>
-											</a>
-										</p>
-									</header>
-									<!-- .entry-header -->
-
+								<div class="media-body media-middle text-left">
+									<h5 class="text-uppercase">
+										<a>Забота</a>
+									</h5>
+									<p>Мы умеем слышать и помнить то, что хочет клиент</p>
 								</div>
-								<!-- .item-content.entry-content -->
-							</article>
-						</div>
-						<div class="col-lg-6">
-							<div class="panel-group blog-accordion bottommargin_0 topmargin_25" id="accordion1">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<div class="entry-meta-corner">
-											<span class="date">
-												<time datetime="2016-08-01T15:05:23+00:00" class="entry-date">
-													<strong>03</strong>
-													JUL
-												</time>
-											</span>
-										</div>
-										<div class="media-links">
-											<a class="abs-link collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse1"></a>
-										</div>
-										<div class="panel-title">
-											<h5>
-												<a href="blog-single-right.html">
-													Vivamus consequat, ipsum et blandit fermentum.
-												</a>
-											</h5>
-											<p class="item-meta greylinks text-uppercase">
-												<a href="#">
-													<i class="flaticon-social"></i>By Anna Fry</a>
-												<a href="#" class="pull-right">
-													<i class="flaticon-communication"></i>
-													<span class="comments-amount">4</span>
-												</a>
-											</p>
-										</div>
-									</div>
-									<div id="collapse1" class="panel-collapse collapse">
-										<div class="panel-body">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium amet ea dicta neque, ut quis omnis quos nam, pariatur, minus, fugit suscipit aspernatur sint ullam quas explicabo. Alias, officiis, dolor!
-										</div>
-									</div>
-								</div>
-
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<div class="entry-meta-corner">
-											<span class="date">
-												<time datetime="2016-08-01T15:05:23+00:00" class="entry-date">
-													<strong>08</strong>
-													JUL
-												</time>
-											</span>
-										</div>
-										<div class="media-links">
-											<a class="abs-link collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse2"></a>
-										</div>
-										<div class="panel-title">
-											<h5>
-												<a href="blog-single-right.html">
-													Aliquam non finibus lectus, id pretium mi erat.
-												</a>
-											</h5>
-											<p class="item-meta greylinks text-uppercase">
-												<a href="#">
-													<i class="flaticon-social"></i>By Anna Fry</a>
-												<a href="#" class="pull-right">
-													<i class="flaticon-communication"></i>
-													<span class="comments-amount">14</span>
-												</a>
-											</p>
-										</div>
-									</div>
-									<div id="collapse2" class="panel-collapse collapse">
-										<div class="panel-body">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium amet ea dicta neque, ut quis omnis quos nam, pariatur, minus, fugit suscipit aspernatur sint ullam quas explicabo. Alias, officiis, dolor!
-										</div>
-									</div>
-								</div>
-
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<div class="entry-meta-corner">
-											<span class="date">
-												<time datetime="2016-08-01T15:05:23+00:00" class="entry-date">
-													<strong>10</strong>
-													JUL
-												</time>
-											</span>
-										</div>
-										<div class="media-links">
-											<a class="abs-link collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse3"></a>
-										</div>
-										<div class="panel-title">
-											<h5>
-												<a href="blog-single-right.html">
-													Praesent molestie, orci bland Donec elementum.
-												</a>
-											</h5>
-											<p class="item-meta greylinks text-uppercase">
-												<a href="#">
-													<i class="flaticon-social"></i>By Anna Fry</a>
-												<a href="#" class="pull-right">
-													<i class="flaticon-communication"></i>
-													<span class="comments-amount">9</span>
-												</a>
-											</p>
-										</div>
-									</div>
-									<div id="collapse3" class="panel-collapse collapse">
-										<div class="panel-body">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium amet ea dicta neque, ut quis omnis quos nam, pariatur, minus, fugit suscipit aspernatur sint ullam quas explicabo. Alias, officiis, dolor!
-										</div>
-									</div>
-								</div>
-
 							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class="ds section_padding_90 page_testimonials parallax">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-sm-12 text-center">
-							<div class="flexslider">
-
-								<div class="container">
-									<div class="row bottommargin_15">
-										<div class="col-sm-12 text-center">
-											<div class="cornered-heading center-heading">
-												<span class="text-uppercase">What people say</span>
-												<h2 class="text-uppercase">Our testimonials</h2>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-
-											<ul class="slides">
-												<li>
-													<div class="row">
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/1.jpg' %}" alt=""> Proin sollicitudin tempor arcu, id vestibulum mi suscipit et. Praesent ac erat tristique, iaculis neque et, porta libero. Duis sodales.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Derrick Rodgers</h5>
-																	<p>Manager</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/2.jpg' %}" alt=""> Duis congue purus non malesuada porttitor. Integer vitae orci ac orci tincidunt efficitur. Sed tristique magna a nulla porttitor congue.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Minerva Ferguson</h5>
-																	<p>Founder &amp; CEO</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/3.jpg' %}" alt=""> Cras id sem posuere, mollis purus a, placerat turpis. Donec blandit tellus viverra, volutpat urna ac, molestie orci.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Raymond Cummings</h5>
-																	<p>Public Relationship</p>
-																</div>
-															</blockquote>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="row">
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/1.jpg' %}" alt=""> Proin sollicitudin tempor arcu, id vestibulum mi suscipit et. Praesent ac erat tristique, iaculis neque et, porta libero. Duis sodales.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Derrick Rodgers</h5>
-																	<p>Manager</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/2.jpg' %}" alt=""> Duis congue purus non malesuada porttitor. Integer vitae orci ac orci tincidunt efficitur. Sed tristique magna a nulla porttitor congue.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Minerva Ferguson</h5>
-																	<p>Founder &amp; CEO</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/3.jpg' %}" alt=""> Cras id sem posuere, mollis purus a, placerat turpis. Donec blandit tellus viverra, volutpat urna ac, molestie orci.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Raymond Cummings</h5>
-																	<p>Public Relationship</p>
-																</div>
-															</blockquote>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="row">
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/1.jpg' %}" alt=""> Proin sollicitudin tempor arcu, id vestibulum mi suscipit et. Praesent ac erat tristique, iaculis neque et, porta libero. Duis sodales.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Derrick Rodgers</h5>
-																	<p>Manager</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/2.jpg' %}" alt=""> Duis congue purus non malesuada porttitor. Integer vitae orci ac orci tincidunt efficitur. Sed tristique magna a nulla porttitor congue.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Minerva Ferguson</h5>
-																	<p>Founder &amp; CEO</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/3.jpg' %}" alt=""> Cras id sem posuere, mollis purus a, placerat turpis. Donec blandit tellus viverra, volutpat urna ac, molestie orci.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Raymond Cummings</h5>
-																	<p>Public Relationship</p>
-																</div>
-															</blockquote>
-														</div>
-													</div>
-												</li>
-
-												<li>
-													<div class="row">
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/1.jpg' %}" alt=""> Proin sollicitudin tempor arcu, id vestibulum mi suscipit et. Praesent ac erat tristique, iaculis neque et, porta libero. Duis sodales.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Derrick Rodgers</h5>
-																	<p>Manager</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/2.jpg' %}" alt=""> Duis congue purus non malesuada porttitor. Integer vitae orci ac orci tincidunt efficitur. Sed tristique magna a nulla porttitor congue.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Minerva Ferguson</h5>
-																	<p>Founder &amp; CEO</p>
-																</div>
-															</blockquote>
-														</div>
-														<div class="col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-4">
-															<blockquote class="blockquote-vertical with_bottom_border ls topmargin_50">
-																<img src="{% static 'images/faces/3.jpg' %}" alt=""> Cras id sem posuere, mollis purus a, placerat turpis. Donec blandit tellus viverra, volutpat urna ac, molestie orci.
-																<hr class="divider_3_60 main_bg_color">
-																<div class="blockquote-meta">
-																	<h5>Raymond Cummings</h5>
-																	<p>Public Relationship</p>
-																</div>
-															</blockquote>
-														</div>
-													</div>
-												</li>
-
-											</ul>
-
-										</div>
-									</div>
-								</div>
-
-							</div>
-							<!-- eof flexslider -->
-
 						</div>
 					</div>
 				</div>
@@ -785,12 +270,8 @@
 					<div class="row">
 						<div class="col-md-offset-2 col-md-8 text-center">
 							<div class="cornered-heading center-heading bottommargin_40">
-								<span class="text-uppercase">Connect with us</span>
-								<h2 class="text-uppercase">Our Contacts</h2>
+								<h2 class="text-uppercase">Наши контакты</h2>
 							</div>
-							<p>
-								Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce tempus odio vitae nibh semper, ac venenatis massa mollis. Proin tempus, mauris eu facilisis feugiat, nisi augue faucibus.
-							</p>
 						</div>
 					</div>
 					<div class="row with_shadow topmargin_40 to_animate" data-animation="fadeInDown">
@@ -802,9 +283,9 @@
 									</div>
 								</div>
 								<div class="media-body text-left">
-									<h5 class="text-uppercase fontsize_16 extra-bold">Head office</h5>
-									<p>1116 15th St, Sacramento,
-										<br> California, CA 95814, USA</p>
+									<h5 class="text-uppercase fontsize_16 extra-bold">Адрес</h5>
+									<p>ул. Родниковая 2-Б, 
+										<br> г. Белгород</p>
 								</div>
 							</div>
 						</div>
@@ -816,9 +297,10 @@
 									</div>
 								</div>
 								<div class="media-body text-left">
-									<h5 class="text-uppercase fontsize_16 extra-bold">Call us</h5>
-									<p>Support: 0800 123 4567
-										<br> Office: 0800 123 4566</p>
+									<h5 class="text-uppercase fontsize_16 extra-bold">Телефон</h5>
+									<p>
+										+7 (4722) 23-19-70
+									</p>
 								</div>
 							</div>
 						</div>
@@ -830,17 +312,15 @@
 									</div>
 								</div>
 								<div class="media-body text-left">
-									<h5 class="text-uppercase fontsize_16 extra-bold">Email Us</h5>
+									<h5 class="text-uppercase fontsize_16 ">Email</h5>
 									<p class="greylinks">
-										<a href="#">energy@support.com</a>
-										<br>
-										<a href="#">energy@info.com</a>
+										<a href="mailto:stroi31@bk.ru">stroi31@bk.ru</a>
 									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row topmargin_35 contact-form-container to_animate" data-animation="fadeInUp">
+					<!-- <div class="row topmargin_35 contact-form-container to_animate" data-animation="fadeInUp">
 						<div class="col-sm-12 text-center">
 							<span class="text-uppercase">Short loin meatloaf</span>
 							<h2 class="text-uppercase topmargin_5 bottommargin_25">Contact Form</h2>
@@ -886,7 +366,7 @@
 							</form>
 
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</section>
 			
