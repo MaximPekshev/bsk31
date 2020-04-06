@@ -1,4 +1,6 @@
 from django.db import models
+from simple_history.models import HistoricalRecords
+
 
 import uuid
 
@@ -70,6 +72,8 @@ class Driver(models.Model):
 	saturday		= models.BooleanField(verbose_name='Суббота', default=True)
 	sunday			= models.BooleanField(verbose_name='Воскресенье', default=True)
 
+	history = HistoricalRecords()
+
 	def __str__(self):
 
 		return self.second_name
@@ -110,8 +114,7 @@ class  Working_day(models.Model):
 
 	slug 		= models.SlugField(max_length=10, verbose_name='Url', blank=True, db_index=True)
 
-
-
+	history = HistoricalRecords()
 
 	def save(self, *args, **kwargs):
 
@@ -141,6 +144,7 @@ class Cashbox(models.Model):
 	cash 			= models.DecimalField(verbose_name = 'Наличные', max_digits=15, decimal_places=2, default=0)
 	cash_card 		= models.DecimalField(verbose_name = 'Карта', max_digits=15, decimal_places=2, default=0)
 
+	history = HistoricalRecords()
 
 	def __str__(self):
 
