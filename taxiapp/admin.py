@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from simple_history.admin import SimpleHistoryAdmin
+
 from .models import Driver
 from .models import Working_day
 from .models import Cashbox
@@ -10,7 +12,7 @@ class Working_dayInline(admin.TabularInline):
     exclude = ('slug', 'debt_of_day')
     extra = 0
 
-class DriverAdmin(admin.ModelAdmin):
+class DriverAdmin(SimpleHistoryAdmin, admin.ModelAdmin):
 	
 	list_display = (
 					'first_name',
@@ -25,7 +27,7 @@ class DriverAdmin(admin.ModelAdmin):
 admin.site.register(Driver, DriverAdmin)
 
 
-class Working_dayAdmin(admin.ModelAdmin):
+class Working_dayAdmin(SimpleHistoryAdmin, admin.ModelAdmin):
 	list_display = (
 					'date',
 					'rate',
@@ -41,7 +43,7 @@ class Working_dayAdmin(admin.ModelAdmin):
 admin.site.register(Working_day, Working_dayAdmin)
 
 
-class CashboxAdmin(admin.ModelAdmin):
+class CashboxAdmin(SimpleHistoryAdmin, admin.ModelAdmin):
 
 	list_display = (
 					'date', 

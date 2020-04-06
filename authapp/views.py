@@ -18,12 +18,13 @@ def login(request):
 		user 			= auth.authenticate(username=username, password=password)
 
 		users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+		users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
 
 		if user is not None:
 
 			auth.login(request, user)
 
-			if request.user in users_in_group:
+			if request.user in users_in_group or request.user in users_in_group_collector:
 				
 				return redirect('taxi_show_index')
 

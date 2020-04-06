@@ -18,7 +18,9 @@ def taxi_show_index(request):
 
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
 
-	if request.user.is_authenticated and request.user in users_in_group:
+	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
+
+	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
 
 		drivers = Driver.objects.all()
 
@@ -38,7 +40,9 @@ def show_driver(request, slug):
 
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
 
-	if request.user.is_authenticated and request.user in users_in_group:
+	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
+
+	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
 
 		driver = Driver.objects.get(slug = slug)
 
@@ -234,8 +238,9 @@ def driver_edit(request, slug):
 def taxi_show_cashbox(request):
 
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
 
-	if request.user.is_authenticated and request.user in users_in_group:
+	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
 
 		cashbox = Cashbox.objects.all().order_by('date')
 
@@ -257,7 +262,7 @@ def taxi_show_cashbox(request):
 
 def taxi_incass(request):
 
-	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+	users_in_group = Group.objects.get(name="taxicollector").user_set.all()
 
 	if request.user.is_authenticated and request.user in users_in_group:
 
