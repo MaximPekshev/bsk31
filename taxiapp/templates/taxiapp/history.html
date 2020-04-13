@@ -1,0 +1,112 @@
+{% extends 'baseapp/base_taxi.html' %}
+
+
+{% block content %}
+
+  <section class="ls ms">
+   <div class="container-fluid flex-row">
+    <div class="row">
+      <div class="col-lg-12 d-flex flex-row-reverse">
+        <div class="py-2 pl-2">
+			<a href="{% url 'taxi_show_index' %}" class="theme_button color1"><i class="rt-icon2-home"></i></a>
+		</div>
+      </div>
+    </div>
+  </div>
+  <div class="container col-lg-12">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active">
+            <a href="#tab3" role="tab" data-toggle="tab">Водители</a>
+          </li>
+          <li>
+            <a href="#tab4" role="tab" data-toggle="tab">Рабочие дни</a>
+          </li>
+        </ul>
+
+        <div class="tab-content top-color-border">
+
+          <div class="tab-pane fade in active" id="tab3">
+            <table class="table_template darklinks table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Дата изменения</th>
+                  <th>Изменено</th>
+                  <th></th>
+                  <th>Водитель</th>
+                  <th>Номер В/У</th>
+                  <th>Гос номер А/М</th>
+                  <th>Топливная карта</th>
+                  <th>Марка А/М</th>
+                  <th>Ставка</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for driver in driver_history %}
+                <tr>
+                  <td>{{ driver.history_date }}</td>
+                  <td>{{ driver.history_user }}</td>
+                  <td></td>
+                  <td>{{ driver.second_name }} {{ driver.first_name }}</td>
+                  <td>{{ driver.driver_license }}</td>
+                  <td>{{ driver.car_number }}</td>
+                  <td>{{ driver.fuel_card }}</td>
+                  <td>{{ driver.car_model }}</td>
+                  <td>{{ driver.rate }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="tab4">
+
+            <table class="table_template darklinks table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Дата изменения</th>
+                  <th>Изменено</th>
+                  <th></th>
+                  <th>Дата</th>
+                  <th>Водитель</th>
+                  <th>Ставка</th>
+                  <th>ГСМ</th>
+                  <th>Штрафы</th>
+                  <th>Наличные</th>
+                  <th>Карта</th>
+                  <th>Безналичные</th>
+                  <th>Долг</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for day in wd_history %}
+                <tr>
+
+                  <td>{{ day.history_date }}</td>
+                  <th>{{ day.history_user }}</th>
+                  <td></td>
+                  <th>{{ day.date }}</th>
+                  <td>{{ day.driver.second_name }} {{ day.driver.first_name }}</td>
+                  <td>{{ day.rate }}</td>
+                  <td>{{ day.fuel }}</td>
+                  <td>{{ day.penalties }}</td>
+                  <td>{{ day.cash }}</td>
+                  <td>{{ day.cash_card }}</td>
+                  <td>{{ day.cashless }}</td>
+                  <td>{{ day.debt_of_day }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div> 
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section> 
+{% endblock %}

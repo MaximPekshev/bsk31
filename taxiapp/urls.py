@@ -3,11 +3,13 @@ from django.urls import include
 from .views import taxi_show_index
 from .views import show_driver, driver_add_new, driver_edit
 from .views import taxi_show_cashbox, taxi_incass
+from .views import taxi_show_history
 
 urlpatterns = [
 
 	path('', 						taxi_show_index, name='taxi_show_index'),
 	path('cashbox/', 				taxi_show_cashbox, name='taxi_show_cashbox'),
+	path('history/', 				taxi_show_history, name='taxi_show_history'),
 	path('incass/', 				taxi_incass, name='taxi_incass'),
 	path('driver/<str:slug>/', 		show_driver, name='show_driver'),
 	path('new-driver/', 			driver_add_new, name='driver_add_new'),
