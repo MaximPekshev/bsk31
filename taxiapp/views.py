@@ -311,4 +311,28 @@ def taxi_incass(request):
 	else:
 
 		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
-		return render(request, 'authapp/login.html')		
+		return render(request, 'authapp/login.html')
+
+
+def taxi_show_history(request):
+	
+	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
+
+	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
+
+		driver_history = Driver.history.all()
+		wd_history     = Working_day.history.all()
+
+		context = {
+
+			'driver_history': driver_history,
+			'wd_history': wd_history,
+		}
+
+		return	render(request, 'taxiapp/history.html', context)
+
+	else:
+
+		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
+		return render(request, 'authapp/login.html')
