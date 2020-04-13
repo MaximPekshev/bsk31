@@ -17,7 +17,7 @@ def calculate_debt(driver_slug):
 		for day in working_days:
 			debt += day.debt_of_day
 		driver.debt = debt	
-		driver.save()
+		driver.save_without_historical_record()
 
 def update_cashbox(working_day):
 
@@ -39,7 +39,7 @@ def update_cashbox(working_day):
 				cash_card=working_day.cash_card,
 				)
 
-			cashbox.save()
+			cashbox.save_without_historical_record()
 	
 
 def get_uuid():
@@ -86,7 +86,15 @@ class Driver(models.Model):
 
 		super(Driver, self).save(*args, **kwargs)
 			
-	
+
+	def save_without_historical_record(self, *args, **kwargs):
+		self.skip_history_when_saving=True
+		try:
+			ret = self.save(*args, **kwargs)
+		finally:
+			del self.skip_history_when_saving
+		return ret
+
 
 	class Meta:
 		verbose_name = 'Водитель'
@@ -127,6 +135,13 @@ class  Working_day(models.Model):
 		calculate_debt(self.driver.slug)
 		update_cashbox(self)
 
+	def save_without_historical_record(self, *args, **kwargs):
+		self.skip_history_when_saving=True
+		try:
+			ret = self.save(*args, **kwargs)
+		finally:
+			del self.skip_history_when_saving
+		return ret
 
 	class Meta:
 		
@@ -156,7 +171,15 @@ class Cashbox(models.Model):
 			self.slug = get_uuid()
 
 		super(Cashbox, self).save(*args, **kwargs)
-			
+	
+	def save_without_historical_record(self, *args, **kwargs):
+		self.skip_history_when_saving=True
+		try:
+			ret = self.save(*args, **kwargs)
+		finally:
+			del self.skip_history_when_saving
+		return ret
+
 	class Meta:
 
 		verbose_name = 'Движение по кассе'
