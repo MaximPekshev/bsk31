@@ -61,17 +61,6 @@ def show_about_us(request):
 
 	return render(request, 'baseapp/about_us.html', context)
 
-def show_under_construct(request):
-
-	service_objects = Service_object.objects.all()
-
-	context = {
-
-		'service_objects': service_objects,
-	}
-	return render(request, 'baseapp/under_construct.html', context)
-
-
 def show_certificates(request):
 
 	service_objects = Service_object.objects.all()
