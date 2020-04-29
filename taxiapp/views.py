@@ -14,6 +14,13 @@ from workingdayapp.forms import WorkingDayForm
 
 from django.contrib.auth.models import Group
 
+def culc_debt(drivers):
+	debt=0
+	for driver in drivers:
+		debt += driver.debt
+	return debt
+
+
 def taxi_show_index(request):
 
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
@@ -22,11 +29,20 @@ def taxi_show_index(request):
 
 	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
 
-		drivers = Driver.objects.all()
+		drivers_works = Driver.objects.filter(active=True).order_by('second_name')
+
+		debt_of_works = culc_debt(drivers_works)
+
+		drivers_fired = Driver.objects.filter(active=False).order_by('second_name')
+
+		debt_of_fired = culc_debt(drivers_fired)
 
 		context = {
 
-			'drivers':drivers,
+			'drivers_works':drivers_works,
+			'debt_of_works':debt_of_works,
+			'drivers_fired':drivers_fired,
+			'debt_of_fired':debt_of_fired,
 
 		}
 
@@ -46,7 +62,7 @@ def show_driver(request, slug):
 
 		driver = Driver.objects.get(slug = slug)
 
-		working_days = Working_day.objects.filter(driver = driver).order_by("date")
+		working_days = Working_day.objects.filter(driver = driver).order_by("-date")
 
 
 		context = {
@@ -242,7 +258,7 @@ def taxi_show_cashbox(request):
 
 	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
 
-		cashbox = Cashbox.objects.all().order_by('date')
+		cashbox = Cashbox.objects.all().order_by('-date')
 
 		ca_cash 	 = Cashbox.objects.all().aggregate(Sum('cash'))['cash__sum']
 		ca_cash_card = Cashbox.objects.all().aggregate(Sum('cash_card'))['cash_card__sum']

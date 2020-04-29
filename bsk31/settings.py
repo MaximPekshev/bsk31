@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5zd)c0gpr(_b@tef0_#8xn4-w@-1epptc&2-t@8^5ces!x1727'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['bsk31.com', 'www.bsk31.com', 'localhost', ]
 
@@ -139,4 +139,5 @@ MEDIA_URL = '/media/'
 
 CRONJOBS = [
     ('30 0 * * *', 'taxiapp.cron.creating_working_days'),
+    ('55 0 * * *', 'taxiapp.cron.yandex_transactions'),
 ]
