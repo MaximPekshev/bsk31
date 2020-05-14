@@ -16,5 +16,6 @@ urlpatterns = [
 	path('edit-driver/<str:slug>/', driver_edit, name='driver_edit'),
 	path('profile/', 				include('authapp.urls')),
 	path('working-days/', 			include('workingdayapp.urls')),
+	path('cars/', 					include('carsapp.urls')),
 
 			]

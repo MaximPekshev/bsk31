@@ -20,4 +20,9 @@ class NewDriverForm(forms.Form):
 	friday 			= forms.BooleanField(required=False)
 	saturday 		= forms.BooleanField(required=False)
 	sunday 			= forms.BooleanField(required=False)
- 
+	car_obj			= forms.CharField(max_length = 10, required=False)
+	
+class PeriodForm(forms.Form):
+
+	trip_start  	= forms.CharField(max_length = 12)
+	trip_end  		= forms.CharField(max_length = 12)

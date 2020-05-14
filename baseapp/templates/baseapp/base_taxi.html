@@ -21,6 +21,8 @@
   		<script src="{% static 'js/bootstrap.js' %}"></script>
   		<script src="{% static 'js/bootstrap.min.js' %}"></script>
 
+
+
  	</head>
  	<body>
   <section class="page_topline ds ms columns_margin_0">
@@ -35,18 +37,18 @@
 
  	{% block content %}
   <section class="ls ms">
+
    <div class="container col-lg-12">
-      <div class="row flex-row-reverse">
-        <div class="row mr-3">
-            <a class="theme_button color1" href="{% url 'taxi_show_cashbox' %}">Касса</a>
-            <a class="theme_button color1 mr-3" href="{% url 'logout' %}">Выйти</a>
-        </div>
-        <div class="row mr-3">
-            <a class="theme_button" href="" data-toggle="modal" data-target="#addnewdriver">Новый водитель<i class="rt-icon2-add"></i></a>
-             <a class="theme_button color1 mr-3" href="{% url 'taxi_show_history' %}">История</a>
-        </div>
+    <div class="row">
+      <div class="col-lg-12 col-12">
+        <a class="theme_button" href="" data-toggle="modal" data-target="#addnewdriver"><i class="rt-icon2-add"></i></a>
+        <a class="theme_button color1" href="{% url 'logout' %}">Выйти</a>
+        <a class="theme_button color1" href="{% url 'taxi_show_cashbox' %}">Касса</a>
+        <a class="theme_button color1" href="{% url 'taxi_show_history' %}">История</a>
+        <a class="theme_button color1" href="{% url 'show_cars' %}">Авто</a>
       </div>
-  </div>
+    </div>
+  </div> 
   <div class="container col-lg-12">
     <div class="row">
       <div class="col-lg-12">
@@ -63,12 +65,14 @@
         <div class="tab-content top-color-border">
 
           <div class="tab-pane fade in active" id="tab1">
+            <div class="table-responsive">
             <table class="table_template darklinks table-hover">
               <thead class="thead-dark">
                 <tr>
                   <th>#</th>
                   <th>Водитель</th>
                   <th>Номер В/У</th>
+                  <th>Номер(NEW)</th>
                   <th>Гос номер А/М</th>
                   <th>Топливная карта</th>
                   <th>Марка А/М</th>
@@ -83,6 +87,7 @@
                   <td>{{ forloop.counter }}</td>
                   <td><a href="{% url 'show_driver' slug=driver.slug %}">{{ driver.second_name }} {{ driver.first_name }}</a></td>
                   <td>{{ driver.driver_license }}</td>
+                  <td>{{ driver.car }}</td>
                   <td>{{ driver.car_number }}</td>
                   <td>{{ driver.fuel_card }}</td>
                   <td>{{ driver.car_model }}</td>
@@ -94,15 +99,17 @@
               </tbody>
             </table>
           </div>
+          </div>
 
           <div class="tab-pane fade" id="tab2">
-
+            <div class="table-responsive">
             <table class="table_template darklinks table-hover">
               <thead class="thead-dark">
                 <tr>
                   <th>#</th>
                   <th>Водитель</th>
                   <th>Номер В/У</th>
+                  <th>Номер(NEW)</th>
                   <th>Гос номер А/М</th>
                   <th>Топливная карта</th>
                   <th>Марка А/М</th>
@@ -117,6 +124,7 @@
                   <td>{{ forloop.counter }}</td>
                   <td><a href="{% url 'show_driver' slug=driver.slug %}">{{ driver.second_name }} {{ driver.first_name }}</a></td>
                   <td>{{ driver.driver_license }}</td>
+                  <td>{{ driver.car }}</td>
                   <td>{{ driver.car_number }}</td>
                   <td>{{ driver.fuel_card }}</td>
                   <td>{{ driver.car_model }}</td>
@@ -127,6 +135,7 @@
                 {% endfor %}
               </tbody>
             </table>
+          </div>
 
           </div> 
 
@@ -137,7 +146,7 @@
   </div>
 </section> 
 
-<div class="modal fade bd-example-modal-lg" id="addnewdriver" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal bd-example-modal-lg" id="addnewdriver" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
        <div class="modal-header">
@@ -146,7 +155,7 @@
            <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body col-sm-12 col-4 text-center">
+        <div class="modal-body col-sm-12 col-12 text-center">
           <form id="edit-driver"  class="shop-register" method="POST" action="{% url 'driver_add_new' %}">
             {% csrf_token %}
               <div class="row">
@@ -218,6 +227,17 @@
 
                     <input type="text" class="form-control " name="car_number" id="car_number" placeholder="Гос номер А/М" value="" required>
                   </div>
+                  <div class="form-group validate-required" id="car_obj">
+                    <label for="car_obj" class="control-label">
+                      <span class="grey">Авто</span>
+                      <span class="required">*</span>
+                    </label>
+                    <select class="form-control" id="car_obj" name="car_obj">
+                      {% for car in cars %}
+                      <option value="{{ car }}">{{ car }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div>
                 <div class="col-lg-12 col-12">
                   <div class="form-group validate-required pt-4" id="active">
@@ -274,12 +294,10 @@
                     </div>    
                   </div>
                 </div>
-
-
               </div>
           </form>
         </div>
-      <div class="modal-footer col-4 col-lg-12">
+      <div class="modal-footer col-12 col-lg-12">
         <a class="theme_button" href="#" data-dismiss="modal">ОТМЕНА</a>
         <button class="theme_button color1" type="submit" form="edit-driver">СОХРАНИТЬ </button>
       </div>
@@ -298,7 +316,6 @@
  	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
 
   <script src="{% static 'js/compressed.js' %}"></script>
 

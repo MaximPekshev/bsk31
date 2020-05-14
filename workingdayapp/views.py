@@ -27,7 +27,7 @@ def working_day_add(request, driver_slug):
 				if day_form.cleaned_data['input_date']:
 					date = day_form.cleaned_data['input_date']
 				else:
-					date = datetime.today()
+					date = datetime.now()
 
 				if day_form.cleaned_data['input_rate']:
 					rate = Decimal(day_form.cleaned_data['input_rate'].replace(',','.'))

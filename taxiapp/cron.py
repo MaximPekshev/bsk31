@@ -148,10 +148,12 @@ def yandex_transactions():
             if taxidriver:
                 working_day = Working_day.objects.filter(driver=taxidriver, date=day_before_today).first()
                 if working_day:
-                    working_day.cashless = Decimal(abs(float(key['amount'])))
+                    working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
                     working_day.save()
                 else:
-                    pass
+                    working_day = Working_day.objects.filter(driver=taxidriver).last()
+                    working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
+                    working_day.save()
             else:
                 missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'),])
 

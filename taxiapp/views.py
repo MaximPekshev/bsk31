@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Driver
+from .models import Driver, Car
 from .models import Working_day
 from .forms import NewDriverForm
 from django.contrib.auth.models import Group
@@ -10,9 +10,14 @@ from django.db.models import Sum
 from datetime import datetime
 from decimal import Decimal
 from workingdayapp.forms import WorkingDayForm
-
+from django.utils import timezone
+from .forms import PeriodForm
 
 from django.contrib.auth.models import Group
+
+import requests
+import json
+
 
 def culc_debt(drivers):
 	debt=0
@@ -37,12 +42,15 @@ def taxi_show_index(request):
 
 		debt_of_fired = culc_debt(drivers_fired)
 
+		cars = Car.objects.all()
+
 		context = {
 
 			'drivers_works':drivers_works,
 			'debt_of_works':debt_of_works,
 			'drivers_fired':drivers_fired,
 			'debt_of_fired':debt_of_fired,
+			'cars':cars,
 
 		}
 
@@ -64,10 +72,15 @@ def show_driver(request, slug):
 
 		working_days = Working_day.objects.filter(driver = driver).order_by("-date")
 
+		if driver.car:
+			cars = Car.objects.exclude(slug=driver.car.slug)
+		else:
+			cars = Car.objects.all()
+
 
 		context = {
 
-			'working_days': working_days, 'driver': driver,
+			'working_days': working_days, 'driver': driver, 'cars':cars,
 
 		}
 
@@ -93,6 +106,13 @@ def driver_add_new(request):
 				last_name 			= dr_form.cleaned_data['last_name']
 				car_model 			= dr_form.cleaned_data['car_model']
 				car_number 			= dr_form.cleaned_data['car_number']
+				car_obj 			= dr_form.cleaned_data['car_obj']
+
+				if car_obj:
+					car = Car.objects.get(car_number=car_obj)
+				else:
+					car = None
+						
 				rate 				= float(dr_form.cleaned_data['rate'].replace(',','.'))
 
 				if dr_form.cleaned_data['third_name']:
@@ -130,6 +150,7 @@ def driver_add_new(request):
 					rate=rate, debt=0, active=active,
 					monday=monday, tuesday=tuesday, wednesday=wednesday,
 					thursday=thursday, friday=friday, saturday=saturday, sunday=sunday,
+					car=car,
 					)
 				new_driver.save()
 
@@ -174,6 +195,15 @@ def driver_edit(request, slug):
 
 				car_model 			= dr_form.cleaned_data['car_model']
 				car_number 			= dr_form.cleaned_data['car_number']
+
+				car_obj 			= dr_form.cleaned_data['car_obj']
+
+				if car_obj:
+					car = Car.objects.get(car_number=car_obj)
+				else:
+					car = None
+
+
 				rate 				= float(dr_form.cleaned_data['rate'].replace(',','.'))
 
 				active 				= dr_form.cleaned_data['active']
@@ -235,6 +265,9 @@ def driver_edit(request, slug):
 
 				if driver.sunday != sunday:
 					driver.sunday = sunday
+
+				if driver.car != car:
+					driver.car = car
 
 
 				driver.save()
@@ -302,7 +335,7 @@ def taxi_incass(request):
 				if cash != 0 or cash_card != 0:
 			
 					cashbox = Cashbox(
-						date=datetime.today(),
+						date=datetime.now(),
 						cash=-cash,
 						cash_card=-cash_card,
 						)
@@ -337,13 +370,38 @@ def taxi_show_history(request):
 
 	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
 
-		driver_history = Driver.history.all()
-		wd_history     = Working_day.history.all()
+		if request.method == 'POST':
+
+			period_form = PeriodForm(request.POST)
+
+			if period_form.is_valid():
+
+				trip_start 		= period_form.cleaned_data['trip_start'] + ' 00:00:01'
+				trip_end 		= period_form.cleaned_data['trip_end'] + ' 23:59:59'
+
+				date_lte 	= datetime.strptime(trip_start, '%Y-%m-%d %H:%M:%S')
+				date_now	= datetime.strptime(trip_end, '%Y-%m-%d %H:%M:%S')
+
+			else:
+
+				messages.info(request, 'Не выбран период отчета!!')
+				current_path = request.META['HTTP_REFERER']
+				return redirect(current_path)	
+
+		else:
+
+			date_now    =   timezone.now()
+			date_lte 	= 	date_now.replace(day = int(date_now.day - 7))
+
+		driver_history = Driver.history.filter(history_date__lte=date_now, history_date__gte=date_lte)
+		wd_history     = Working_day.history.filter(history_date__lte=date_now, history_date__gte=date_lte)
 
 		context = {
 
 			'driver_history': driver_history,
 			'wd_history': wd_history,
+			'date_now': date_now.strftime("%Y-%m-%d"),
+			'date_lte': date_lte.strftime("%Y-%m-%d"),
 		}
 
 		return	render(request, 'taxiapp/history.html', context)
@@ -352,3 +410,71 @@ def taxi_show_history(request):
 
 		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
 		return render(request, 'authapp/login.html')
+
+
+
+def import_car():
+
+	cars_url = 'https://fleet-api.taxi.yandex.net/v1/parks/cars/list'
+	dr_headers = {'Accept-Language': 'ru',
+	           'X-Client-ID': 'taxi/park/d720a2f94349461ab80d9c613b8e801c',
+	           'X-API-Key': 'rrAqtFLKUQzNQTNPkh+WyCGzWfPbIvCxCUt+Iy'}
+
+	cars_data = {
+				"fields": {
+				},
+				"limit": 100,
+				"query": {
+				      "park": {
+				        "id": 'd720a2f94349461ab80d9c613b8e801c'
+				      },
+			    },
+
+	}
+
+	answer = requests.post(cars_url, headers=dr_headers, data=json.dumps(cars_data),)
+	response = answer.json()
+	cars = response.get('cars')
+
+	for car in cars:
+		brand = car.get('brand')
+		model = car.get('model')
+		number = car.get('number')
+		vin = car.get('vin')
+		year = car.get('year')
+		color = car.get('color')
+
+		print(brand, number)
+
+		new_car = Car(
+
+			car_number = number,
+			car_brand = brand,
+			car_model = model,
+
+			)
+
+		new_car.save()
+
+		print(new_car)
+		print('--------------------------------------')
+
+
+def link_cars():
+	driver = Driver.objects.all()
+	for dr in driver:
+		num = dr.car_number.upper()
+
+		try:
+			car = Car.objects.get(car_number=num)
+			dr.car = car
+			dr.save()
+
+			print(car, ' загружена успешно! для водителя ', dr)
+			print('-------------------------------------------------')
+
+		except car.DoesNotExist:
+
+			print(num, ' номер в базе автомобилей не найден!')
+			print('-------------------------------------------------')
+

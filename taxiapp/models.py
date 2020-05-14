@@ -1,6 +1,6 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
-
+from datetime import datetime
 
 import uuid
 
@@ -33,7 +33,7 @@ def update_cashbox(working_day):
 		if working_day.cash != 0 or working_day.cash_card != 0:
 			
 			cashbox = Cashbox(
-				date=working_day.date,
+				date=datetime.now(),
 				working_day=working_day,
 				cash=working_day.cash,
 				cash_card=working_day.cash_card,
@@ -71,6 +71,7 @@ class Driver(models.Model):
 	friday			= models.BooleanField(verbose_name='Пятница', default=True)
 	saturday		= models.BooleanField(verbose_name='Суббота', default=True)
 	sunday			= models.BooleanField(verbose_name='Воскресенье', default=True)
+	car 			= models.ForeignKey('Car', verbose_name='Автомобиль', on_delete=models.SET_DEFAULT,null=True, blank=True, default=None)
 
 	history = HistoricalRecords()
 
@@ -151,7 +152,7 @@ class  Working_day(models.Model):
 
 class Cashbox(models.Model):
 	
-	date 			= models.DateField('Дата операции', auto_now_add = False)
+	date 			= models.DateTimeField('Дата операции', auto_now_add = False)
 
 	slug 			= models.SlugField(max_length=15, verbose_name='Url', blank=True, db_index=True)
 	working_day 	= models.ForeignKey(Working_day, on_delete=models.PROTECT, blank=True, null=True, default=None)
@@ -185,3 +186,28 @@ class Cashbox(models.Model):
 		verbose_name = 'Движение по кассе'
 		verbose_name_plural = 'Движения по кассе'
 
+
+
+class Car(models.Model):
+
+	slug		= models.SlugField(max_length=10, verbose_name='Url', blank=True, db_index=True)
+
+	car_number 	= models.CharField(max_length = 15, verbose_name = 'Номер', blank=True, null=True, default='')
+	car_brand	= models.CharField(max_length = 30, verbose_name = 'Марка', blank=True, null=True, default='')
+	car_model 	= models.CharField(max_length = 30, verbose_name = 'Модель', blank=True, null=True, default='')
+		
+	def __str__(self):
+
+		return self.car_number
+
+	def save(self, *args, **kwargs):
+
+		if self.slug == "":
+			self.slug = get_uuid()
+
+		super(Car, self).save(*args, **kwargs)
+
+
+	class Meta:
+		verbose_name = 'Автомобиль'
+		verbose_name_plural = 'Автомобили'

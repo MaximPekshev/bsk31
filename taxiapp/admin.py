@@ -5,6 +5,7 @@ from simple_history.admin import SimpleHistoryAdmin
 from .models import Driver
 from .models import Working_day
 from .models import Cashbox
+from .models import Car 
 
 
 class Working_dayInline(admin.TabularInline):
@@ -18,11 +19,15 @@ class DriverAdmin(SimpleHistoryAdmin, admin.ModelAdmin):
 					'first_name',
 					'second_name',
 					'third_name',
+					'car',
 					)
 
 	inlines		= [Working_dayInline]
 
 	exclude = ('slug',)
+
+
+
 
 admin.site.register(Driver, DriverAdmin)
 
@@ -54,3 +59,16 @@ class CashboxAdmin(SimpleHistoryAdmin, admin.ModelAdmin):
 	exclude = ('slug',)
 
 admin.site.register(Cashbox, CashboxAdmin)
+
+
+class CarAdmin(admin.ModelAdmin):
+
+	list_display = (
+					'car_number', 
+					'car_brand',
+					'car_model',
+					)
+
+	exclude = ('slug',)
+
+admin.site.register(Car, CarAdmin)
