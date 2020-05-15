@@ -8,9 +8,8 @@ def show_cars(request):
 
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
 
-	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
 
-	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
+	if request.user.is_authenticated and (request.user in users_in_group):
 
 		cars = Car.objects.all()
 
@@ -32,9 +31,8 @@ def taxi_new_car(request):
 
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
 
-	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
 
-	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
+	if request.user.is_authenticated and (request.user in users_in_group):
 
 		if request.method == 'POST':
 
@@ -82,9 +80,8 @@ def taxi_edit_car(request, slug):
 
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
 
-	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
 
-	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
+	if request.user.is_authenticated and (request.user in users_in_group):
 
 		if request.method == 'POST':
 
