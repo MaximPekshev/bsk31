@@ -114,12 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.bsk31.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'info@bsk31.com'
-EMAIL_HOST_PASSWORD = 'B1k0Y3d1'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

@@ -15,6 +15,8 @@ from .forms import PeriodForm
 
 from django.contrib.auth.models import Group
 
+import django.core.exceptions
+
 import requests
 import json
 
@@ -104,8 +106,6 @@ def driver_add_new(request):
 
 				first_name 			= dr_form.cleaned_data['first_name']
 				last_name 			= dr_form.cleaned_data['last_name']
-				car_model 			= dr_form.cleaned_data['car_model']
-				car_number 			= dr_form.cleaned_data['car_number']
 				car_obj 			= dr_form.cleaned_data['car_obj']
 
 				if car_obj:
@@ -145,7 +145,6 @@ def driver_add_new(request):
 					first_name=first_name, second_name=last_name, 
 					third_name=third_name,
 					driver_license=driver_license,
-					car_number=car_number, car_model=car_model,
 					fuel_card=fuel_card,
 					rate=rate, debt=0, active=active,
 					monday=monday, tuesday=tuesday, wednesday=wednesday,
@@ -193,8 +192,6 @@ def driver_edit(request, slug):
 				else:
 					fuel_card = ''	
 
-				car_model 			= dr_form.cleaned_data['car_model']
-				car_number 			= dr_form.cleaned_data['car_number']
 
 				car_obj 			= dr_form.cleaned_data['car_obj']
 
@@ -230,14 +227,8 @@ def driver_edit(request, slug):
 				if driver.driver_license != driver_license:
 					driver.driver_license = driver_license
 
-				if driver.car_model != car_model:
-					driver.car_model = car_model
-
 				if driver.fuel_card != fuel_card:
 					driver.fuel_card = fuel_card	
-						
-				if driver.car_number != car_number:
-					driver.car_number = car_number
 
 				if driver.rate != rate:
 					driver.rate = rate	
@@ -393,13 +384,81 @@ def taxi_show_history(request):
 			date_now    =   timezone.now()
 			date_lte 	= 	date_now.replace(day = int(date_now.day - 7))
 
+		d_history = []
+
 		driver_history = Driver.history.filter(history_date__lte=date_now, history_date__gte=date_lte)
+
+		for dh in driver_history:
+
+			try:
+
+				dr_prev = dh.get_previous_by_history_date(id=dh.id)
+
+				driver 			= False
+				if (dh.first_name != dr_prev.first_name):
+
+					driver 		= True
+
+				if (dh.second_name != dr_prev.second_name):
+
+					driver 		= True
+
+				if (dh.third_name != dr_prev.third_name):
+
+					driver 		= True	
+
+				driver_license 	= False if (dh.driver_license == dr_prev.driver_license) else True
+				rate 			= False if (dh.rate == dr_prev.rate) else True
+				fuel_card 		= False if (dh.fuel_card == dr_prev.fuel_card) else True
+				car 			= False if (dh.car == dr_prev.car) else True
+
+			except dh.DoesNotExist:
+
+
+				driver 			= False
+				driver_license 	= False
+				rate			= False
+				fuel_card		= False
+				car 			= False
+
+			d_history.append([dh, driver, driver_license, rate, fuel_card, car])
+
+		work_day_hist  = []
+
 		wd_history     = Working_day.history.filter(history_date__lte=date_now, history_date__gte=date_lte)
+
+		for wd in wd_history:
+
+			try:
+
+				wd_prev 		= wd.get_previous_by_history_date(id=wd.id)
+
+				rate 			= False if (wd.rate == wd_prev.rate) else True
+				fuel 			= False if (wd.fuel == wd_prev.fuel) else True
+				penalties 		= False if (wd.penalties == wd_prev.penalties) else True
+				cash 			= False if (wd.cash == wd_prev.cash) else True
+				cash_card 		= False if (wd.cash_card == wd_prev.cash_card) else True
+				cashless 		= False if (wd.cashless == wd_prev.cashless) else True
+				debt_of_day 	= False if (wd.debt_of_day == wd_prev.debt_of_day) else True
+
+
+			except wd.DoesNotExist:
+
+				rate 			= False
+				fuel 			= False
+				penalties 		= False
+				cash 			= False
+				cash_card 		= False
+				cashless		= False
+				debt_of_day 	= False
+
+			work_day_hist.append([wd, rate, fuel, penalties, cash, cash_card, cashless, debt_of_day])	
+
 
 		context = {
 
-			'driver_history': driver_history,
-			'wd_history': wd_history,
+			'd_history': d_history,
+			'work_day_hist': work_day_hist,
 			'date_now': date_now.strftime("%Y-%m-%d"),
 			'date_lte': date_lte.strftime("%Y-%m-%d"),
 		}

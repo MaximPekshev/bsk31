@@ -27,7 +27,6 @@
   <div class="container col-lg-12">
     <div class="row">
       <div class="col-lg-12">
-
         <ul class="nav nav-tabs" role="tablist">
           <li class="active">
             <a href="#tab3" role="tab" data-toggle="tab">Водители</a>
@@ -40,7 +39,6 @@
         <div class="tab-content top-color-border">
 
           <div class="tab-pane fade in active" id="tab3">
-            <div class="table-responsive">
             <table class="table_template darklinks table-hover">
               <thead class="thead-dark">
                 <tr>
@@ -50,33 +48,27 @@
                   <th>Водитель</th>
                   <th>Номер В/У</th>
                   <th>Номер(NEW)</th>
-                  <th>Гос номер А/М</th>
                   <th>Топливная карта</th>
-                  <th>Марка А/М</th>
                   <th>Ставка</th>
                 </tr>
               </thead>
               <tbody>
-                {% for driver in driver_history %}
+                {% for driver in d_history %}
                 <tr>
-                  <td>{{ driver.history_date }}</td>
-                  <td>{{ driver.history_user }}</td>
+                  <td>{{ driver.0.history_date }}</td>
+                  <td>{{ driver.0.history_user }}</td>
                   <td></td>
-                  <td>{{ driver.second_name }} {{ driver.first_name }}</td>
-                  <td>{{ driver.driver_license }}</td>
-                  <td>{{ driver.car }}</td>
-                  <td>{{ driver.car_number }}</td>
-                  <td>{{ driver.fuel_card }}</td>
-                  <td>{{ driver.car_model }}</td>
-                  <td>{{ driver.rate }}</td>
+                  <td {% if driver.1 == True %}class="table-danger"{% endif %}>{{ driver.0.second_name }} {{ driver.0.first_name }}</td>
+                  <td {% if driver.2 == True %}class="table-danger"{% endif %}>{{ driver.0.driver_license }}</td>
+                  <td {% if driver.5 == True %}class="table-danger"{% endif %}>{{ driver.0.car }}</td>
+                  <td {% if driver.4 == True %}class="table-danger"{% endif %}>{{ driver.0.fuel_card }}</td>
+                  <td {% if driver.3 == True %}class="table-danger"{% endif %}>{{ driver.0.rate }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
           </div>
-          </div>
           <div class="tab-pane fade" id="tab4">
-            <div class="table-responsive">
             <table class="table_template darklinks table-hover">
               <thead class="thead-dark">
                 <tr>
@@ -95,27 +87,26 @@
                 </tr>
               </thead>
               <tbody>
-                {% for day in wd_history %}
+                {% for day in work_day_hist %}
                 <tr>
 
-                  <td>{{ day.history_date }}</td>
-                  <th>{{ day.history_user }}</th>
+                  <td>{{ day.0.history_date }}</td>
+                  <th>{{ day.0.history_user }}</th>
                   <td></td>
-                  <th>{{ day.date }}</th>
-                  <td>{{ day.driver.second_name }} {{ day.driver.first_name }}</td>
-                  <td>{{ day.rate }}</td>
-                  <td>{{ day.fuel }}</td>
-                  <td>{{ day.penalties }}</td>
-                  <td>{{ day.cash }}</td>
-                  <td>{{ day.cash_card }}</td>
-                  <td>{{ day.cashless }}</td>
-                  <td>{{ day.debt_of_day }}</td>
+                  <th>{{ day.0.date }}</th>
+                  <td>{{ day.0.driver.second_name }} {{ day.driver.first_name }}</td>
+                  <td {% if day.1 == True %}class="table-danger"{% endif %}>{{ day.0.rate }}</td>
+                  <td {% if day.2 == True %}class="table-danger"{% endif %}>{{ day.0.fuel }}</td>
+                  <td {% if day.3 == True %}class="table-danger"{% endif %}>{{ day.0.penalties }}</td>
+                  <td {% if day.4 == True %}class="table-danger"{% endif %}>{{ day.0.cash }}</td>
+                  <td {% if day.5 == True %}class="table-danger"{% endif %}>{{ day.0.cash_card }}</td>
+                  <td {% if day.6 == True %}class="table-danger"{% endif %}>{{ day.0.cashless }}</td>
+                  <td {% if day.7 == True %}class="table-danger"{% endif %}>{{ day.0.debt_of_day }}</td>
                 </tr>
                 {% endfor %}
               </tbody>
             </table>
 
-          </div> 
         </div>
         </div>
         

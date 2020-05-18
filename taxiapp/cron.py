@@ -169,10 +169,10 @@ def yandex_transactions():
 
 def send_mail(missing_drivers, day_before_today):
 
-    HOST = "mail.bsk31.com"
-    sender_email = "info@bsk31.com"
+    HOST = "smtp.mail.ru"
+    sender_email = "info@annasoft.ru"
     receiver_email = ['info@annasoft.ru', 'm.pekshev@annasoft.ru']
-    password = "B1k0Y3d1"
+    password = "M@sterkey$302"
      
     message = MIMEMultipart("alternative")
     message["Subject"] = "Отчет по загрузке из Яндекс Такси"
@@ -204,7 +204,8 @@ def send_mail(missing_drivers, day_before_today):
     message.attach(part2)
     
     context = ssl.create_default_context()
-    server = smtplib.SMTP(HOST)
+    server = smtplib.SMTP(HOST, 587)
+    server.starttls()
     server.login(sender_email, password)
     server.sendmail(
         sender_email, receiver_email , message.as_string()

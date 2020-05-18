@@ -7,8 +7,6 @@ class NewDriverForm(forms.Form):
 	third_name  	= forms.CharField(max_length = 30, required=False)
 	driver_license 	= forms.CharField(max_length = 15, required=False)
 	fuel_card 		= forms.CharField(max_length = 30, required=False)
-	car_model		= forms.CharField(max_length = 30)
-	car_number		= forms.CharField(max_length = 15)
 	rate			= forms.CharField(max_length = 15)
 
 	active 			= forms.BooleanField(required=False)
