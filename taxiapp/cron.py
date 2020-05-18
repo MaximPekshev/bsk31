@@ -110,8 +110,13 @@ def yandex_transactions():
         driver = (p.get('driver_profile'))
         dr_license = driver.get('driver_license')
 
-        now         =   datetime.datetime.now().isoformat() + '+03:00'
-        yesterday   =   (datetime.datetime.now() - datetime.timedelta(days=1)).isoformat() + '+03:00'
+        n = datetime.datetime.now()
+        n = n.replace(hour=0, minute=1)
+        y = n - datetime.timedelta(days=1)
+        y = y.replace(hour=0,minute=1)
+
+        now         =   n.isoformat() + '+00:00'
+        yesterday   =   y.isoformat() + '+00:00'
 
         url = 'https://fleet-api.taxi.yandex.net/v2/parks/driver-profiles/transactions/list'
         headers = {'Accept-Language': 'ru',
@@ -166,7 +171,7 @@ def send_mail(missing_drivers, day_before_today):
 
     HOST = "mail.bsk31.com"
     sender_email = "info@bsk31.com"
-    receiver_email = ['info@annasoft.ru', 'm.pekshev@annasoft.ru', 'cherbadgi_sn@mail.ru']
+    receiver_email = ['info@annasoft.ru', 'm.pekshev@annasoft.ru']
     password = "B1k0Y3d1"
      
     message = MIMEMultipart("alternative")
