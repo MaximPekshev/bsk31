@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5zd)c0gpr(_b@tef0_#8xn4-w@-1epptc&2-t@8^5ces!x1727'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['bsk31.com', 'www.bsk31.com', 'localhost', ]
 
@@ -113,6 +113,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.bsk31.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'info@bsk31.com'
+EMAIL_HOST_PASSWORD = 'B1k0Y3d1'
 
 
 # Internationalization
