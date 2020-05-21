@@ -176,10 +176,12 @@ def yandex_transactions():
 
 def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_transactions):
 
-    HOST = "smtp.mail.ru"
-    sender_email = "info@annasoft.ru"
+
+    HOST = "mail.hosting.reg.ru"
+    sender_email = "info@bsk31.com"
     receiver_email = ['info@annasoft.ru', 'm.pekshev@annasoft.ru', ]
-    password = "M@sterkey$302"
+    password = "B1k0Y3d1"
+
      
     message = MIMEMultipart("alternative")
     message["Subject"] = "Отчет по загрузке из Яндекс от {}".format(day_before_today.strftime("%Y-%m-%d"))
