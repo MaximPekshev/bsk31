@@ -106,6 +106,9 @@ def yandex_transactions():
 
     missing_drivers = []
 
+    summ_of_transactions = 0
+    num_of_transactions = 0
+
     for p in profiles:
         driver = (p.get('driver_profile'))
         dr_license = driver.get('driver_license')
@@ -159,30 +162,34 @@ def yandex_transactions():
                     working_day = Working_day.objects.filter(driver=taxidriver).last()
                     working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
                     working_day.save()
+
+                summ_of_transactions    += Decimal(abs(float(key['amount'])))
+                num_of_transactions     += 1
+
             else:
-                missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'),])
+                missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'), key['amount'],])
 
     if missing_drivers:
-            send_mail(missing_drivers, day_before_today)    
+            send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_transactions)    
             
 
 
-def send_mail(missing_drivers, day_before_today):
+def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_transactions):
 
     HOST = "smtp.mail.ru"
     sender_email = "info@annasoft.ru"
-    receiver_email = ['info@annasoft.ru', 'm.pekshev@annasoft.ru']
+    receiver_email = ['info@annasoft.ru', 'm.pekshev@annasoft.ru', ]
     password = "M@sterkey$302"
      
     message = MIMEMultipart("alternative")
-    message["Subject"] = "Отчет по загрузке из Яндекс Такси"
+    message["Subject"] = "Отчет по загрузке из Яндекс от {}".format(day_before_today.strftime("%Y-%m-%d"))
     message["From"] = sender_email
     message["To"] = ','.join(receiver_email)
     
     test_text = ""
 
     for item in missing_drivers:
-        test_text += "<p>{} {} {} {} </p>".format(item[0], item[1], item[2], item[3],)
+        test_text += "<p>{} {} {} {}, сумма : {}</p>".format(item[0], item[1], item[2], item[3], item[4],)
 
     text = """\
     {}""".format(test_text)
@@ -190,12 +197,14 @@ def send_mail(missing_drivers, day_before_today):
     html = """\
     <html>
       <body>
+        <H3>{1} загружено {3} транзакций на сумму {2}р. </H3>
+
         <H3>Список водителей, которые не найдены в базе данных: </H3>
-           {}
-        <p>Данные по транзакциям этих водителей за {} необходимо загрузить вручную!</p>
+           {0}
+        <p>Данные по транзакциям этих водителей за {1} необходимо загрузить вручную!</p>
       </body>
     </html>
-    """.format(test_text, day_before_today.strftime("%Y-%m-%d"))
+    """.format(test_text, day_before_today.strftime("%Y-%m-%d"), summ_of_transactions, num_of_transactions)
      
     part1 = MIMEText(text, "plain")
     part2 = MIMEText(html, "html")

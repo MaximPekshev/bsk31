@@ -204,7 +204,8 @@
                       <span class="required">*</span>
                     </label>
                     <select class="form-control" id="car_obj" name="car_obj" form="new-driver">
-                      <option selected>{{ driver.car }}</option>
+                      <option selected>{% if driver.car %}{{ driver.car }}{% else%}...{% endif %}</option>
+                      {% if driver.car %}<option value="">...</option>{% endif %}
                       {% for car in cars %}
                       <option value="{{ car }}">{{ car }}</option>
                       {% endfor %}

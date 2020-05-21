@@ -38,6 +38,14 @@ def taxi_show_index(request):
 
 		drivers_works = Driver.objects.filter(active=True).order_by('second_name')
 
+		cars_works = []
+
+		for dr in drivers_works:
+			if dr.car in cars_works:
+				pass
+			else:
+				cars_works.append(dr.car)
+
 		debt_of_works = culc_debt(drivers_works)
 
 		drivers_fired = Driver.objects.filter(active=False).order_by('second_name')
@@ -53,6 +61,7 @@ def taxi_show_index(request):
 			'drivers_fired':drivers_fired,
 			'debt_of_fired':debt_of_fired,
 			'cars':cars,
+			'cars_works': len(cars_works),
 
 		}
 
@@ -78,6 +87,7 @@ def show_driver(request, slug):
 			cars = Car.objects.exclude(slug=driver.car.slug)
 		else:
 			cars = Car.objects.all()
+
 
 
 		context = {
