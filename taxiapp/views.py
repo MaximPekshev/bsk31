@@ -44,7 +44,8 @@ def taxi_show_index(request):
 			if dr.car in cars_works:
 				pass
 			else:
-				cars_works.append(dr.car)
+				if dr.car:
+					cars_works.append(dr.car)
 
 		debt_of_works = culc_debt(drivers_works)
 
