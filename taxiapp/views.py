@@ -401,7 +401,24 @@ def taxi_show_history(request):
 		else:
 
 			date_now    =   timezone.now()
-			date_lte 	= 	date_now.replace(day = int((date_now.day if date_now.day>7 else (date_now.day+30)) - 7))
+
+			if date_now.day > 7:
+
+				date_lte 	= 	date_now.replace(day = int(date_now.day - 7))
+
+			else:	
+
+				date_lte 	= 	date_now.replace(day = int(date_now.day + 30 - 7))
+
+				if date_now.month > 1:
+
+					date_lte 	= 	date_lte.replace(month = int(date_lte.month - 1))
+
+				else:
+
+					date_lte 	= 	date_lte.replace(month = int(date_lte.month + 12 - 1))
+					date_lte 	= 	date_lte.replace(year = int(date_lte.year - 1))
+					
 
 		d_history = []
 
