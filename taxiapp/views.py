@@ -11,7 +11,7 @@ from datetime import datetime
 from decimal import Decimal
 from workingdayapp.forms import WorkingDayForm
 from django.utils import timezone
-from .forms import PeriodForm
+from .forms import PeriodForm, Gas_upload
 
 from django.contrib.auth.models import Group
 
@@ -19,6 +19,7 @@ import django.core.exceptions
 
 import requests
 import json
+import xlrd
 
 
 def culc_debt(drivers):
@@ -30,7 +31,13 @@ def culc_debt(drivers):
 
 def taxi_show_index(request):
 
+	taxiadmin = False
+
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+
+	if request.user in users_in_group:
+
+		taxiadmin = True
 
 	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
 
@@ -63,6 +70,7 @@ def taxi_show_index(request):
 			'debt_of_fired':debt_of_fired,
 			'cars':cars,
 			'cars_works': len(cars_works),
+			'taxiadmin': taxiadmin,
 
 		}
 
@@ -482,3 +490,117 @@ def taxi_show_history(request):
 		return render(request, 'authapp/login.html')
 
 
+def gas_upload(request):
+
+	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
+
+	if request.user.is_authenticated and request.user in users_in_group:
+		
+		if request.method == 'POST':
+
+			gas_form = Gas_upload(request.POST,request.FILES)
+
+			if gas_form.is_valid():
+
+				gas_file = 	request.FILES['gas_file']
+				option_gas = request.POST['optiongas']
+
+				missing_drivers = []
+				upload_transactions = []
+
+				wb = xlrd.open_workbook(file_contents=gas_file.read())
+
+				sheet = wb.sheet_by_index(0)
+
+				if option_gas == 'option1':
+
+					for n in range(sheet.nrows):
+
+						if sheet.cell(n,4).value == 'Дебет':
+
+							date_of_transaction = datetime.date(xlrd.xldate.xldate_as_datetime(sheet.cell(n,0).value, wb.datemode))
+
+							fuel_card = str(int(sheet.cell(n,2).value))
+
+							summ_of_transaction = Decimal(int(abs(sheet.cell(n,9).value))).quantize(Decimal("1.00"))
+
+							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first()
+
+							if taxidriver:
+
+								working_day = Working_day.objects.filter(driver=taxidriver, date=date_of_transaction).first()
+
+								if working_day:
+									working_day.fuel = working_day.fuel + summ_of_transaction
+									working_day.save()
+								else:	
+									working_day = Working_day.objects.filter(driver=taxidriver).last()
+									working_day.fuel = working_day.fuel + summ_of_transaction
+									working_day.save()
+
+								upload_transactions.append([date_of_transaction, taxidriver.second_name, taxidriver.first_name, fuel_card, summ_of_transaction])
+
+							else:
+
+								missing_drivers.append([date_of_transaction, fuel_card, summ_of_transaction])
+
+				elif option_gas == 'option2':
+
+					def_fuel_card = ''
+
+					for n in range(sheet.nrows):
+
+						if sheet.cell(n,5).value == 'Обслуживание':
+
+							date_of_transaction = datetime.strptime(sheet.cell(n,4).value, '%d.%m.%Y %H:%M:%S').date()
+
+							if sheet.cell(n,0).value:
+
+								fuel_card = str(int(sheet.cell(n,0).value))
+
+								def_fuel_card = fuel_card
+
+							else:
+								
+								fuel_card = def_fuel_card
+
+							summ_of_transaction = Decimal(float(sheet.cell(n,11).value.replace('-','').strip().replace(',','.'))).quantize(Decimal("1.00"))
+
+							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first()
+
+							if taxidriver:
+
+								working_day = Working_day.objects.filter(driver=taxidriver, date=date_of_transaction).first()
+
+								if working_day:
+									working_day.fuel = working_day.fuel + summ_of_transaction
+									working_day.save()
+								else:	
+									working_day = Working_day.objects.filter(driver=taxidriver).last()
+									working_day.fuel = working_day.fuel + summ_of_transaction
+									working_day.save()
+
+								upload_transactions.append([date_of_transaction, taxidriver.second_name, taxidriver.first_name, fuel_card, summ_of_transaction])
+
+							else:
+
+								missing_drivers.append([date_of_transaction, fuel_card, summ_of_transaction])
+
+				context = {
+							'upload_transactions': upload_transactions,
+							'missing_drivers': missing_drivers,
+				}
+
+				return	render(request, 'taxiapp/upload_succes.html', context)
+
+			else:
+				current_path = request.META['HTTP_REFERER']
+				return redirect(current_path)
+
+		else:
+			current_path = request.META['HTTP_REFERER']
+			return redirect(current_path)
+	else:
+
+		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
+		return render(request, 'authapp/login.html')			

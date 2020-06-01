@@ -106,6 +106,8 @@ def yandex_transactions():
 
     missing_drivers = []
 
+    day_bt = datetime.datetime.now() - datetime.timedelta(days=1)
+
     summ_of_transactions = 0
     num_of_transactions = 0
 
@@ -169,8 +171,7 @@ def yandex_transactions():
             else:
                 missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'), key['amount'],])
 
-    if missing_drivers:
-            send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_transactions)    
+    send_mail(missing_drivers, day_bt, summ_of_transactions, num_of_transactions)    
             
 
 
@@ -189,9 +190,9 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
     message["To"] = ','.join(receiver_email)
     
     test_text = ""
-
-    for item in missing_drivers:
-        test_text += "<p>{} {} {} {}, сумма : {}</p>".format(item[0], item[1], item[2], item[3], item[4],)
+    if missing_drivers:
+        for item in missing_drivers:
+            test_text += "<p>{} {} {} {}, сумма : {}</p>".format(item[0], item[1], item[2], item[3], item[4],)
 
     text = """\
     {}""".format(test_text)

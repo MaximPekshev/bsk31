@@ -24,3 +24,11 @@ class PeriodForm(forms.Form):
 
 	trip_start  	= forms.CharField(max_length = 12)
 	trip_end  		= forms.CharField(max_length = 12)
+
+
+class Gas_upload(forms.Form):
+
+	gas_file 		= forms.FileField()
+	optiongas		= forms.CharField(max_length = 30)
+
+	

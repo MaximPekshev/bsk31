@@ -46,6 +46,9 @@
         <a class="theme_button color1" href="{% url 'taxi_show_cashbox' %}">Касса</a>
         <a class="theme_button color1" href="{% url 'taxi_show_history' %}">История</a>
         <a class="theme_button color1" href="{% url 'show_cars' %}">Авто</a>
+        {% if taxiadmin %}
+        <a class="theme_button" href="" data-toggle="modal" data-target="#gas_upload"><i class="rt-icon2-download"></i></a>
+        {% endif %}
       </div>
       <div class="col-lg-4 col-12">
         <h2>авто в работе: <span style="color: #fcca03">{{ cars_works }}</span></h2>
@@ -285,7 +288,45 @@
   </div>
 </div>
 
+<div class="modal bd-example-modal-lg" id="gas_upload" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="text-uppercase pt-3">Загрузка данных по заправкам</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body col-sm-12 col-4 text-center">
+          <form id="gas_upld"  enctype="multipart/form-data" class="shop-register" method="POST" action="{% url 'gas_upload' %}">
+            {% csrf_token %}
+              <div class="row">
+                <div class="col-lg-12 col-12 text-left">
+                  <div class="form-group validate-required" id="fuel_card">
+                    <input type="file"  name="gas_file" id="gas_file" placeholder="Выберите файл для загрузки" value="" required>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optiongas" id="petrolplus" value="option1" checked> ges.petrolplus.ru
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optiongas" id="astrachan" value="option2"> astrakhan.gazpromlpg.ru
+                    </label>
+                  </div>
+                </div>
+              </div>
+          </form>
+        </div>
+      <div class="modal-footer col-4 col-lg-12">
+        <a class="theme_button" href="#" data-dismiss="modal">ОТМЕНА</a>
+        <button class="theme_button color1" type="submit" form="gas_upld">ЗАГРУЗИТЬ</button>
+      </div>
 
+    </div>
+  </div>
+</div>
 
  	{% endblock %}
 
