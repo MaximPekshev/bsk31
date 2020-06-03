@@ -533,13 +533,13 @@ def gas_upload(request):
 
 					for n in range(sheet.nrows):
 
-						if sheet.cell(n,4).value == 'Дебет':
+						if sheet.cell(n,4).value == 'Дебет' or sheet.cell(n,4).value == 'Возврат':
 
 							date_of_transaction = datetime.date(xlrd.xldate.xldate_as_datetime(sheet.cell(n,0).value, wb.datemode))
 
 							fuel_card = str(int(sheet.cell(n,2).value))
 
-							summ_of_transaction = Decimal(abs(sheet.cell(n,9).value)).quantize(Decimal("1.00"))
+							summ_of_transaction = Decimal(sheet.cell(n,9).value).quantize(Decimal("1.00"))
 
 							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first()
 
@@ -567,19 +567,19 @@ def gas_upload(request):
 
 					for n in range(sheet.nrows):
 
+						if sheet.cell(n,0).ctype == 2:
+
+							fuel_card = str(int(sheet.cell(n,0).value))
+
+							def_fuel_card = fuel_card
+
+						else:
+								
+							fuel_card = def_fuel_card
+
 						if sheet.cell(n,5).value == 'Обслуживание':
 
 							date_of_transaction = datetime.strptime(sheet.cell(n,4).value, '%d.%m.%Y %H:%M:%S').date()
-
-							if sheet.cell(n,0).value:
-
-								fuel_card = str(int(sheet.cell(n,0).value))
-
-								def_fuel_card = fuel_card
-
-							else:
-								
-								fuel_card = def_fuel_card
 
 							summ_of_transaction = Decimal(abs(sheet.cell(n,11).value)).quantize(Decimal("1.00"))
 

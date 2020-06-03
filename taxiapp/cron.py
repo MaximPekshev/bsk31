@@ -194,20 +194,33 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
         for item in missing_drivers:
             test_text += "<p>{} {} {} {}, сумма : {}</p>".format(item[0], item[1], item[2], item[3], item[4],)
 
-    text = """\
-    {}""".format(test_text)
-     
-    html = """\
-    <html>
-      <body>
-        <H3>{1} загружено {3} транзакций на сумму {2}р. </H3>
+        text = """\
+        {}""".format(test_text)
+         
+        html = """\
+        <html>
+          <body>
+            <H3>{1} загружено {3} транзакций на сумму {2}р. </H3>
 
-        <H3>Список водителей, которые не найдены в базе данных: </H3>
-           {0}
-        <p>Данные по транзакциям этих водителей за {1} необходимо загрузить вручную!</p>
-      </body>
-    </html>
-    """.format(test_text, day_before_today.strftime("%Y-%m-%d"), summ_of_transactions, num_of_transactions)
+            <H3>Список водителей, которые не найдены в базе данных: </H3>
+               {0}
+            <p>Данные по транзакциям этих водителей за {1} необходимо загрузить вручную!</p>
+          </body>
+        </html>
+        """.format(test_text, day_before_today.strftime("%Y-%m-%d"), summ_of_transactions, num_of_transactions)
+
+    else:
+
+        text = """\
+        """
+        
+        html = """\
+        <html>
+          <body>
+            <H3>{0} загружено {2} транзакций на сумму {1}р. </H3>
+          </body>
+        </html>
+        """.format(day_before_today.strftime("%Y-%m-%d"), summ_of_transactions, num_of_transactions)
      
     part1 = MIMEText(text, "plain")
     part2 = MIMEText(html, "html")
