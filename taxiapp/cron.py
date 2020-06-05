@@ -207,7 +207,7 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
             <p>Данные по транзакциям этих водителей за {1} необходимо загрузить вручную!</p>
           </body>
         </html>
-        """.format(test_text, day_before_today.strftime("%Y-%m-%d"), summ_of_transactions, num_of_transactions)
+        """.format(test_text, day_before_today.strftime("%Y-%m-%d"), summ_of_transactions.quantize(Decimal("1.00")), num_of_transactions)
 
     else:
 
@@ -220,7 +220,7 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
             <H3>{0} загружено {2} транзакций на сумму {1}р. </H3>
           </body>
         </html>
-        """.format(day_before_today.strftime("%Y-%m-%d"), summ_of_transactions, num_of_transactions)
+        """.format(day_before_today.strftime("%Y-%m-%d"), summ_of_transactions.quantize(Decimal("1.00")), num_of_transactions)
      
     part1 = MIMEText(text, "plain")
     part2 = MIMEText(html, "html")
