@@ -308,7 +308,7 @@ def taxi_show_cashbox(request):
 
 		context = {
 
-			'cashbox': cashbox, 'ca_cash': ca_cash, 'ca_cash_card': ca_cash_card,
+			'cashbox': cashbox, 'ca_cash': ca_cash.quantize(Decimal("1.00")), 'ca_cash_card': ca_cash_card.quantize(Decimal("1.00")),
 
 		}
 

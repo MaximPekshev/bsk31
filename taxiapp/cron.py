@@ -180,7 +180,7 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
 
     HOST = "mail.hosting.reg.ru"
     sender_email = "info@bsk31.com"
-    receiver_email = ['info@annasoft.ru', 'm.pekshev@annasoft.ru', ]
+    receiver_email = ['info@annasoft.ru', 'cherbadgi_sn@mail.ru', ]
     password = "B1k0Y3d1"
 
      
