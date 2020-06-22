@@ -1487,6 +1487,32 @@ p > [class*="rt-icon"] + [class*="rt-icon"] {
 	line-height: 0;
 }
 
+/*
+** annasoft
+*/
+
+.date-as {
+
+	
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 10px 20px 10px;
+	margin-bottom: 3px;
+	line-height: 1;
+	display: inline-block;
+	min-width: 8.5em;
+	text-align: center;
+	color: #ffffff;
+	border: none;
+	background-color: #333333;
+	border-radius: 4px;
+	position: relative;
+
+}
+
+
+
 /* 
 **buttons 
 */
