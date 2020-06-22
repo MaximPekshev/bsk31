@@ -215,7 +215,10 @@ def driver_edit(request, slug):
 				car_obj 			= dr_form.cleaned_data['car_obj']
 
 				if car_obj:
-					car = Car.objects.get(car_number=car_obj)
+					try:
+						car = Car.objects.get(car_number=car_obj)
+					except Car.DoesNotExist:
+						car = None
 				else:
 					car = None
 
