@@ -49,6 +49,8 @@
                   <th>Номер В/У</th>
                   <th>Номер(NEW)</th>
                   <th>Топливная карта</th>
+                  <th>Топливная карта 2</th>
+                  <th>Email</th>
                   <th>Ставка</th>
                 </tr>
               </thead>
@@ -60,8 +62,10 @@
                   <td></td>
                   <td {% if driver.1 == True %}class="table-danger"{% endif %}>{{ driver.0.second_name }} {{ driver.0.first_name }}</td>
                   <td {% if driver.2 == True %}class="table-danger"{% endif %}>{{ driver.0.driver_license }}</td>
-                  <td {% if driver.5 == True %}class="table-danger"{% endif %}>{{ driver.0.car }}</td>
+                  <td {% if driver.5 == True %}class="table-danger"{% endif %}>{% if driver.0.car %}{{ driver.0.car }}{% endif %}</td>
                   <td {% if driver.4 == True %}class="table-danger"{% endif %}>{{ driver.0.fuel_card }}</td>
+                  <td {% if driver.6 == True %}class="table-danger"{% endif %}>{{ driver.0.fuel_card_2 }}</td>
+                  <td {% if driver.7 == True %}class="table-danger"{% endif %}>{{ driver.0.email }}</td>
                   <td {% if driver.3 == True %}class="table-danger"{% endif %}>{{ driver.0.rate }}</td>
                 </tr>
                 {% endfor %}

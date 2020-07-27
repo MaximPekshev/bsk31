@@ -4,7 +4,7 @@ from .views import taxi_show_index
 from .views import show_driver, driver_add_new, driver_edit
 from .views import taxi_show_cashbox, taxi_incass
 from .views import taxi_show_history
-from .views import gas_upload
+from .views import gas_upload, send_debts
 
 urlpatterns = [
 
@@ -19,5 +19,6 @@ urlpatterns = [
 	path('profile/', 				include('authapp.urls')),
 	path('working-days/', 			include('workingdayapp.urls')),
 	path('cars/', 					include('carsapp.urls')),
+	path('send-debts/', 			send_debts, name='send_debts'),
 
 			]

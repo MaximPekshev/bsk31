@@ -9,6 +9,8 @@ import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+from decouple import config
+
 
 def creating_working_days():
 
@@ -82,8 +84,8 @@ def yandex_transactions():
 
     driver_url = 'https://fleet-api.taxi.yandex.net/v1/parks/driver-profiles/list'
     dr_headers = {'Accept-Language': 'ru',
-               'X-Client-ID': 'taxi/park/d720a2f94349461ab80d9c613b8e801c',
-               'X-API-Key': 'rrAqtFLKUQzNQTNPkh+WyCGzWfPbIvCxCUt+Iy'}
+               'X-Client-ID': config('YA_X_CLIENT_ID'),
+               'X-API-Key': config('YA_X_API_KEY')}
 
     driver_data = {
                 "fields": {
@@ -94,7 +96,7 @@ def yandex_transactions():
                 },
                 "query": {
                       "park": {
-                        "id": 'd720a2f94349461ab80d9c613b8e801c'
+                        "id": config('YA_ID')
                       },
                 },
 
@@ -125,8 +127,8 @@ def yandex_transactions():
 
         url = 'https://fleet-api.taxi.yandex.net/v2/parks/driver-profiles/transactions/list'
         headers = {'Accept-Language': 'ru',
-                   'X-Client-ID': 'taxi/park/d720a2f94349461ab80d9c613b8e801c',
-                   'X-API-Key': 'rrAqtFLKUQzNQTNPkh+WyCGzWfPbIvCxCUt+Iy'}
+                   'X-Client-ID': config('YA_X_CLIENT_ID'),
+                   'X-API-Key': config('YA_X_API_KEY')}
 
         data = {
                     "query": {
@@ -134,7 +136,7 @@ def yandex_transactions():
                                     "driver_profile": {
                                     "id": driver['id']
                                     },
-                                  "id": "d720a2f94349461ab80d9c613b8e801c",
+                                  "id": config('YA_ID'),
                                   "transaction": {
                                         "category_ids": ['partner_service_manual',],
                                         "event_at": {
@@ -179,9 +181,9 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
 
 
     HOST = "mail.hosting.reg.ru"
-    sender_email = "info@bsk31.com"
+    sender_email = config('MAIL_USER')
     receiver_email = ['info@annasoft.ru', 'cherbadgi_sn@mail.ru', ]
-    password = "B1k0Y3d1"
+    password = config('MAIL_PASSWORD')
 
      
     message = MIMEMultipart("alternative")

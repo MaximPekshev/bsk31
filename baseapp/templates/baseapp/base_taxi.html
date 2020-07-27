@@ -25,6 +25,9 @@
 
  	</head>
  	<body>
+  <div class="preloader">
+    <div class="preloader_image"></div>
+  </div>
   <section class="page_topline ds ms columns_margin_0">
     <div class="container">
       <div class="row">
@@ -48,6 +51,7 @@
         <a class="theme_button color1" href="{% url 'show_cars' %}">Авто</a>
         {% if taxiadmin %}
         <a class="theme_button" href="" data-toggle="modal" data-target="#gas_upload"><i class="rt-icon2-download"></i></a>
+        <a class="theme_button" href="{% url 'send_debts' %}"><i class="rt-icon2-mail"></i></a>
         {% endif %}
       </div>
       <div class="col-lg-4 col-12">
@@ -77,9 +81,11 @@
                   <th>#</th>
                   <th>Водитель</th>
                   <th>Номер В/У</th>
-                  <th>Гос номер А/М</th>
+                  <th>Номер А/М</th>
                   <th>Марка А/М</th>
                   <th>Топливная карта</th>
+                  <th>Топливная карта 2</th>
+                  <th>Email</th>
                   <th>Ставка</th>
                   <th></th>
                   <th>Долг</th>
@@ -94,6 +100,8 @@
                   <td>{{ driver.car.car_number }}</td>
                   <td>{{ driver.car.car_brand }} {{ driver.car.car_model }}</td>
                   <td>{{ driver.fuel_card }}</td>
+                  <td>{{ driver.fuel_card_2 }}</td>
+                  <td>{{ driver.email }}</td>
                   <td>{{ driver.rate }}</td>
                   <td></td>
                   <td>{{ driver.debt }}</td>
@@ -110,9 +118,11 @@
                   <th>#</th>
                   <th>Водитель</th>
                   <th>Номер В/У</th>
-                  <th>Гос номер А/М</th>
+                  <th>Номер А/М</th>
                   <th>Марка А/М</th>
                   <th>Топливная карта</th>
+                  <th>Топливная карта 2</th>
+                  <th>Email</th>
                   <th>Ставка</th>
                   <th></th>
                   <th>Долг</th>
@@ -127,6 +137,8 @@
                   <td>{{ driver.car.car_number }}</td>
                   <td>{{ driver.car.car_brand }} {{ driver.car.car_model }}</td>
                   <td>{{ driver.fuel_card }}</td>
+                  <td>{{ driver.fuel_card_2 }}</td>
+                  <td>{{ driver.email }}</td>
                   <td>{{ driver.rate }}</td>
                   <td></td>
                   <td>{{ driver.debt }}</td>
@@ -207,6 +219,22 @@
                     </label>
 
                     <input type="text" class="form-control " name="fuel_card" id="fuel_card" placeholder="Топливная карта" value="">
+                  </div>
+
+                  <div class="form-group validate-required" id="fuel_card_2">
+                    <label for="fuel_card_2" class="control-label">
+                      <span class="grey">Топливная карта 2</span>
+                    </label>
+
+                    <input type="text" class="form-control " name="fuel_card_2" id="fuel_card_2" placeholder="Топливная карта 2" value="">
+                  </div>
+
+                  <div class="form-group validate-required" id="email">
+                    <label for="email" class="control-label">
+                      <span class="grey">Email</span>
+                    </label>
+
+                    <input type="email" class="form-control " name="email" id="email" placeholder="Email" value="">
                   </div>
 
                   <div class="form-group validate-required" id="car_obj">
@@ -338,6 +366,7 @@
  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
   <script src="{% static 'js/compressed.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 
  	</body>	
 </html>

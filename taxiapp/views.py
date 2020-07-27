@@ -21,6 +21,8 @@ import requests
 import json
 import xlrd
 
+from .scripts import driver_mailing
+
 
 def culc_debt(drivers):
 	debt=0
@@ -148,7 +150,18 @@ def driver_add_new(request):
 				if dr_form.cleaned_data['fuel_card']:
 					fuel_card = dr_form.cleaned_data['fuel_card']
 				else:
-					fuel_card = ''	
+					fuel_card = ''
+
+
+				if dr_form.cleaned_data['fuel_card_2']:
+					fuel_card_2 = dr_form.cleaned_data['fuel_card_2']
+				else:
+					fuel_card_2 = ''
+
+				if dr_form.cleaned_data['email']:
+					email = dr_form.cleaned_data['email']
+				else:
+					email = ''	
 
 				active 				= dr_form.cleaned_data['active']	
 
@@ -165,6 +178,8 @@ def driver_add_new(request):
 					third_name=third_name,
 					driver_license=driver_license,
 					fuel_card=fuel_card,
+					fuel_card_2=fuel_card_2,
+					email=email,
 					rate=rate, debt=0, active=active,
 					monday=monday, tuesday=tuesday, wednesday=wednesday,
 					thursday=thursday, friday=friday, saturday=saturday, sunday=sunday,
@@ -209,7 +224,17 @@ def driver_edit(request, slug):
 				if dr_form.cleaned_data['fuel_card']:
 					fuel_card = dr_form.cleaned_data['fuel_card']
 				else:
-					fuel_card = ''	
+					fuel_card = ''
+
+				if dr_form.cleaned_data['fuel_card_2']:
+					fuel_card_2 = dr_form.cleaned_data['fuel_card_2']
+				else:
+					fuel_card_2 = ''
+					
+				if dr_form.cleaned_data['email']:
+					email = dr_form.cleaned_data['email']
+				else:
+					email = ''		
 
 
 				car_obj 			= dr_form.cleaned_data['car_obj']
@@ -251,6 +276,12 @@ def driver_edit(request, slug):
 
 				if driver.fuel_card != fuel_card:
 					driver.fuel_card = fuel_card	
+
+				if driver.fuel_card_2 != fuel_card_2:
+					driver.fuel_card_2 = fuel_card_2
+
+				if driver.email != email:
+					driver.email = email	
 
 				if driver.rate != rate:
 					driver.rate = rate	
@@ -302,6 +333,11 @@ def taxi_show_cashbox(request):
 	users_in_group = Group.objects.get(name="taxiadmin").user_set.all()
 	users_in_group_collector = Group.objects.get(name="taxicollector").user_set.all()
 
+	collector = False
+
+	if request.user in users_in_group_collector:
+		collector = True
+
 	if request.user.is_authenticated and (request.user in users_in_group or request.user in users_in_group_collector):
 
 		cashbox = Cashbox.objects.all().order_by('-date')
@@ -312,6 +348,7 @@ def taxi_show_cashbox(request):
 		context = {
 
 			'cashbox': cashbox, 'ca_cash': ca_cash.quantize(Decimal("1.00")), 'ca_cash_card': ca_cash_card.quantize(Decimal("1.00")),
+			'collector': collector,
 
 		}
 
@@ -450,6 +487,8 @@ def taxi_show_history(request):
 				rate 			= False if (dh.rate == dr_prev.rate) else True
 				fuel_card 		= False if (dh.fuel_card == dr_prev.fuel_card) else True
 				car 			= False if (dh.car == dr_prev.car) else True
+				fuel_card_2 	= False if (dh.fuel_card_2 == dr_prev.fuel_card_2) else True
+				email 			= False if (dh.email == dr_prev.email) else True
 
 			except dh.DoesNotExist:
 
@@ -459,8 +498,10 @@ def taxi_show_history(request):
 				rate			= False
 				fuel_card		= False
 				car 			= False
+				fuel_card_2		= False
+				email			= False
 
-			d_history.append([dh, driver, driver_license, rate, fuel_card, car])
+			d_history.append([dh, driver, driver_license, rate, fuel_card, car, fuel_card_2, email])
 
 		work_day_hist  = []
 
@@ -544,7 +585,7 @@ def gas_upload(request):
 
 							summ_of_transaction = Decimal(sheet.cell(n,9).value).quantize(Decimal("1.00"))
 
-							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first()
+							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first() if Driver.objects.filter(fuel_card=fuel_card).first() else Driver.objects.filter(fuel_card_2=fuel_card).first()
 
 							if taxidriver:
 
@@ -586,7 +627,7 @@ def gas_upload(request):
 
 							summ_of_transaction = Decimal(abs(sheet.cell(n,11).value)).quantize(Decimal("1.00"))
 
-							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first()
+							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first() if Driver.objects.filter(fuel_card=fuel_card).first() else Driver.objects.filter(fuel_card_2=fuel_card).first()
 
 							if taxidriver:
 
@@ -623,4 +664,11 @@ def gas_upload(request):
 	else:
 
 		messages.info(request, 'У Вас не достаточно прав для доступа в данный раздел! Обратитесь к администратору!')
-		return render(request, 'authapp/login.html')			
+		return render(request, 'authapp/login.html')
+
+def send_debts(request):
+
+	driver_mailing()
+
+	current_path = request.META['HTTP_REFERER']
+	return redirect(current_path)

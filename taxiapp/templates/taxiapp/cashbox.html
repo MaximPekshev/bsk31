@@ -8,7 +8,9 @@
 		<div class="row">
 			<div class="col-lg-12 col-12">
 				<a href="{% url 'taxi_show_index' %}" class="theme_button color1"><i class="rt-icon2-home"></i></a>
+				{% if collector %}
 				<a href="" class="theme_button" data-toggle="modal" data-target="#incass">ИНКАССАЦИЯ</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>

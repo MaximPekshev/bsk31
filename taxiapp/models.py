@@ -55,6 +55,9 @@ class Driver(models.Model):
 	car_number		= models.CharField(max_length = 15, verbose_name = 'Номер А/М', blank=True, null=True, default='')
 	car_model		= models.CharField(max_length = 30, verbose_name = 'Марка А/М', blank=True, null=True, default='')
 	fuel_card		= models.CharField(max_length = 15, verbose_name = 'Топливная карта', blank=True, null=True, default='')
+	fuel_card_2		= models.CharField(max_length = 15, verbose_name = 'Топливная карта 2', blank=True, null=True, default='')
+
+	email 			= models.CharField(max_length = 30, verbose_name='Email', blank=True)
 
 	rate			= models.DecimalField(verbose_name = 'Ставка', max_digits=15, decimal_places=2, blank=True, null=True, default=0)
 

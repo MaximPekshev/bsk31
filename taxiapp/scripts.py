@@ -1,68 +1,54 @@
-import requests
-import json
-from .models import Driver, Car
+from decouple import config
 
-def import_car():
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
-	cars_url = 'https://fleet-api.taxi.yandex.net/v1/parks/cars/list'
-	dr_headers = {'Accept-Language': 'ru',
-	           'X-Client-ID': 'taxi/park/d720a2f94349461ab80d9c613b8e801c',
-	           'X-API-Key': 'rrAqtFLKUQzNQTNPkh+WyCGzWfPbIvCxCUt+Iy'}
+import datetime
 
-	cars_data = {
-				"fields": {
-				},
-				"limit": 100,
-				"query": {
-				      "park": {
-				        "id": 'd720a2f94349461ab80d9c613b8e801c'
-				      },
-			    },
+from .models import Driver
 
-	}
+ 
 
-	answer = requests.post(cars_url, headers=dr_headers, data=json.dumps(cars_data),)
-	response = answer.json()
-	cars = response.get('cars')
+def driver_mailing():
 
-	for car in cars:
-		brand = car.get('brand')
-		model = car.get('model')
-		number = car.get('number')
-		vin = car.get('vin')
-		year = car.get('year')
-		color = car.get('color')
 
-		print(brand, number)
+		HOST = "mail.hosting.reg.ru"
+		sender_email = config('MAIL_USER')
+		password = config('MAIL_PASSWORD')
 
-		new_car = Car(
+		for driver in Driver.objects.filter(active=True):
 
-			car_number = number,
-			car_brand = brand,
-			car_model = model,
+			receiver_email = [ driver.email ]
 
+			message = MIMEMultipart("alternative")
+			message["Subject"] = "Ваш долг на {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+			message["From"] = sender_email
+			message["To"] = ','.join(receiver_email)
+
+			text = """\
+			"""
+
+			html = """\
+		    <html>
+		      <body>
+		        <H3>Ваш долг на {0} составляет {1}р.</H3>
+		      </body>
+		    </html>
+		    """.format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), driver.debt )
+
+			part1 = MIMEText(text, "plain")
+			part2 = MIMEText(html, "html")
+		     
+			message.attach(part1)
+			message.attach(part2)
+		    
+			context = ssl.create_default_context()
+			server = smtplib.SMTP(HOST, 587)
+			server.starttls()
+			server.login(sender_email, password)
+			server.sendmail(
+				sender_email, receiver_email , message.as_string()
 			)
 
-		new_car.save()
-
-		print(new_car)
-		print('--------------------------------------')
-
-
-def link_cars():
-	driver = Driver.objects.all()
-	for dr in driver:
-		num = dr.car_number.upper()
-
-		try:
-			car = Car.objects.get(car_number=num)
-			dr.car = car
-			dr.save()
-
-			print(car, ' загружена успешно! для водителя ', dr)
-			print('-------------------------------------------------')
-
-		except car.DoesNotExist:
-
-			print(num, ' номер в базе автомобилей не найден!')
-			print('-------------------------------------------------')
+		server.quit()
