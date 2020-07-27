@@ -670,5 +670,4 @@ def send_debts(request):
 
 	driver_mailing()
 
-	current_path = request.META['HTTP_REFERER']
-	return redirect(current_path)
+	return render(request, 'taxiapp/mailing_succes.html')
