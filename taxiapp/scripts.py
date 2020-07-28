@@ -19,36 +19,37 @@ def driver_mailing():
 
 		for driver in Driver.objects.filter(active=True):
 
-			receiver_email = [ driver.email ]
+			if driver.email:	
 
-			message = MIMEMultipart("alternative")
-			message["Subject"] = "Ваш долг на {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
-			message["From"] = sender_email
-			message["To"] = ','.join(receiver_email)
+				receiver_email = [ driver.email ]
 
-			text = """\
-			"""
+				message = MIMEMultipart("alternative")
+				message["Subject"] = "Ваш долг на {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+				message["From"] = sender_email
+				message["To"] = ','.join(receiver_email)
 
-			html = """\
-		    <html>
-		      <body>
-		        <H3>Ваш долг на {0} составляет {1}р.</H3>
-		      </body>
-		    </html>
-		    """.format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), driver.debt )
+				text = """\
+				"""
 
-			part1 = MIMEText(text, "plain")
-			part2 = MIMEText(html, "html")
-		     
-			message.attach(part1)
-			message.attach(part2)
-		    
-			context = ssl.create_default_context()
-			server = smtplib.SMTP(HOST, 587)
-			server.starttls()
-			server.login(sender_email, password)
-			server.sendmail(
-				sender_email, receiver_email , message.as_string()
-			)
+				html = """\
+			    <html>
+			      <body>
+			        <H3>Ваш долг на {0} составляет {1}р.</H3>
+			      </body>
+			    </html>
+			    """.format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"), driver.debt )
 
-		server.quit()
+				part1 = MIMEText(text, "plain")
+				part2 = MIMEText(html, "html")
+			     
+				message.attach(part1)
+				message.attach(part2)
+			    
+				context = ssl.create_default_context()
+				server = smtplib.SMTP(HOST, 587)
+				server.starttls()
+				server.login(sender_email, password)
+				server.sendmail(
+					sender_email, receiver_email , message.as_string()
+				)
+				server.quit()
