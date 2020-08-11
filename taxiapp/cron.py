@@ -167,7 +167,7 @@ def yandex_transactions():
                     working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
                     working_day.save()
 
-                summ_of_transactions    += Decimal(float(key['amount']))
+                summ_of_transactions    += Decimal(abs(float(key['amount'])))
                 num_of_transactions     += 1
 
             else:
