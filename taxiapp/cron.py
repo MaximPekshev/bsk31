@@ -149,29 +149,31 @@ def yandex_transactions():
 
         } 
 
-        time.sleep(2)
+        time.sleep(3)
         answer = requests.post(url, headers=headers, data=json.dumps(data),)
         response = answer.json()
         transactions = response.get('transactions')
 
-        for key in transactions:
-            day_before_today = datetime.datetime.now() - datetime.timedelta(days=1)
-            taxidriver = Driver.objects.filter(driver_license=dr_license['number']).first()
-            if taxidriver:
-                working_day = Working_day.objects.filter(driver=taxidriver, date=day_before_today).first()
-                if working_day:
-                    working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
-                    working_day.save()
+        if transactions:
+
+            for key in transactions:
+                day_before_today = datetime.datetime.now() - datetime.timedelta(days=1)
+                taxidriver = Driver.objects.filter(driver_license=dr_license['number']).first()
+                if taxidriver:
+                    working_day = Working_day.objects.filter(driver=taxidriver, date=day_before_today).first()
+                    if working_day:
+                        working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
+                        working_day.save()
+                    else:
+                        working_day = Working_day.objects.filter(driver=taxidriver).last()
+                        working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
+                        working_day.save()
+
+                    summ_of_transactions    += Decimal(abs(float(key['amount'])))
+                    num_of_transactions     += 1
+
                 else:
-                    working_day = Working_day.objects.filter(driver=taxidriver).last()
-                    working_day.cashless = working_day.cashless + Decimal(abs(float(key['amount'])))
-                    working_day.save()
-
-                summ_of_transactions    += Decimal(abs(float(key['amount'])))
-                num_of_transactions     += 1
-
-            else:
-                missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'), key['amount'],])
+                    missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'), key['amount'],])
 
     send_mail(missing_drivers, day_bt, summ_of_transactions, num_of_transactions)    
             
