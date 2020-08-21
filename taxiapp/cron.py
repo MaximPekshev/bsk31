@@ -79,7 +79,6 @@ def creating_working_days():
 
         new_working_day.save()
 
-
 def yandex_transactions():
 
     driver_url = 'https://fleet-api.taxi.yandex.net/v1/parks/driver-profiles/list'
@@ -100,9 +99,17 @@ def yandex_transactions():
                       },
                 },
 
-    } 
+    }
 
-    answer = requests.post(driver_url, headers=dr_headers, data=json.dumps(driver_data),)
+    for i in range(10):
+        time.sleep(2)
+        answer = requests.post(driver_url, headers=dr_headers, data=json.dumps(driver_data),)
+        log_file = open('log/log.txt', 'a+')
+        log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + driver_url + ' ' + str(answer.status_code) + '\n')
+        log_file.close()
+        if answer.status_code == 200:
+            break  
+
     response = answer.json()
     profiles = response.get('driver_profiles')
 
@@ -114,6 +121,7 @@ def yandex_transactions():
     num_of_transactions = 0
 
     for p in profiles:
+
         driver = (p.get('driver_profile'))
         dr_license = driver.get('driver_license')
 
@@ -149,8 +157,16 @@ def yandex_transactions():
 
         } 
 
-        time.sleep(3)
-        answer = requests.post(url, headers=headers, data=json.dumps(data),)
+        for i in range(10):
+
+            time.sleep(2)
+            answer = requests.post(url, headers=headers, data=json.dumps(data),)
+            log_file = open('log/log.txt', 'a+')
+            log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + url + ' ' + str(answer.status_code) + ' ' + driver['id'] + '\n')
+            log_file.close()
+            if answer.status_code == 200:
+                break
+
         response = answer.json()
         transactions = response.get('transactions')
 
@@ -175,8 +191,9 @@ def yandex_transactions():
                 else:
                     missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'), key['amount'],])
 
-    send_mail(missing_drivers, day_bt, summ_of_transactions, num_of_transactions)    
-            
+    send_mail(missing_drivers, day_bt, summ_of_transactions, num_of_transactions) 
+
+
 
 
 def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_transactions):
@@ -240,3 +257,4 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
         sender_email, receiver_email , message.as_string()
     )
     server.quit()
+
