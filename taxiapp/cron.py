@@ -191,7 +191,9 @@ def yandex_transactions():
                 else:
                     missing_drivers.append([dr_license['number'], driver.get('last_name'), driver.get('first_name'), driver.get('middle_name'), key['amount'],])
 
-    send_mail(missing_drivers, day_bt, summ_of_transactions, num_of_transactions) 
+    if num_of_transactions:
+        
+        send_mail(missing_drivers, day_bt, summ_of_transactions, num_of_transactions) 
 
 
 
@@ -202,6 +204,7 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
     HOST = "mail.hosting.reg.ru"
     sender_email = config('MAIL_USER')
     receiver_email = ['info@annasoft.ru', 'cherbadgi_sn@mail.ru', ]
+    # receiver_email = ['info@annasoft.ru', ]
     password = config('MAIL_PASSWORD')
 
      

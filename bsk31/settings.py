@@ -149,5 +149,5 @@ MEDIA_URL = '/media/'
 
 CRONJOBS = [
     ('30 0 * * *', 'taxiapp.cron.creating_working_days'),
-    ('55 0 * * *', 'taxiapp.cron.yandex_transactions'),
+    ('55 3 * * *', 'taxiapp.cron.yandex_transactions'),
 ]
