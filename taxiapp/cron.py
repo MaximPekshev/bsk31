@@ -79,7 +79,7 @@ def creating_working_days():
 
         new_working_day.save()
 
-def yandex_transactions():
+def transactions_yandex():
 
     driver_url = 'https://fleet-api.taxi.yandex.net/v1/parks/driver-profiles/list'
     dr_headers = {'Accept-Language': 'ru',
