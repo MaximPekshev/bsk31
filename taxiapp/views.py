@@ -583,7 +583,7 @@ def gas_upload(request):
 
 							fuel_card = str(int(sheet.cell(n,2).value))
 
-							summ_of_transaction = Decimal(sheet.cell(n,9).value).quantize(Decimal("1.00"))
+							summ_of_transaction = Decimal(sheet.cell(n,10).value).quantize(Decimal("1.00"))
 
 							taxidriver = Driver.objects.filter(fuel_card=fuel_card).first() if Driver.objects.filter(fuel_card=fuel_card).first() else Driver.objects.filter(fuel_card_2=fuel_card).first()
 
