@@ -106,7 +106,8 @@ def transactions_yandex():
     for i in range(10):
         time.sleep(2)
         answer = requests.post(driver_url, headers=dr_headers, data=json.dumps(driver_data),)
-        log_file = open(os.path.abspath('www/bsk31.com/log/log.txt'), 'a+')
+        # log_file = open(os.path.abspath('www/bsk31.com/log/log.txt'), 'a+')
+        log_file = open(os.path.abspath('log/log.txt'), 'a+')
         log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + driver_url + ' ' + str(answer.status_code) + '\n')
         log_file.close()
         if answer.status_code == 200:
@@ -163,8 +164,9 @@ def transactions_yandex():
 
             time.sleep(3)
             answer = requests.post(url, headers=headers, data=json.dumps(data),)
-            log_file = open(os.path.abspath('www/bsk31.com/log/log.txt'), 'a+')
-            log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + url + ' ' + str(answer.status_code) + ' ' + driver['id'] + ' ' + driver['last_name'] + ' ' + driver['driver_license'] + '\n')
+            # log_file = open(os.path.abspath('www/bsk31.com/log/log.txt'), 'a+')
+            log_file = open(os.path.abspath('log/log.txt'), 'a+')
+            log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + url + ' ' + str(answer.status_code) + ' ' + driver['id'] + ' ' + driver.get('last_name') + ' ' + driver.get('driver_license') + '\n')
             log_file.close()
             if answer.status_code == 200:
                 break
