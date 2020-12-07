@@ -162,14 +162,16 @@ def transactions_yandex():
 
         for i in range(20):
 
-            time.sleep(3)
             answer = requests.post(url, headers=headers, data=json.dumps(data),)
             log_file = open(os.path.abspath('www/bsk31.com/log/log.txt'), 'a+')
             # log_file = open(os.path.abspath('log/log.txt'), 'a+')
             log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + url + ' ' + str(answer.status_code) + ' ' + driver['id']  + '\n')
             log_file.close()
             if answer.status_code == 200:
+                time.sleep(3)
                 break
+
+            time.sleep(i*3)
 
         response = answer.json()
         transactions = response.get('transactions')
