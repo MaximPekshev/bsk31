@@ -259,11 +259,24 @@ def send_mail(missing_drivers, day_before_today, summ_of_transactions, num_of_tr
     message.attach(part2)
     
     context = ssl.create_default_context()
-    server = smtplib.SMTP(HOST, 587)
-    server.starttls()
-    server.login(sender_email, password)
-    server.sendmail(
-        sender_email, receiver_email , message.as_string()
-    )
-    server.quit()
+
+    try:
+        server = smtplib.SMTP(HOST, 587)
+        server.starttls()
+        server.login(sender_email, password)
+        server.sendmail(
+            sender_email, receiver_email , message.as_string()
+        )
+        server.quit()
+
+        log_file = open(os.path.abspath('www/bsk31.com/log/log.txt'), 'a+')
+        # log_file = open(os.path.abspath('log/log.txt'), 'a+')
+        log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' загружено транзакций ' + num_of_transactions  + ' на сумму ' + summ_of_transactions.quantize(Decimal("1.00")) + ', письмо отправлено!'   + '\n')
+        log_file.close()
+
+    except Exception as e: 
+        log_file = open(os.path.abspath('www/bsk31.com/log/log.txt'), 'a+')
+        # log_file = open(os.path.abspath('log/log.txt'), 'a+')
+        log_file.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' загружено транзакций ' + num_of_transactions  + ' на сумму ' + summ_of_transactions.quantize(Decimal("1.00")) + ' письмо отправить не удалось. Код ошибки: ' + e + '\n')
+        log_file.close()
 
